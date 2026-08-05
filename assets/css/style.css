@@ -234,8 +234,16 @@ p { margin: 0; line-height: 1.55; color: var(--ink-soft); }
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: min(100%, 460px);
+  aspect-ratio: 400 / 520;
+  margin: 0 auto;
 }
 .bin-svg { width: min(100%, 380px); filter: drop-shadow(0 30px 40px rgba(11,74,66,0.22)); }
+
+.bin-canvas { display: none; width: 100%; height: 100%; }
+.bin-scene.is-3d .bin-svg { display: none; }
+.bin-scene.is-3d .bin-canvas { display: block; }
 #binLid { transition: transform 0.1s linear; }
 #foamGroup, #waterGroup, #sparkleGroup, #shineSweep, #binGrime { transition: opacity 0.1s linear; }
 

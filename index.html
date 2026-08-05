@@ -21,6 +21,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 
+<script type="importmap">
+{
+  "imports": {
+    "three": "./assets/js/vendor/three.module.min.js"
+  }
+}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -86,7 +94,8 @@
           <a href="#rendez-vous" class="btn btn-cta hero-cta" id="heroCta">Je veux une poubelle propre</a>
         </div>
 
-        <div class="bin-scene" aria-hidden="true">
+        <div class="bin-scene" id="binScene" aria-hidden="true">
+          <canvas id="binCanvas" class="bin-canvas"></canvas>
           <svg viewBox="0 0 400 520" class="bin-svg" id="binSvg">
             <defs>
               <linearGradient id="binGradLg" x1="0%" y1="0%" x2="100%" y2="100%">

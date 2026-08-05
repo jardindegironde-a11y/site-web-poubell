@@ -37,26 +37,29 @@
 
   /* ---------- Scroll-linked bin animation ---------- */
   var hero = document.getElementById('hero');
+  var binScene = document.getElementById('binScene');
   var lowPower = (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
                  (navigator.deviceMemory && navigator.deviceMemory <= 2);
 
-  if (reduceMotion || lowPower) {
-    hero.classList.add('is-simplified');
-  } else {
-    initScrollBin();
+  function supportsWebGL() {
+    try {
+      var c = document.createElement('canvas');
+      return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+    } catch (e) {
+      return false;
+    }
   }
 
-  function initScrollBin() {
-    var grime = document.getElementById('binGrime');
-    var foam = document.getElementById('foamGroup');
-    var water = document.getElementById('waterGroup');
-    var sparkle = document.getElementById('sparkleGroup');
-    var shine = document.getElementById('shineSweep');
-    var lid = document.getElementById('binLid');
-    var headlineDirty = document.querySelector('.headline-dirty');
-    var headlineClean = document.querySelector('.headline-clean');
-    var heroCta = document.getElementById('heroCta');
+  if (reduceMotion || lowPower) {
+    hero.classList.add('is-simplified');
+  } else if (supportsWebGL()) {
+    binScene.classList.add('is-3d');
+    initWebglBin();
+  } else {
+    initSvgScrollBin();
+  }
 
+  function makeScrollProgress(callback) {
     var ticking = false;
     var heroTop = 0;
     var scrollRange = 1;
@@ -66,56 +69,102 @@
       scrollRange = Math.max(hero.offsetHeight - window.innerHeight, 1);
     }
 
-    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-    function smoothstep(edge0, edge1, x) {
-      var t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
-      return t * t * (3 - 2 * t);
+    function tick() {
+      ticking = false;
+      var progress = Math.max(0, Math.min(1, (window.scrollY - heroTop) / scrollRange));
+      callback(progress);
     }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(tick);
+        ticking = true;
+      }
+    }
+
+    measure();
+    tick();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function () {
+      measure();
+      tick();
+    });
+
+    return { measure: measure, tick: tick };
+  }
+
+  function bindHeadlineAndCta(progress) {
+    var dirtyOpacity = 1 - smoothstepJs(0.34, 0.5, progress);
+    var cleanOpacity = smoothstepJs(0.44, 0.6, progress);
+    var headlineDirty = document.querySelector('.headline-dirty');
+    var headlineClean = document.querySelector('.headline-clean');
+    var heroCta = document.getElementById('heroCta');
+    headlineDirty.style.opacity = String(dirtyOpacity);
+    headlineDirty.style.transform = 'translateY(' + (-14 * (1 - dirtyOpacity)) + 'px)';
+    headlineClean.style.opacity = String(cleanOpacity);
+    headlineClean.style.transform = 'translateY(' + (14 * (1 - cleanOpacity)) + 'px)';
+
+    var ctaOpacity = smoothstepJs(0.5, 0.68, progress);
+    heroCta.style.opacity = String(ctaOpacity);
+    heroCta.style.transform = 'translateY(' + (16 * (1 - ctaOpacity)) + 'px)';
+    heroCta.style.pointerEvents = ctaOpacity > 0.5 ? 'auto' : 'none';
+  }
+
+  function smoothstepJs(edge0, edge1, x) {
+    var t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+    return t * t * (3 - 2 * t);
+  }
+
+  function initWebglBin() {
+    var canvas = document.getElementById('binCanvas');
+
+    import('./bin-scene.js').then(function (mod) {
+      var scene = mod.initBinScene(canvas);
+      var container = binScene;
+
+      function resize() {
+        var rect = container.getBoundingClientRect();
+        scene.resize(rect.width, rect.height);
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      makeScrollProgress(function (progress) {
+        scene.render(progress);
+        bindHeadlineAndCta(progress);
+      });
+    }).catch(function () {
+      binScene.classList.remove('is-3d');
+      initSvgScrollBin();
+    });
+  }
+
+  function initSvgScrollBin() {
+    var grime = document.getElementById('binGrime');
+    var foam = document.getElementById('foamGroup');
+    var water = document.getElementById('waterGroup');
+    var sparkle = document.getElementById('sparkleGroup');
+    var shine = document.getElementById('shineSweep');
+    var lid = document.getElementById('binLid');
+
+    function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
     function triangle(x, start, peak, end) {
       if (x <= start || x >= end) return 0;
       if (x <= peak) return (x - start) / (peak - start);
       return 1 - (x - peak) / (end - peak);
     }
 
-    function render() {
-      ticking = false;
-      var progress = clamp((window.scrollY - heroTop) / scrollRange, 0, 1);
-
+    makeScrollProgress(function (progress) {
       grime.style.opacity = String(clamp(1 - progress * 1.7, 0, 1));
       foam.style.opacity = String(triangle(progress, 0.08, 0.38, 0.78));
-      water.style.opacity = String(smoothstep(0.45, 0.85, progress));
-      sparkle.style.opacity = String(smoothstep(0.68, 0.98, progress));
-      shine.style.opacity = String(smoothstep(0.6, 0.92, progress) * 0.9);
+      water.style.opacity = String(smoothstepJs(0.45, 0.85, progress));
+      sparkle.style.opacity = String(smoothstepJs(0.68, 0.98, progress));
+      shine.style.opacity = String(smoothstepJs(0.6, 0.92, progress) * 0.9);
 
-      var lidAngle = -18 * smoothstep(0.78, 1, progress);
+      var lidAngle = -18 * smoothstepJs(0.78, 1, progress);
       lid.style.transform = 'rotate(' + lidAngle + 'deg)';
 
-      var dirtyOpacity = 1 - smoothstep(0.34, 0.5, progress);
-      var cleanOpacity = smoothstep(0.44, 0.6, progress);
-      headlineDirty.style.opacity = String(dirtyOpacity);
-      headlineDirty.style.transform = 'translateY(' + (-14 * (1 - dirtyOpacity)) + 'px)';
-      headlineClean.style.opacity = String(cleanOpacity);
-      headlineClean.style.transform = 'translateY(' + (14 * (1 - cleanOpacity)) + 'px)';
-
-      var ctaOpacity = smoothstep(0.5, 0.68, progress);
-      heroCta.style.opacity = String(ctaOpacity);
-      heroCta.style.transform = 'translateY(' + (16 * (1 - ctaOpacity)) + 'px)';
-      heroCta.style.pointerEvents = ctaOpacity > 0.5 ? 'auto' : 'none';
-    }
-
-    function onScroll() {
-      if (!ticking) {
-        window.requestAnimationFrame(render);
-        ticking = true;
-      }
-    }
-
-    measure();
-    render();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', function () {
-      measure();
-      render();
+      bindHeadlineAndCta(progress);
     });
   }
 
