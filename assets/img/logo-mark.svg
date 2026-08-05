@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">BACNIFIQUE</title>
+  <defs>
+    <linearGradient id="binGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E7C6E"/>
+      <stop offset="100%" stop-color="#0B4A42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- sparkles -->
+  <g fill="#FFC93C">
+    <path d="M96 18 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3 z"/>
+    <path d="M108 40 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 z"/>
+  </g>
+
+  <!-- water splash -->
+  <g fill="none" stroke="#3FD9C7" stroke-width="4" stroke-linecap="round" opacity="0.9">
+    <path d="M74 34 C 86 30, 98 34, 104 44"/>
+    <path d="M78 46 C 90 44, 100 48, 106 56"/>
+  </g>
+  <g fill="#3FD9C7">
+    <ellipse cx="96" cy="30" rx="4.5" ry="6" transform="rotate(20 96 30)"/>
+    <ellipse cx="104" cy="58" rx="4" ry="5.5" transform="rotate(30 104 58)"/>
+    <ellipse cx="88" cy="52" rx="3" ry="4" transform="rotate(10 88 52)"/>
+  </g>
+
+  <!-- wheels -->
+  <circle cx="42" cy="100" r="6" fill="#0B4A42"/>
+  <circle cx="72" cy="100" r="6" fill="#0B4A42"/>
+
+  <!-- bin body -->
+  <rect x="28" y="46" width="56" height="54" rx="10" fill="url(#binGrad)"/>
+  <path d="M30 96 h52" stroke="#0B4A42" stroke-width="3" stroke-linecap="round"/>
+  <g stroke="#0B4A42" stroke-width="2.5" stroke-linecap="round" opacity="0.5">
+    <line x1="44" y1="54" x2="44" y2="92"/>
+    <line x1="56" y1="54" x2="56" y2="92"/>
+    <line x1="68" y1="54" x2="68" y2="92"/>
+  </g>
+
+  <!-- lid -->
+  <path d="M24 46 L60 24 L74 32 L38 54 Z" fill="#146357"/>
+  <rect x="44" y="34" width="12" height="4" rx="2" fill="#0B4A42" transform="rotate(-28 50 36)"/>
+</svg>
