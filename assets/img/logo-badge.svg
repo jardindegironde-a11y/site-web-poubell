@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 520" role="img" aria-labelledby="badgeTitle badgeDesc">
+  <title id="badgeTitle">BACNIFIQUE</title>
+  <desc id="badgeDesc">Nettoyage de poubelles — badge logo</desc>
+
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="42%" r="60%">
+      <stop offset="0%" stop-color="#EAF7F2" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#EAF7F2" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#EAF7F2" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="ringGrad" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#F5F6F6"/>
+      <stop offset="30%" stop-color="#C9CFCE"/>
+      <stop offset="50%" stop-color="#F8F9F9"/>
+      <stop offset="72%" stop-color="#BFC5C4"/>
+      <stop offset="100%" stop-color="#EDEFEE"/>
+    </linearGradient>
+
+    <linearGradient id="ringInnerShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0B4A42" stop-opacity="0.18"/>
+      <stop offset="12%" stop-color="#0B4A42" stop-opacity="0"/>
+      <stop offset="88%" stop-color="#0B4A42" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0B4A42" stop-opacity="0.14"/>
+    </linearGradient>
+
+    <linearGradient id="binGrad" x1="10%" y1="0%" x2="95%" y2="100%">
+      <stop offset="0%" stop-color="#22897A"/>
+      <stop offset="55%" stop-color="#156358"/>
+      <stop offset="100%" stop-color="#0B4A42"/>
+    </linearGradient>
+
+    <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E7C6E"/>
+      <stop offset="100%" stop-color="#0E4F45"/>
+    </linearGradient>
+  </defs>
+
+  <!-- soft backlight -->
+  <circle cx="210" cy="196" r="205" fill="url(#glow)"/>
+
+  <!-- metallic ring -->
+  <circle cx="210" cy="196" r="164" fill="none" stroke="url(#ringGrad)" stroke-width="15"/>
+  <circle cx="210" cy="196" r="164" fill="none" stroke="url(#ringInnerShadow)" stroke-width="15"/>
+  <circle cx="210" cy="196" r="171.5" fill="none" stroke="#8F9694" stroke-opacity="0.35" stroke-width="1"/>
+  <circle cx="210" cy="196" r="156.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1"/>
+
+  <!-- inner backdrop -->
+  <circle cx="210" cy="196" r="156" fill="#F7FBFA"/>
+
+  <!-- ================= icon ================= -->
+  <g>
+    <!-- ground shadow -->
+    <ellipse cx="196" cy="333" rx="70" ry="11" fill="#0B4A42" opacity="0.14"/>
+
+    <!-- water splash -->
+    <g fill="none" stroke="#2DD4BF" stroke-width="5" stroke-linecap="round" opacity="0.95">
+      <path d="M262 128 C 288 116, 316 122, 332 146"/>
+      <path d="M270 154 C 294 148, 316 156, 328 176"/>
+      <path d="M258 182 C 280 180, 298 190, 306 206"/>
+    </g>
+    <g fill="#2DD4BF">
+      <ellipse cx="316" cy="112" rx="7.5" ry="10.5" transform="rotate(24 316 112)"/>
+      <ellipse cx="336" cy="150" rx="6.5" ry="9" transform="rotate(35 336 150)"/>
+      <ellipse cx="312" cy="196" rx="5.5" ry="7.5" transform="rotate(14 312 196)"/>
+      <ellipse cx="278" cy="214" rx="5" ry="6.5" transform="rotate(6 278 214)"/>
+    </g>
+
+    <!-- sparkles -->
+    <g fill="#FFC93C">
+      <path d="M100 132 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 z"/>
+      <path d="M330 232 l4.5 11 11 4.5 -11 4.5 -4.5 11 -4.5 -11 -11 -4.5 11 -4.5 z"/>
+      <path d="M112 300 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z"/>
+    </g>
+
+    <!-- wheels -->
+    <circle cx="163" cy="336" r="12.5" fill="#0B4A42"/>
+    <circle cx="229" cy="336" r="12.5" fill="#0B4A42"/>
+    <circle cx="163" cy="336" r="4.5" fill="#1E7C6E"/>
+    <circle cx="229" cy="336" r="4.5" fill="#1E7C6E"/>
+
+    <!-- bin body -->
+    <rect x="132" y="188" width="128" height="152" rx="20" fill="url(#binGrad)"/>
+    <rect x="132" y="188" width="128" height="152" rx="20" fill="none" stroke="#0B4A42" stroke-opacity="0.3" stroke-width="2"/>
+    <path d="M140 318 h112" stroke="#0B4A42" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+    <g stroke="#0B4A42" stroke-width="3" stroke-linecap="round" opacity="0.28">
+      <line x1="168" y1="204" x2="168" y2="316"/>
+      <line x1="196" y1="204" x2="196" y2="316"/>
+      <line x1="224" y1="204" x2="224" y2="316"/>
+    </g>
+    <rect x="132" y="188" width="128" height="16" rx="8" fill="#0B4A42" opacity="0.32"/>
+
+    <!-- lid (ajar) -->
+    <path d="M112 188 L196 122 L268 154 L246 176 L196 148 L134 200 Z" fill="url(#lidGrad)"/>
+    <path d="M112 188 L196 122 L268 154 L268 166 L196 136 L112 200 Z" fill="#0B4A42" opacity="0.45"/>
+    <rect x="176" y="130" width="40" height="10" rx="5" fill="#0B4A42" transform="rotate(-24 196 135)"/>
+  </g>
+
+  <!-- ================= wordmark ================= -->
+  <text x="210" y="452" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Manrope', Arial, sans-serif" font-size="46" font-weight="800" fill="#0B4A42" letter-spacing="0.5">BACNIFIQUE</text>
+  <text x="210" y="484" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Manrope', Arial, sans-serif" font-size="19" font-weight="700" fill="#2DD4BF" letter-spacing="3">NETTOYAGE DE POUBELLES</text>
+</svg>
