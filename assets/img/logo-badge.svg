@@ -90,10 +90,9 @@
     </g>
     <rect x="132" y="188" width="128" height="16" rx="8" fill="#0B4A42" opacity="0.32"/>
 
-    <!-- lid (ajar) -->
-    <path d="M112 188 L196 122 L268 154 L246 176 L196 148 L134 200 Z" fill="url(#lidGrad)"/>
-    <path d="M112 188 L196 122 L268 154 L268 166 L196 136 L112 200 Z" fill="#0B4A42" opacity="0.45"/>
-    <rect x="176" y="130" width="40" height="10" rx="5" fill="#0B4A42" transform="rotate(-24 196 135)"/>
+    <!-- lid (single flap, hinged at the left, propped open) -->
+    <path d="M123 188 L205 138 L237 156 L155 206 Z" fill="url(#lidGrad)"/>
+    <rect x="168.6" y="160.6" width="27.4" height="9.1" rx="4.5" fill="#0B4A42" opacity="0.85" transform="rotate(-28 182.3 165.1)"/>
   </g>
 
   <!-- ================= wordmark ================= -->
