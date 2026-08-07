@@ -1,101 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 520" role="img" aria-labelledby="badgeTitle badgeDesc">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 500" role="img" aria-labelledby="badgeTitle badgeDesc">
   <title id="badgeTitle">BACNIFIQUE</title>
-  <desc id="badgeDesc">Nettoyage de poubelles — badge logo</desc>
+  <desc id="badgeDesc">Nettoyage de poubelles — logo</desc>
 
   <defs>
-    <radialGradient id="glow" cx="50%" cy="42%" r="60%">
-      <stop offset="0%" stop-color="#EAF7F2" stop-opacity="0.9"/>
-      <stop offset="70%" stop-color="#EAF7F2" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#EAF7F2" stop-opacity="0"/>
-    </radialGradient>
-
-    <linearGradient id="ringGrad" x1="15%" y1="0%" x2="85%" y2="100%">
-      <stop offset="0%" stop-color="#F5F6F6"/>
-      <stop offset="30%" stop-color="#C9CFCE"/>
-      <stop offset="50%" stop-color="#F8F9F9"/>
-      <stop offset="72%" stop-color="#BFC5C4"/>
-      <stop offset="100%" stop-color="#EDEFEE"/>
-    </linearGradient>
-
-    <linearGradient id="ringInnerShadow" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0B4A42" stop-opacity="0.18"/>
-      <stop offset="12%" stop-color="#0B4A42" stop-opacity="0"/>
-      <stop offset="88%" stop-color="#0B4A42" stop-opacity="0"/>
-      <stop offset="100%" stop-color="#0B4A42" stop-opacity="0.14"/>
-    </linearGradient>
-
     <linearGradient id="binGrad" x1="10%" y1="0%" x2="95%" y2="100%">
-      <stop offset="0%" stop-color="#22897A"/>
-      <stop offset="55%" stop-color="#156358"/>
+      <stop offset="0%" stop-color="#1E8878"/>
       <stop offset="100%" stop-color="#0B4A42"/>
     </linearGradient>
-
     <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1E7C6E"/>
-      <stop offset="100%" stop-color="#0E4F45"/>
+      <stop offset="0%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#12796B"/>
     </linearGradient>
   </defs>
 
-  <!-- soft backlight -->
-  <circle cx="210" cy="196" r="205" fill="url(#glow)"/>
+  <!-- thin open ring -->
+  <path d="M300 96 A150 150 0 1 1 262 82" fill="none" stroke="#0B4A42" stroke-width="6" stroke-linecap="round"/>
 
-  <!-- metallic ring -->
-  <circle cx="210" cy="196" r="164" fill="none" stroke="url(#ringGrad)" stroke-width="15"/>
-  <circle cx="210" cy="196" r="164" fill="none" stroke="url(#ringInnerShadow)" stroke-width="15"/>
-  <circle cx="210" cy="196" r="171.5" fill="none" stroke="#8F9694" stroke-opacity="0.35" stroke-width="1"/>
-  <circle cx="210" cy="196" r="156.5" fill="none" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="1"/>
+  <!-- leaf accent breaking the ring -->
+  <path d="M268 66 C 300 58, 330 74, 336 104 C 302 108, 274 96, 268 66 Z" fill="#2DD4BF"/>
+  <path d="M272 70 C 292 84, 312 92, 330 100" fill="none" stroke="#0B4A42" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
 
-  <!-- inner backdrop -->
-  <circle cx="210" cy="196" r="156" fill="#F7FBFA"/>
-
-  <!-- ================= icon ================= -->
-  <g>
-    <!-- ground shadow -->
-    <ellipse cx="196" cy="333" rx="70" ry="11" fill="#0B4A42" opacity="0.14"/>
-
-    <!-- water splash -->
-    <g fill="none" stroke="#2DD4BF" stroke-width="5" stroke-linecap="round" opacity="0.95">
-      <path d="M262 128 C 288 116, 316 122, 332 146"/>
-      <path d="M270 154 C 294 148, 316 156, 328 176"/>
-      <path d="M258 182 C 280 180, 298 190, 306 206"/>
-    </g>
-    <g fill="#2DD4BF">
-      <ellipse cx="316" cy="112" rx="7.5" ry="10.5" transform="rotate(24 316 112)"/>
-      <ellipse cx="336" cy="150" rx="6.5" ry="9" transform="rotate(35 336 150)"/>
-      <ellipse cx="312" cy="196" rx="5.5" ry="7.5" transform="rotate(14 312 196)"/>
-      <ellipse cx="278" cy="214" rx="5" ry="6.5" transform="rotate(6 278 214)"/>
-    </g>
-
-    <!-- sparkles -->
-    <g fill="#FFC93C">
-      <path d="M100 132 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 z"/>
-      <path d="M330 232 l4.5 11 11 4.5 -11 4.5 -4.5 11 -4.5 -11 -11 -4.5 11 -4.5 z"/>
-      <path d="M112 300 l4 10 10 4 -10 4 -4 10 -4 -10 -10 -4 10 -4 z"/>
-    </g>
-
-    <!-- wheels -->
-    <circle cx="163" cy="336" r="12.5" fill="#0B4A42"/>
-    <circle cx="229" cy="336" r="12.5" fill="#0B4A42"/>
-    <circle cx="163" cy="336" r="4.5" fill="#1E7C6E"/>
-    <circle cx="229" cy="336" r="4.5" fill="#1E7C6E"/>
-
-    <!-- bin body -->
-    <rect x="132" y="188" width="128" height="152" rx="20" fill="url(#binGrad)"/>
-    <rect x="132" y="188" width="128" height="152" rx="20" fill="none" stroke="#0B4A42" stroke-opacity="0.3" stroke-width="2"/>
-    <path d="M140 318 h112" stroke="#0B4A42" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
-    <g stroke="#0B4A42" stroke-width="3" stroke-linecap="round" opacity="0.28">
-      <line x1="168" y1="204" x2="168" y2="316"/>
-      <line x1="196" y1="204" x2="196" y2="316"/>
-      <line x1="224" y1="204" x2="224" y2="316"/>
-    </g>
-    <rect x="132" y="188" width="128" height="16" rx="8" fill="#0B4A42" opacity="0.32"/>
-
-    <!-- lid (single flap, hinged at the left, propped open) -->
-    <path d="M123 188 L205 138 L237 156 L155 206 Z" fill="url(#lidGrad)"/>
-    <rect x="168.6" y="160.6" width="27.4" height="9.1" rx="4.5" fill="#0B4A42" opacity="0.85" transform="rotate(-28 182.3 165.1)"/>
+  <!-- water droplets -->
+  <g fill="#2DD4BF">
+    <ellipse cx="322" cy="150" rx="8" ry="11" transform="rotate(18 322 150)"/>
+    <ellipse cx="336" cy="188" rx="6.5" ry="9" transform="rotate(10 336 188)"/>
+    <ellipse cx="308" cy="214" rx="5.5" ry="7.5" transform="rotate(4 308 214)"/>
   </g>
 
+  <!-- sparkles -->
+  <g fill="#FFC93C">
+    <path d="M92 140 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6 z"/>
+    <path d="M112 300 l4.5 11 11 4.5 -11 4.5 -4.5 11 -4.5 -11 -11 -4.5 11 -4.5 z"/>
+  </g>
+
+  <!-- ground shadow -->
+  <ellipse cx="196" cy="333" rx="72" ry="11" fill="#0B4A42" opacity="0.12"/>
+
+  <!-- wheels -->
+  <circle cx="163" cy="336" r="12.5" fill="#0B4A42"/>
+  <circle cx="229" cy="336" r="12.5" fill="#0B4A42"/>
+  <circle cx="163" cy="336" r="4.5" fill="#1E7C6E"/>
+  <circle cx="229" cy="336" r="4.5" fill="#1E7C6E"/>
+
+  <!-- bin body -->
+  <rect x="132" y="188" width="128" height="152" rx="20" fill="url(#binGrad)"/>
+  <g stroke="#EAF7F2" stroke-width="2.5" stroke-linecap="round" opacity="0.55">
+    <line x1="168" y1="206" x2="168" y2="316"/>
+    <line x1="196" y1="206" x2="196" y2="316"/>
+    <line x1="224" y1="206" x2="224" y2="316"/>
+  </g>
+  <path d="M140 318 h112" stroke="#EAF7F2" stroke-width="2.5" stroke-linecap="round" opacity="0.4"/>
+  <rect x="132" y="188" width="128" height="16" rx="8" fill="#0B4A42" opacity="0.32"/>
+
+  <!-- sparkle on the bin -->
+  <path d="M212 250 l4 9.5 9.5 4 -9.5 4 -4 9.5 -4 -9.5 -9.5 -4 9.5 -4 z" fill="#EAF7F2" opacity="0.9"/>
+
+  <!-- lid (single flap, hinged at the left, propped open) -->
+  <path d="M123 188 L205 138 L237 156 L155 206 Z" fill="url(#lidGrad)"/>
+  <rect x="168.6" y="160.6" width="27.4" height="9.1" rx="4.5" fill="#0B4A42" opacity="0.85" transform="rotate(-28 182.3 165.1)"/>
+
   <!-- ================= wordmark ================= -->
-  <text x="210" y="452" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Manrope', Arial, sans-serif" font-size="46" font-weight="800" fill="#0B4A42" letter-spacing="0.5">BACNIFIQUE</text>
-  <text x="210" y="484" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Manrope', Arial, sans-serif" font-size="19" font-weight="700" fill="#2DD4BF" letter-spacing="3">NETTOYAGE DE POUBELLES</text>
+  <text x="210" y="430" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Manrope', Arial, sans-serif" font-size="46" font-weight="800" fill="#0B4A42" letter-spacing="0.5">BACNIFIQUE</text>
+  <text x="210" y="462" text-anchor="middle" font-family="'Plus Jakarta Sans', 'Manrope', Arial, sans-serif" font-size="19" font-weight="700" fill="#2DD4BF" letter-spacing="3">NETTOYAGE DE POUBELLES</text>
 </svg>

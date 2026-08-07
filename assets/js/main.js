@@ -185,10 +185,6 @@
   binCount.addEventListener('change', updatePrice);
   updatePrice();
 
-  var dateInput = document.getElementById('date');
-  var today = new Date().toISOString().split('T')[0];
-  dateInput.setAttribute('min', today);
-
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     formStatus.textContent = '';
@@ -205,8 +201,6 @@
       postalCode: form.postalCode.value.trim(),
       city: form.city.value.trim(),
       binCount: form.binCount.value,
-      date: form.date.value,
-      timeSlot: form.timeSlot.value,
       notes: form.notes.value.trim(),
       total: (parseInt(form.binCount.value, 10) || 1) * PRICE_PER_BIN
     };
@@ -231,7 +225,7 @@
       .catch(function () {
         formStatus.textContent = "Une erreur est survenue. Merci de réessayer ou de nous appeler directement.";
         submitBtn.disabled = false;
-        submitBtn.textContent = 'Confirmer ma demande de rendez-vous';
+        submitBtn.textContent = 'Envoyer ma demande';
       });
   });
 })();

@@ -43,12 +43,10 @@ $address    = clean('address', $input, 200);
 $postalCode = clean('postalCode', $input, 10);
 $city       = clean('city', $input, 100);
 $binCount   = (int) ($input['binCount'] ?? 0);
-$date       = clean('date', $input, 20);
-$timeSlot   = clean('timeSlot', $input, 60);
 $notes      = isset($input['notes']) ? mb_substr(trim(strip_tags((string) $input['notes'])), 0, 1000) : '';
 
 if ($fullName === '' || $phone === '' || $address === '' || $postalCode === '' ||
-    $city === '' || $binCount < 1 || $date === '' || $timeSlot === '') {
+    $city === '' || $binCount < 1) {
     http_response_code(422);
     respond(false, 'Merci de compléter tous les champs obligatoires.');
 }
@@ -62,10 +60,8 @@ $entry = [
     'telephone'        => $phone,
     'adresse'          => $address,
     'code_postal'      => $postalCode,
-    'ville'            => $city,
+    'commune'          => $city,
     'nombre_poubelles' => $binCount,
-    'date_souhaitee'   => $date,
-    'creneau'          => $timeSlot,
     'notes'            => $notes,
     'total_estime'     => $total . ' €',
 ];
@@ -87,17 +83,16 @@ if ($fp && flock($fp, LOCK_EX)) {
 }
 
 // --- Envoi de l'e-mail de notification ---
-$subject = 'Nouvelle demande de rendez-vous BACNIFIQUE - ' . $fullName;
+$subject = 'Nouvelle demande de nettoyage BACNIFIQUE - ' . $fullName;
 
-$body = "Nouvelle demande de rendez-vous BACNIFIQUE\n\n"
+$body = "Nouvelle demande de nettoyage BACNIFIQUE\n"
+    . "A rappeler pour fixer la date de collecte.\n\n"
     . "Nom : {$fullName}\n"
     . "Téléphone : {$phone}\n"
     . "Adresse : {$address}\n"
     . "Code postal : {$postalCode}\n"
-    . "Ville : {$city}\n"
+    . "Commune : {$city}\n"
     . "Nombre de poubelles : {$binCount}\n"
-    . "Date souhaitée : {$date}\n"
-    . "Créneau horaire : {$timeSlot}\n"
     . "Total estimé : {$total} €\n"
     . "Informations complémentaires : " . ($notes !== '' ? $notes : '—') . "\n";
 
