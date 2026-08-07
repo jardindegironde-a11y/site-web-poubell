@@ -7,6 +7,7 @@ const COLOR_LID = 0x0E7C6E;
 const COLOR_WHEEL = 0x1B2422;
 const COLOR_FOAM = 0xF3FBF8;
 const COLOR_WATER = 0x8FE9DC;
+const COLOR_MIST = 0xEAF9FF;
 
 function makeRadialTexture(innerColor, outerColor, size = 128) {
   const canvas = document.createElement('canvas');
@@ -282,6 +283,28 @@ export function initBinScene(canvas) {
   }
   binGroup.add(waterMesh);
 
+  /* ---------- Deodorising mist (rises from the open lid after the rinse) ---------- */
+  const MIST_COUNT = 40;
+  const mistGeo = new THREE.SphereGeometry(1, 8, 8);
+  const mistMat = new THREE.MeshBasicMaterial({ color: COLOR_MIST, transparent: true, opacity: 0, depthWrite: false });
+  const mistMesh = new THREE.InstancedMesh(mistGeo, mistMat, MIST_COUNT);
+  mistMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  const mistData = [];
+  for (let i = 0; i < MIST_COUNT; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const spread = 0.15 + Math.random() * 0.55;
+    mistData.push({
+      dirX: Math.cos(angle) * spread,
+      dirZ: Math.sin(angle) * spread * 0.6,
+      riseFrom: 1.98,
+      riseTo: 2.55 + Math.random() * 0.5,
+      scale: 0.05 + Math.random() * 0.09,
+      t0: Math.random() * 0.6,
+      t1: 0.4 + Math.random() * 0.6
+    });
+  }
+  binGroup.add(mistMesh);
+
   /* ---------- Sparkles ---------- */
   const sparkTex = makeSparkleTexture();
   const SPARK_COUNT = 6;
@@ -364,6 +387,23 @@ export function initBinScene(canvas) {
     waterMat.opacity = clamp(windowOn * 0.9, 0, 0.85);
   }
 
+  function updateMist(progress) {
+    const windowOn = triangle(progress, 0.76, 0.9, 1.08);
+    for (let i = 0; i < MIST_COUNT; i++) {
+      const d = mistData[i];
+      const local = smoothstep(0.7 + d.t0 * 0.2, 0.7 + d.t0 * 0.2 + d.t1 * 0.25, progress);
+      const y = THREE.MathUtils.lerp(d.riseFrom, d.riseTo, local);
+      const puff = triangle(local, 0, 0.35, 1) * 0.6 + local * 0.4;
+      dummy.position.set(d.dirX * (0.3 + local), y, d.dirZ * (0.3 + local) - 0.1);
+      dummy.scale.setScalar(Math.max(d.scale * (0.4 + puff), 0.0001));
+      dummy.rotation.set(0, 0, 0);
+      dummy.updateMatrix();
+      mistMesh.setMatrixAt(i, dummy.matrix);
+    }
+    mistMesh.instanceMatrix.needsUpdate = true;
+    mistMat.opacity = clamp(windowOn * 0.55, 0, 0.5);
+  }
+
   function updateWasher(progress) {
     const active = Math.max(triangle(progress, 0.02, 0.3, 0.6), triangle(progress, 0.46, 0.68, 0.9));
     const op = clamp(active * 1.2, 0, 1);
@@ -390,6 +430,7 @@ export function initBinScene(canvas) {
 
     updateFoam(progress);
     updateWater(progress);
+    updateMist(progress);
     updateWasher(progress);
     updateSparkles(progress);
 
@@ -418,6 +459,7 @@ export function initBinScene(canvas) {
     lidGeo.dispose();
     foamGeo.dispose();
     waterGeo.dispose();
+    mistGeo.dispose();
   }
 
   return { render, resize, dispose };

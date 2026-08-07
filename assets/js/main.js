@@ -50,11 +50,14 @@
     }
   }
 
-  if (reduceMotion || lowPower) {
-    hero.classList.add('is-simplified');
-  } else if (supportsWebGL()) {
+  /* The bin animation is driven entirely by the visitor's own scroll position
+     (no autoplay/parallax), so it stays on even with "reduce motion" set —
+     only genuinely low-power devices or missing WebGL fall back to the flat SVG. */
+  if (supportsWebGL() && !lowPower) {
     binScene.classList.add('is-3d');
     initWebglBin();
+  } else if (lowPower) {
+    hero.classList.add('is-simplified');
   } else {
     initSvgScrollBin();
   }
