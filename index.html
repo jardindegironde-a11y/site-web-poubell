@@ -18,7 +18,9 @@
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://api.fontshare.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 
 <script type="application/ld+json">
@@ -58,7 +60,7 @@
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
         06 30 64 47 09
       </a>
-      <a href="#contact" class="btn btn-cta">Nous contacter</a>
+      <a href="#contact" class="btn btn-cta" data-modal-trigger>Nous contacter</a>
       <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="mobileNav" aria-label="Ouvrir le menu">
         <span></span><span></span><span></span>
       </button>
@@ -71,7 +73,7 @@
     <a href="#avant-apres">Avant / Après</a>
     <a href="#contact">Contact</a>
     <a href="tel:+33630644709" class="mobile-phone">📞 06 30 64 47 09</a>
-    <a href="#contact" class="btn btn-cta">Nous contacter</a>
+    <a href="#contact" class="btn btn-cta" data-modal-trigger>Nous contacter</a>
   </div>
 </header>
 
@@ -89,7 +91,7 @@
             <h1 class="headline headline-clean">Faites-la redevenir <span>BACNIFIQUE.</span></h1>
           </div>
           <p class="hero-sub">On récupère votre poubelle, on la nettoie de fond en comble, on vous la ramène. Vous n'avez rien à faire.</p>
-          <a href="#contact" class="btn btn-cta hero-cta" id="heroCta">Je veux une poubelle propre</a>
+          <a href="#contact" class="btn btn-cta hero-cta" id="heroCta" data-modal-trigger>Je veux une poubelle propre</a>
         </div>
 
         <div class="bin-scene" aria-hidden="true">
@@ -115,9 +117,28 @@
     <div class="hero-progress-spacer" aria-hidden="true"></div>
   </section>
 
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">25 € par poubelle</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Collecte le lendemain des éboueurs</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Désinfection complète</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Zéro effort de votre part</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Service en Gironde</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Sans engagement</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">25 € par poubelle</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Collecte le lendemain des éboueurs</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Désinfection complète</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Zéro effort de votre part</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Service en Gironde</span><span class="marquee-dot">✺</span>
+      <span class="marquee-item">Sans engagement</span><span class="marquee-dot">✺</span>
+    </div>
+  </div>
+
   <!-- ============ SERVICES ============ -->
   <section class="services" id="services">
     <div class="container">
+      <div class="chapter-marker"><span class="chapter-num">01</span><span class="chapter-label">Le service</span></div>
       <h2 class="section-title">Un service complet, en trois gestes</h2>
 
       <div class="service-grid">
@@ -163,6 +184,7 @@
   <!-- ============ COMMENT ÇA MARCHE ============ -->
   <section class="process" id="comment-ca-marche">
     <div class="container">
+      <div class="chapter-marker"><span class="chapter-num">02</span><span class="chapter-label">Le déroulé</span></div>
       <h2 class="section-title">Comment ça marche</h2>
 
       <div class="process-grid">
@@ -199,6 +221,7 @@
   <!-- ============ POURQUOI NETTOYER SA POUBELLE ============ -->
   <section class="reasons" id="pourquoi">
     <div class="container">
+      <div class="chapter-marker"><span class="chapter-num">03</span><span class="chapter-label">Pourquoi</span></div>
       <h2 class="section-title">Pourquoi nettoyer sa poubelle ?</h2>
       <p class="reasons-intro">Une poubelle sale, ce n'est pas juste inesthétique. C'est un vrai nid à problèmes, été comme hiver.</p>
 
@@ -240,6 +263,7 @@
   <!-- ============ AVANT / APRÈS ============ -->
   <section class="before-after" id="avant-apres">
     <div class="container">
+      <div class="chapter-marker"><span class="chapter-num">04</span><span class="chapter-label">Les résultats</span></div>
       <h2 class="section-title">Nos résultats en images</h2>
       <p class="reasons-intro">Faites glisser le curseur pour voir la différence.</p>
 
@@ -278,6 +302,7 @@
   <!-- ============ TARIF ============ -->
   <section class="pricing" id="tarif">
     <div class="container pricing-inner">
+      <div class="chapter-marker"><span class="chapter-num">05</span><span class="chapter-label">Le tarif</span></div>
       <p class="eyebrow eyebrow-light">Tarif simple et transparent</p>
       <div class="price-figure">
         <span class="price-amount">25 €</span>
@@ -285,13 +310,14 @@
       </div>
       <p class="price-lead">Pour seulement 25 €, débarrassez-vous de la tâche que personne ne veut faire.</p>
       <p class="price-sub">Nettoyage, désinfection et désodorisation inclus. Un service simple, rapide et sans mauvaise surprise.</p>
-      <a href="#contact" class="btn btn-yellow">Nous contacter</a>
+      <a href="#contact" class="btn btn-yellow" data-modal-trigger>Nous contacter</a>
     </div>
   </section>
 
   <!-- ============ CONTACT ============ -->
   <section class="contact" id="contact">
     <div class="container contact-inner">
+      <div class="chapter-marker"><span class="chapter-num">06</span><span class="chapter-label">Réservez</span></div>
       <h2 class="section-title">Prenez rendez-vous en 2 minutes</h2>
       <p class="reasons-intro">Pas de formulaire à remplir : appelez-nous ou envoyez-nous un e-mail, on convient ensemble d'un jour de collecte.</p>
 
@@ -358,7 +384,35 @@
   <p class="footer-copy">© <span id="year"></span> BACNIFIQUE. Tous droits réservés.</p>
 </footer>
 
-<a href="#contact" class="mobile-sticky-cta">Nous contacter</a>
+<a href="#contact" class="mobile-sticky-cta" data-modal-trigger>Nous contacter</a>
+
+<!-- ============ MODAL RÉSERVATION RAPIDE ============ -->
+<div class="modal-overlay" id="contactModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button type="button" class="modal-close" id="modalClose" aria-label="Fermer">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+    </button>
+    <div class="chapter-marker modal-chapter"><span class="chapter-num">06</span><span class="chapter-label">Réservez</span></div>
+    <h3 id="modalTitle">Appelez-nous ou écrivez-nous</h3>
+    <p>Pas de formulaire à remplir : on convient ensemble d'un jour de collecte.</p>
+    <div class="contact-cards modal-contact-cards">
+      <a href="tel:+33630644709" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
+        </div>
+        <h3>Par téléphone</h3>
+        <p class="contact-card-value">06 30 64 47 09</p>
+      </a>
+      <a href="mailto:bacnifique@gmail.com" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
+        </div>
+        <h3>Par e-mail</h3>
+        <p class="contact-card-value">bacnifique@gmail.com</p>
+      </a>
+    </div>
+  </div>
+</div>
 
 <script src="assets/js/main.js"></script>
 </body>

@@ -18,6 +18,31 @@
     });
   });
 
+  /* ---------- Contact modal ---------- */
+  var modal = document.getElementById('contactModal');
+  var modalClose = document.getElementById('modalClose');
+
+  function openModal(e) {
+    if (e) e.preventDefault();
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+  }
+  function closeModal() {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
+
+  document.querySelectorAll('[data-modal-trigger]').forEach(function (trigger) {
+    trigger.addEventListener('click', openModal);
+  });
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !modal.hidden) closeModal();
+  });
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
