@@ -1,8 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="BACNIFIQUE">
-  <!-- badge -->
-  <rect x="4" y="4" width="112" height="112" rx="30" fill="#16241D"/>
-
-  <!-- bac : poignée, couvercle, corps fuselé, roues -->
+  <!-- variante sans badge, pour les fonds sombres (footer) -->
   <g fill="#F6F1E3">
     <rect x="43" y="27" width="16" height="7" rx="3.5"/>
     <rect x="24" y="33" width="54" height="10" rx="4"/>
@@ -10,7 +7,5 @@
     <circle cx="33" cy="87" r="5.5"/>
     <circle cx="69" cy="87" r="5.5"/>
   </g>
-
-  <!-- l'éclat : unique touche d'accent de la marque -->
   <path d="M94 27 Q96 36 105 38 Q96 40 94 49 Q92 40 83 38 Q92 36 94 27 Z" fill="#C4402F"/>
 </svg>
