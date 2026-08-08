@@ -119,6 +119,24 @@
     });
   }
 
+  /* ---------- Avant / Après sliders ---------- */
+  document.querySelectorAll('[data-ba]').forEach(function (slider) {
+    var before = slider.querySelector('.ba-before');
+    var handle = slider.querySelector('.ba-handle');
+    var range = slider.querySelector('.ba-range');
+
+    function update(value) {
+      before.style.clipPath = 'inset(0 ' + (100 - value) + '% 0 0)';
+      handle.style.left = value + '%';
+    }
+
+    range.addEventListener('input', function () {
+      update(Number(range.value));
+    });
+
+    update(Number(range.value));
+  });
+
   /* ---------- Booking form: live price + submit ---------- */
   var form = document.getElementById('bookingForm');
   var binCount = document.getElementById('binCount');

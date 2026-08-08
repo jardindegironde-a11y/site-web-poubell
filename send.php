@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
 
-const NOTIFICATION_EMAIL = 'jardindegironde@gmail.com';
+const NOTIFICATION_EMAIL = 'bacnifique@gmail.com';
 const PRICE_PER_BIN = 25;
 const STORAGE_FILE = __DIR__ . '/storage/rendezvous.json';
 
