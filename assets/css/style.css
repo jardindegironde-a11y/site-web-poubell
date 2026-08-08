@@ -782,6 +782,13 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 900px) {
   .main-nav, .header-actions .btn-cta, .header-phone { display: none; }
   .nav-toggle { display: flex; }
+
+  /* le CTA du header disparaît ici : le CTA collant prend le relais
+     dès le même seuil, pour qu'un appel reste toujours à portée */
+  .mobile-sticky-cta { display: block; }
+  .stage-actions .btn-ghost { display: none; }
+  .contact { padding-bottom: 150px; }
+
   .reasons-grid { grid-template-columns: repeat(2, 1fr); }
   .ba-grid { grid-template-columns: 1fr 1fr; }
   .footer-inner { grid-template-columns: 1fr; text-align: center; }
@@ -799,12 +806,9 @@ body.modal-open { overflow: hidden; }
   .stage-panels { padding-bottom: 156px; }
   .stage-title { font-size: clamp(2.2rem, 10vw, 3rem); }
 
-  /* le CTA collant couvre déjà l'appel : on évite le doublon sous le pouce */
-  .stage-actions .btn-ghost { display: none; }
-
-  .reasons, .before-after, .contact { padding: 84px 0; }
+  .reasons, .before-after { padding: 84px 0; }
+  .contact { padding: 84px 0 150px; }
   .pricing { padding: 90px 0; }
-  .contact { padding-bottom: 150px; }
   .section-head { margin-bottom: 44px; }
 
   .reasons-grid { grid-template-columns: 1fr; }
@@ -812,7 +816,6 @@ body.modal-open { overflow: hidden; }
   .contact-cards { grid-template-columns: 1fr; max-width: 300px; }
   .modal-contact-cards { grid-template-columns: 1fr; }
   .modal-card { padding: 40px 24px 30px; }
-  .mobile-sticky-cta { display: block; }
 }
 
 /* ---------- Mouvement réduit ---------- */
