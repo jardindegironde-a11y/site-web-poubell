@@ -47,12 +47,9 @@
   }
 
   function initScrollBin() {
-    var grime = document.getElementById('binGrime');
-    var foam = document.getElementById('foamGroup');
-    var water = document.getElementById('waterGroup');
-    var sparkle = document.getElementById('sparkleGroup');
-    var shine = document.getElementById('shineSweep');
-    var lid = document.getElementById('binLid');
+    var binClean = document.getElementById('binPhotoClean');
+    var binShine = document.getElementById('binShine');
+    var binFx = document.getElementById('binFx');
     var headlineDirty = document.querySelector('.headline-dirty');
     var headlineClean = document.querySelector('.headline-clean');
     var heroCta = document.getElementById('heroCta');
@@ -81,14 +78,9 @@
       ticking = false;
       var progress = clamp((window.scrollY - heroTop) / scrollRange, 0, 1);
 
-      grime.style.opacity = String(clamp(1 - progress * 1.7, 0, 1));
-      foam.style.opacity = String(triangle(progress, 0.08, 0.38, 0.78));
-      water.style.opacity = String(smoothstep(0.45, 0.85, progress));
-      sparkle.style.opacity = String(smoothstep(0.68, 0.98, progress));
-      shine.style.opacity = String(smoothstep(0.6, 0.92, progress) * 0.9);
-
-      var lidAngle = -18 * smoothstep(0.78, 1, progress);
-      lid.style.transform = 'rotate(' + lidAngle + 'deg)';
+      binClean.style.opacity = String(smoothstep(0.3, 0.7, progress));
+      binFx.style.opacity = String(triangle(progress, 0.15, 0.45, 0.8));
+      binShine.style.opacity = String(smoothstep(0.5, 0.8, progress) * triangle(progress, 0.5, 0.68, 0.92) * 2.2);
 
       var dirtyOpacity = 1 - smoothstep(0.34, 0.5, progress);
       var cleanOpacity = smoothstep(0.44, 0.6, progress);
@@ -118,6 +110,24 @@
       render();
     });
   }
+
+  /* ---------- Before / After sliders ---------- */
+  document.querySelectorAll('[data-ba-slider]').forEach(function (slider) {
+    var before = slider.querySelector('.ba-img-before');
+    var handle = slider.querySelector('.ba-handle');
+    var range = slider.querySelector('.ba-range');
+
+    function update(value) {
+      before.style.clipPath = 'inset(0 ' + (100 - value) + '% 0 0)';
+      handle.style.left = value + '%';
+    }
+
+    range.addEventListener('input', function () {
+      update(Number(range.value));
+    });
+
+    update(Number(range.value));
+  });
 
   /* ---------- Booking form: live price + submit ---------- */
   var form = document.getElementById('bookingForm');
