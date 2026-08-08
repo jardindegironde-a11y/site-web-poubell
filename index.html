@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Collecte et nettoyage de poubelles en Gironde | BACNIFIQUE</title>
-<meta name="description" content="BACNIFIQUE récupère votre poubelle, la nettoie, la désinfecte et la désodorise, puis vous la ramène. Service en Gironde, tarif 25 € par poubelle.">
+<meta name="description" content="BACNIFIQUE récupère votre poubelle, la nettoie, la désinfecte et la désodorise, puis vous la ramène le jour même. Service en Gironde, 25 € par poubelle.">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="/">
+<link rel="canonical" href="https://bacnifique.fr/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="website">
@@ -14,13 +14,16 @@
 <meta property="og:title" content="Collecte et nettoyage de poubelles en Gironde | BACNIFIQUE">
 <meta property="og:description" content="Collecte, nettoyage, désinfection et retour de votre poubelle en Gironde. 25 € par poubelle.">
 <meta property="og:locale" content="fr_FR">
+<meta property="og:image" content="https://bacnifique.fr/assets/img/generated/studio-clean.webp">
+<meta name="theme-color" content="#F6F1E3">
 
 <link rel="icon" type="image/svg+xml" href="assets/img/logo-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.fontshare.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@500,700,800&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/generated/studio-dirty.webp" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/style.css">
 
 <script type="application/ld+json">
@@ -33,6 +36,13 @@
   "areaServed": "Gironde",
   "telephone": "+33630644709",
   "email": "bacnifique@gmail.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "268 avenue du Maréchal de Lattre de Tassigny",
+    "postalCode": "33600",
+    "addressLocality": "Pessac",
+    "addressCountry": "FR"
+  },
   "slogan": "Le propre jusqu'au bac."
 }
 </script>
@@ -44,20 +54,20 @@
 <!-- ============ HEADER ============ -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="#accueil" class="brand" aria-label="BACNIFIQUE - accueil">
-      <img src="assets/img/logo-mark.svg" alt="" width="40" height="40" class="brand-mark">
+    <a href="#top" class="brand" aria-label="BACNIFIQUE - accueil">
+      <img src="assets/img/logo-mark.svg" alt="" width="38" height="38" class="brand-mark">
       <span class="brand-word">BACNIFIQUE</span>
     </a>
 
-    <nav class="main-nav" id="mainNav" aria-label="Navigation principale">
-      <a href="#services">Services</a>
+    <nav class="main-nav" aria-label="Navigation principale">
+      <a href="#pourquoi">Pourquoi</a>
+      <a href="#resultats">Résultats</a>
       <a href="#tarif">Tarif</a>
-      <a href="#contact">Contact</a>
     </nav>
 
     <div class="header-actions">
       <a href="tel:+33630644709" class="header-phone">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
         06 30 64 47 09
       </a>
       <a href="#contact" class="btn btn-cta" data-modal-trigger>Nous contacter</a>
@@ -68,53 +78,77 @@
   </div>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="#services">Services</a>
+    <a href="#pourquoi">Pourquoi</a>
+    <a href="#resultats">Résultats</a>
     <a href="#tarif">Tarif</a>
-    <a href="#avant-apres">Avant / Après</a>
-    <a href="#contact">Contact</a>
-    <a href="tel:+33630644709" class="mobile-phone">📞 06 30 64 47 09</a>
+    <a href="tel:+33630644709" class="mobile-phone">06 30 64 47 09</a>
     <a href="#contact" class="btn btn-cta" data-modal-trigger>Nous contacter</a>
   </div>
 </header>
 
-<main id="accueil">
+<main id="top">
 
-  <!-- ============ HERO / SCROLL ANIMATION ============ -->
-  <section class="hero" id="hero">
-    <div class="hero-sticky">
-      <div class="hero-inner container">
+  <!-- ============ SCÈNE PRODUIT PILOTÉE AU SCROLL ============ -->
+  <section class="stage" id="stage">
+    <div class="stage-sticky">
 
-        <div class="hero-text">
-          <p class="eyebrow">Collecte, nettoyage et retour en Gironde</p>
-          <div class="headline-stack" aria-live="off">
-            <h1 class="headline headline-dirty">Votre poubelle est sale ?</h1>
-            <h1 class="headline headline-clean">Faites-la redevenir <span>BACNIFIQUE.</span></h1>
-          </div>
-          <p class="hero-sub">On récupère votre poubelle, on la nettoie de fond en comble, on vous la ramène. Vous n'avez rien à faire.</p>
-          <a href="#contact" class="btn btn-cta hero-cta" id="heroCta" data-modal-trigger>Je veux une poubelle propre</a>
+      <div class="stage-product" aria-hidden="true">
+        <div class="product-frame">
+          <canvas id="binCanvas" class="product-canvas"></canvas>
+          <img src="assets/img/generated/studio-dirty.webp" alt="" class="product-dirty" id="productDirty" width="820" height="820">
+          <span class="product-glow"></span>
         </div>
+      </div>
 
-        <div class="bin-scene" aria-hidden="true">
-          <div class="bin-photo-wrap">
-            <img src="assets/img/generated/hero-dirty.webp" alt="" class="bin-photo bin-photo-dirty" width="1000" height="1339" fetchpriority="high">
-            <img src="assets/img/generated/hero-clean.webp" alt="" class="bin-photo bin-photo-clean" id="binPhotoClean" width="1000" height="1339">
-            <div class="bin-shine" id="binShine"></div>
-            <div class="bin-fx" id="binFx">
-              <span class="fx-bubble" style="left:22%;top:18%"></span>
-              <span class="fx-bubble" style="left:68%;top:12%"></span>
-              <span class="fx-bubble" style="left:78%;top:30%"></span>
-              <span class="fx-bubble" style="left:14%;top:34%"></span>
-              <span class="fx-bubble" style="left:50%;top:8%"></span>
-              <span class="fx-sparkle" style="left:16%;top:58%"></span>
-              <span class="fx-sparkle" style="left:84%;top:66%"></span>
-              <span class="fx-sparkle" style="left:60%;top:82%"></span>
-            </div>
+      <noscript>
+        <img src="assets/img/generated/studio-clean.webp" alt="Poubelle nettoyée par BACNIFIQUE" class="product-noscript" width="820" height="820">
+      </noscript>
+
+      <div class="stage-panels">
+
+        <article class="panel panel-hero is-active" data-panel="0">
+          <div class="chapter-marker"><span class="chapter-num">01</span><span class="chapter-label">Le constat</span></div>
+          <h1 class="stage-title">Votre poubelle<br>est sale.</h1>
+          <p class="stage-text">On la récupère, on la nettoie de fond en comble, on vous la ramène. Vous n'avez rien à faire.</p>
+          <div class="stage-actions">
+            <a href="#contact" class="btn btn-accent" data-modal-trigger>Réserver un nettoyage</a>
+            <a href="tel:+33630644709" class="btn btn-ghost">06 30 64 47 09</a>
           </div>
-        </div>
+        </article>
+
+        <article class="panel" data-panel="1">
+          <div class="chapter-marker"><span class="chapter-num">02</span><span class="chapter-label">La collecte</span></div>
+          <h2 class="stage-title">On passe<br>le matin.</h2>
+          <p class="stage-text">Le lendemain du passage des éboueurs, on vient chercher votre bac directement devant chez vous. Vous n'avez même pas besoin d'être là.</p>
+        </article>
+
+        <article class="panel" data-panel="2">
+          <div class="chapter-marker"><span class="chapter-num">03</span><span class="chapter-label">Le nettoyage</span></div>
+          <h2 class="stage-title">Lavé,<br>désinfecté.</h2>
+          <p class="stage-text">Nettoyage haute pression à notre dépôt, désinfection complète puis désodorisation. Les odeurs et les bactéries partent avec l'eau, pas devant votre porte.</p>
+        </article>
+
+        <article class="panel" data-panel="3">
+          <div class="chapter-marker"><span class="chapter-num">04</span><span class="chapter-label">Le retour</span></div>
+          <h2 class="stage-title">Reposé<br>le soir même.</h2>
+          <p class="stage-text">Votre poubelle retrouve sa place en fin de journée, propre, sèche et prête à resservir. Un seul geste de votre côté : nous appeler.</p>
+          <div class="stage-actions">
+            <a href="#contact" class="btn btn-accent" data-modal-trigger>Réserver pour 25 €</a>
+          </div>
+        </article>
 
       </div>
+
+      <div class="stage-progress" aria-hidden="true">
+        <span class="dot is-on"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+
+      <div class="scroll-hint" id="scrollHint" aria-hidden="true">
+        <span>Faites défiler</span>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5 V19 M6 13 L12 19 L18 13"/></svg>
+      </div>
+
     </div>
-    <div class="hero-progress-spacer" aria-hidden="true"></div>
   </section>
 
   <!-- ============ MARQUEE ============ -->
@@ -135,160 +169,92 @@
     </div>
   </div>
 
-  <!-- ============ SERVICES ============ -->
-  <section class="services" id="services">
-    <div class="container">
-      <div class="chapter-marker"><span class="chapter-num">01</span><span class="chapter-label">Le service</span></div>
-      <h2 class="section-title">Un service complet, en trois gestes</h2>
-
-      <div class="service-grid">
-        <article class="service-card">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 20 L34 6 L42 14 L22 34 Z"/>
-              <path d="M22 34 L10 42 L6 38 L14 26"/>
-            </svg>
-          </div>
-          <h3>Nettoyage en profondeur</h3>
-          <p>Élimination des saletés et des résidus présents dans votre poubelle.</p>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M24 5 L40 12 V22 C40 33 33 40 24 43 C15 40 8 33 8 22 V12 Z"/>
-              <path d="M17 24 L22 29 L32 18"/>
-            </svg>
-          </div>
-          <h3>Désinfection</h3>
-          <p>Un bac plus propre et plus agréable à utiliser au quotidien.</p>
-        </article>
-
-        <article class="service-card">
-          <div class="service-icon">
-            <svg viewBox="0 0 48 48" width="30" height="30" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 26 C12 20 12 32 18 26 C24 20 24 32 30 26 C36 20 36 32 42 26"/>
-              <path d="M9 16 C15 10 15 22 21 16"/>
-              <path d="M27 36 C33 30 33 42 39 36"/>
-            </svg>
-          </div>
-          <h3>Désodorisation</h3>
-          <p>Réduction des mauvaises odeurs pour retrouver une sensation de fraîcheur.</p>
-        </article>
-      </div>
-
-      <p class="services-note">On récupère votre poubelle chez vous le lendemain du passage des éboueurs, on la nettoie à notre dépôt, et on vous la ramène. Vous n'avez rien à faire, sauf profiter d'une poubelle propre.</p>
-    </div>
-  </section>
-
-  <!-- ============ COMMENT ÇA MARCHE ============ -->
-  <section class="process" id="comment-ca-marche">
-    <div class="container">
-      <div class="chapter-marker"><span class="chapter-num">02</span><span class="chapter-label">Le déroulé</span></div>
-      <h2 class="section-title">Comment ça marche</h2>
-
-      <div class="process-grid">
-        <article class="process-step">
-          <span class="process-num">1</span>
-          <div class="process-icon">
-            <svg viewBox="0 0 48 48" width="26" height="26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="19"/><path d="M24 13 V24 L32 29"/></svg>
-          </div>
-          <h3>Le matin, on récupère</h3>
-          <p>Le lendemain du passage des éboueurs, on vient chercher votre poubelle directement chez vous.</p>
-        </article>
-
-        <article class="process-step">
-          <span class="process-num">2</span>
-          <div class="process-icon">
-            <svg viewBox="0 0 48 48" width="26" height="26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M6 26 C12 20 12 32 18 26 C24 20 24 32 30 26 C36 20 36 32 42 26"/><path d="M9 16 C15 10 15 22 21 16"/></svg>
-          </div>
-          <h3>On nettoie à notre dépôt</h3>
-          <p>Nettoyage haute pression, désinfection et désodorisation complète, loin de chez vous.</p>
-        </article>
-
-        <article class="process-step">
-          <span class="process-num">3</span>
-          <div class="process-icon">
-            <svg viewBox="0 0 48 48" width="26" height="26" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="19"/><path d="M15 24 L21 30 L33 17"/></svg>
-          </div>
-          <h3>Le soir, on vous la ramène</h3>
-          <p>Votre poubelle est reposée chez vous en fin de journée, propre et prête à resservir.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ POURQUOI NETTOYER SA POUBELLE ============ -->
+  <!-- ============ POURQUOI ============ -->
   <section class="reasons" id="pourquoi">
     <div class="container">
-      <div class="chapter-marker"><span class="chapter-num">03</span><span class="chapter-label">Pourquoi</span></div>
-      <h2 class="section-title">Pourquoi nettoyer sa poubelle ?</h2>
-      <p class="reasons-intro">Une poubelle sale, ce n'est pas juste inesthétique. C'est un vrai nid à problèmes, été comme hiver.</p>
+      <div class="section-head" data-reveal>
+        <h2 class="section-title">Une poubelle sale,<br>c'est un nid à problèmes.</h2>
+        <p class="section-lead">Ce n'est pas qu'une question d'apparence. Ce qui reste au fond du bac attire, prolifère et se sent — surtout l'été.</p>
+      </div>
 
       <div class="reasons-grid">
-        <article class="reason-card">
-          <div class="reason-icon">🐀</div>
-          <h3>Rats et nuisibles</h3>
-          <p>Les résidus attirent rats et rongeurs, particulièrement en période estivale.</p>
+        <article class="reason-card" data-reveal>
+          <span class="reason-index">01</span>
+          <h3>Rats et rongeurs</h3>
+          <p>Les résidus alimentaires attirent les nuisibles, particulièrement en période estivale.</p>
         </article>
-        <article class="reason-card">
-          <div class="reason-icon">🪰</div>
-          <h3>Mouches, guêpes, cafards</h3>
-          <p>Une poubelle sale devient un lieu de ponte idéal pour les insectes.</p>
+        <article class="reason-card" data-reveal>
+          <span class="reason-index">02</span>
+          <h3>Mouches et cafards</h3>
+          <p>Un bac encrassé devient un lieu de ponte idéal pour les insectes.</p>
         </article>
-        <article class="reason-card">
-          <div class="reason-icon">🦠</div>
-          <h3>Bactéries et maladies</h3>
-          <p>Les jus de déchets accumulés favorisent la prolifération de bactéries et de moisissures.</p>
+        <article class="reason-card" data-reveal>
+          <span class="reason-index">03</span>
+          <h3>Bactéries</h3>
+          <p>Les jus de déchets accumulés favorisent moisissures et prolifération bactérienne.</p>
         </article>
-        <article class="reason-card">
-          <div class="reason-icon">👃</div>
-          <h3>Mauvaises odeurs</h3>
-          <p>Surtout en été, une poubelle non entretenue dégage des odeurs difficiles à supporter, pour vous et le voisinage.</p>
+        <article class="reason-card" data-reveal>
+          <span class="reason-index">04</span>
+          <h3>Odeurs persistantes</h3>
+          <p>En été, une poubelle non entretenue empeste bien au-delà de votre entrée.</p>
         </article>
-        <article class="reason-card">
-          <div class="reason-icon">🏡</div>
-          <h3>Image de votre maison</h3>
-          <p>Une poubelle propre devant chez vous, c'est aussi une meilleure image pour votre maison ou votre copropriété.</p>
+        <article class="reason-card" data-reveal>
+          <span class="reason-index">05</span>
+          <h3>Image de la maison</h3>
+          <p>Un bac propre devant chez vous change l'allure de votre entrée et de la copropriété.</p>
         </article>
-        <article class="reason-card">
-          <div class="reason-icon">⏱️</div>
-          <h3>Zéro effort de votre part</h3>
-          <p>Vous n'avez ni à sortir le tuyau, ni à frotter : on s'occupe de tout, de A à Z.</p>
+        <article class="reason-card" data-reveal>
+          <span class="reason-index">06</span>
+          <h3>Zéro corvée</h3>
+          <p>Ni tuyau, ni gants, ni brosse : la tâche que personne ne veut faire, on s'en charge.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ AVANT / APRÈS ============ -->
-  <section class="before-after" id="avant-apres">
+  <!-- ============ DÉTAIL MACRO ============ -->
+  <section class="detail">
+    <img src="assets/img/generated/macro.webp" alt="Surface d'une poubelle fraîchement lavée, couverte de gouttes d'eau" class="detail-img" width="1400" height="791" loading="lazy" decoding="async">
+    <div class="detail-overlay">
+      <div class="container detail-inner" data-reveal>
+        <p class="detail-eyebrow">Le niveau de propreté</p>
+        <h2 class="detail-title">Propre jusqu'au fond du bac.</h2>
+        <p class="detail-text">Haute pression, désinfectant professionnel, séchage. On ne masque pas l'odeur : on retire ce qui la produit.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RÉSULTATS ============ -->
+  <section class="before-after" id="resultats">
     <div class="container">
-      <div class="chapter-marker"><span class="chapter-num">04</span><span class="chapter-label">Les résultats</span></div>
-      <h2 class="section-title">Nos résultats en images</h2>
-      <p class="reasons-intro">Faites glisser le curseur pour voir la différence.</p>
+      <div class="section-head" data-reveal>
+        <div class="chapter-marker"><span class="chapter-num">05</span><span class="chapter-label">Les résultats</span></div>
+        <h2 class="section-title">Avant, après.</h2>
+        <p class="section-lead">Faites glisser le curseur pour voir la différence.</p>
+      </div>
 
       <div class="ba-grid">
-        <div class="ba-slider" data-ba-slider>
-          <img src="assets/img/generated/pair1-clean.webp" alt="Poubelle grise propre devant une entrée de maison" class="ba-img ba-img-after">
-          <img src="assets/img/generated/pair1-dirty.webp" alt="Poubelle grise sale et tachée devant une entrée de maison" class="ba-img ba-img-before">
+        <div class="ba-slider" data-ba-slider data-reveal>
+          <img src="assets/img/generated/pair1-clean.webp" alt="Poubelle grise propre devant une entrée de maison" class="ba-img ba-img-after" width="900" height="671" loading="lazy" decoding="async">
+          <img src="assets/img/generated/pair1-dirty.webp" alt="Poubelle grise sale et tachée devant une entrée de maison" class="ba-img ba-img-before" width="900" height="671" loading="lazy" decoding="async">
           <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Curseur avant après, poubelle grise">
           <span class="ba-handle" aria-hidden="true"></span>
           <span class="ba-tag ba-tag-before">Avant</span>
           <span class="ba-tag ba-tag-after">Après</span>
         </div>
 
-        <div class="ba-slider" data-ba-slider>
-          <img src="assets/img/generated/pair2-clean.webp" alt="Poubelle verte propre devant un garage" class="ba-img ba-img-after">
-          <img src="assets/img/generated/pair2-dirty.webp" alt="Poubelle verte sale devant un garage" class="ba-img ba-img-before">
+        <div class="ba-slider" data-ba-slider data-reveal>
+          <img src="assets/img/generated/pair2-clean.webp" alt="Poubelle verte propre devant un garage" class="ba-img ba-img-after" width="900" height="671" loading="lazy" decoding="async">
+          <img src="assets/img/generated/pair2-dirty.webp" alt="Poubelle verte sale devant un garage" class="ba-img ba-img-before" width="900" height="671" loading="lazy" decoding="async">
           <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Curseur avant après, poubelle verte">
           <span class="ba-handle" aria-hidden="true"></span>
           <span class="ba-tag ba-tag-before">Avant</span>
           <span class="ba-tag ba-tag-after">Après</span>
         </div>
 
-        <div class="ba-slider" data-ba-slider>
-          <img src="assets/img/generated/pair3-clean.webp" alt="Poubelle bleue propre près d'une clôture" class="ba-img ba-img-after">
-          <img src="assets/img/generated/pair3-dirty.webp" alt="Poubelle bleue sale près d'une clôture" class="ba-img ba-img-before">
+        <div class="ba-slider" data-ba-slider data-reveal>
+          <img src="assets/img/generated/pair3-clean.webp" alt="Poubelle bleue propre près d'une clôture" class="ba-img ba-img-after" width="900" height="671" loading="lazy" decoding="async">
+          <img src="assets/img/generated/pair3-dirty.webp" alt="Poubelle bleue sale près d'une clôture" class="ba-img ba-img-before" width="900" height="671" loading="lazy" decoding="async">
           <input type="range" min="0" max="100" value="50" class="ba-range" aria-label="Curseur avant après, poubelle bleue">
           <span class="ba-handle" aria-hidden="true"></span>
           <span class="ba-tag ba-tag-before">Avant</span>
@@ -302,37 +268,38 @@
   <!-- ============ TARIF ============ -->
   <section class="pricing" id="tarif">
     <div class="container pricing-inner">
-      <div class="chapter-marker"><span class="chapter-num">05</span><span class="chapter-label">Le tarif</span></div>
       <p class="eyebrow eyebrow-light">Tarif simple et transparent</p>
-      <div class="price-figure">
+      <div class="price-figure" data-reveal>
         <span class="price-amount">25 €</span>
         <span class="price-unit">par poubelle</span>
       </div>
-      <p class="price-lead">Pour seulement 25 €, débarrassez-vous de la tâche que personne ne veut faire.</p>
-      <p class="price-sub">Nettoyage, désinfection et désodorisation inclus. Un service simple, rapide et sans mauvaise surprise.</p>
-      <a href="#contact" class="btn btn-yellow" data-modal-trigger>Nous contacter</a>
+      <p class="price-lead">Collecte, nettoyage, désinfection, désodorisation et retour compris.</p>
+      <p class="price-sub">Pas d'abonnement, pas de frais cachés, pas d'engagement. Vous appelez quand vous en avez besoin.</p>
+      <a href="#contact" class="btn btn-accent" data-modal-trigger>Réserver pour 25 €</a>
     </div>
   </section>
 
   <!-- ============ CONTACT ============ -->
   <section class="contact" id="contact">
     <div class="container contact-inner">
-      <div class="chapter-marker"><span class="chapter-num">06</span><span class="chapter-label">Réservez</span></div>
-      <h2 class="section-title">Prenez rendez-vous en 2 minutes</h2>
-      <p class="reasons-intro">Pas de formulaire à remplir : appelez-nous ou envoyez-nous un e-mail, on convient ensemble d'un jour de collecte.</p>
+      <div class="section-head" data-reveal>
+        <div class="chapter-marker"><span class="chapter-num">06</span><span class="chapter-label">Réservez</span></div>
+        <h2 class="section-title">Un appel, et c'est réglé.</h2>
+        <p class="section-lead">Pas de formulaire à remplir : on convient ensemble d'un jour de collecte, en deux minutes.</p>
+      </div>
 
       <div class="contact-cards">
-        <a href="tel:+33630644709" class="contact-card">
+        <a href="tel:+33630644709" class="contact-card" data-reveal>
           <div class="contact-card-icon">
-            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
           </div>
           <h3>Par téléphone</h3>
           <p class="contact-card-value">06 30 64 47 09</p>
         </a>
 
-        <a href="mailto:bacnifique@gmail.com" class="contact-card">
+        <a href="mailto:bacnifique@gmail.com" class="contact-card" data-reveal>
           <div class="contact-card-icon">
-            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
           </div>
           <h3>Par e-mail</h3>
           <p class="contact-card-value">bacnifique@gmail.com</p>
@@ -341,15 +308,15 @@
 
       <ul class="trust-list contact-trust">
         <li>
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 L12 4 L21 11 V20 H3 Z"/></svg>
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 L12 4 L21 11 V20 H3 Z"/></svg>
           On récupère votre poubelle chez vous
         </li>
         <li>
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 V22 M5 7 H19 M5 17 H19"/></svg>
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 V22 M5 7 H19 M5 17 H19"/></svg>
           Tarif clair : 25 € par poubelle
         </li>
         <li>
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L16 14"/></svg>
+          <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7 V12 L16 14"/></svg>
           Réponse rapide pour fixer votre créneau
         </li>
       </ul>
@@ -362,7 +329,7 @@
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <img src="assets/img/logo-mark.svg" alt="" width="36" height="36">
+      <img src="assets/img/logo-mark.svg" alt="" width="34" height="34" loading="lazy">
       <div>
         <p class="footer-name">BACNIFIQUE</p>
         <p class="footer-tagline">Le propre jusqu'au bac.</p>
@@ -384,28 +351,28 @@
   <p class="footer-copy">© <span id="year"></span> BACNIFIQUE. Tous droits réservés.</p>
 </footer>
 
-<a href="#contact" class="mobile-sticky-cta" data-modal-trigger>Nous contacter</a>
+<a href="#contact" class="mobile-sticky-cta" data-modal-trigger>Réserver pour 25 €</a>
 
-<!-- ============ MODAL RÉSERVATION RAPIDE ============ -->
+<!-- ============ MODAL CONTACT ============ -->
 <div class="modal-overlay" id="contactModal" hidden>
   <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <button type="button" class="modal-close" id="modalClose" aria-label="Fermer">
-      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M5 5 L19 19 M19 5 L5 19"/></svg>
     </button>
-    <div class="chapter-marker modal-chapter"><span class="chapter-num">06</span><span class="chapter-label">Réservez</span></div>
+    <div class="chapter-marker"><span class="chapter-num">06</span><span class="chapter-label">Réservez</span></div>
     <h3 id="modalTitle">Appelez-nous ou écrivez-nous</h3>
-    <p>Pas de formulaire à remplir : on convient ensemble d'un jour de collecte.</p>
+    <p>On convient ensemble d'un jour de collecte. 25 € par poubelle, sans engagement.</p>
     <div class="contact-cards modal-contact-cards">
       <a href="tel:+33630644709" class="contact-card">
         <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5c0-.6.4-1 1-1h3l2 5-2 1a11 11 0 0 0 5 5l1-2 5 2v3c0 .6-.4 1-1 1C10.5 21 3 13.5 3 5"/></svg>
         </div>
         <h3>Par téléphone</h3>
         <p class="contact-card-value">06 30 64 47 09</p>
       </a>
       <a href="mailto:bacnifique@gmail.com" class="contact-card">
         <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 L12 13 L21 7"/></svg>
         </div>
         <h3>Par e-mail</h3>
         <p class="contact-card-value">bacnifique@gmail.com</p>
@@ -414,6 +381,6 @@
   </div>
 </div>
 
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js" defer></script>
 </body>
 </html>
