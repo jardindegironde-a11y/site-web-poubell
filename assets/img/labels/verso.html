@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800;900&display=swap');
+
+  :root{
+    --pine:#16241D;
+    --ivory:#F6F1E3;
+    --red:#C4402F;
+    --sage:#6E9481;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{width:1063px;height:1063px;font-family:'Inter Tight',system-ui,sans-serif;}
+
+  .disc{
+    position:relative;
+    width:1063px;height:1063px;
+    border-radius:50%;
+    overflow:hidden;
+    background:var(--ivory) center/cover no-repeat;
+  }
+  .disc img.bg{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+  }
+  .ring{
+    position:absolute; inset:34px;
+    border-radius:50%;
+    border:2px solid rgba(22,36,29,.16);
+    z-index:3;
+    pointer-events:none;
+  }
+
+  .content{
+    position:absolute; inset:0;
+    z-index:4;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center;
+  }
+
+  .caption{
+    font-weight:700;
+    font-size:36px;
+    color:var(--pine);
+    line-height:1.28;
+    max-width:640px;
+  }
+  .caption b{ color:var(--red); }
+
+  .qr-card{
+    margin:34px 0 30px;
+    background:var(--ivory);
+    padding:26px;
+    border-radius:28px;
+    box-shadow:0 10px 30px rgba(22,36,29,.18);
+    border:2px solid rgba(22,36,29,.08);
+  }
+  .qr-card img{ display:block; width:340px; height:340px; }
+
+  .site{
+    font-weight:900;
+    font-size:52px;
+    letter-spacing:.5px;
+    color:var(--pine);
+  }
+  .phone{
+    margin-top:10px;
+    font-weight:600;
+    font-size:34px;
+    letter-spacing:1px;
+    color:var(--sage);
+  }
+  .phone::before{
+    content:"";
+  }
+</style>
+</head>
+<body>
+  <div class="disc" id="disc">
+    <img class="bg" src="bg-light.jpg" alt="">
+    <div class="ring"></div>
+    <div class="content">
+      <div class="caption">Scannez le <b>QR&nbsp;code</b><br>pour voir notre site web</div>
+      <div class="qr-card"><img src="qr-bacnifique.png" alt="QR code"></div>
+      <div class="site">bacnifique.fr</div>
+      <div class="phone">06 30 64 47 09</div>
+    </div>
+  </div>
+</body>
+</html>
