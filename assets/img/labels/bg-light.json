@@ -1,0 +1,22 @@
+[
+  {
+    "created_at": "2026-08-09T18:16:14.01676Z",
+    "display_name": "GPT Image 2",
+    "id": "8cf794b9-92ee-494a-90e0-6b9193a23a59",
+    "job_type": "gpt_image_2",
+    "min_result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HdU3J9vp8BxFaY2elB8cM4Q1yd/hf_20260809_181614_8cf794b9-92ee-494a-90e0-6b9193a23a59_min.webp",
+    "params": {
+      "aspect_ratio": "1:1",
+      "height": 2048,
+      "medias": [],
+      "model": "videotape-alpha",
+      "prompt": "Abstract minimalist background texture, warm ivory cream (#F6F1E3) solid base with extremely subtle soft paper grain texture throughout, very faint muted sage green (#6E9481) soft cloudy texture in one corner, elegant premium eco-friendly packaging texture, no text, no logos, no objects, seamless smooth gradient, square composition, light and airy",
+      "quality": "high",
+      "reference_elements": [],
+      "resolution": "2k",
+      "width": 2048
+    },
+    "result_url": "https://d8j0ntlcm91z4.cloudfront.net/user_3HdU3J9vp8BxFaY2elB8cM4Q1yd/hf_20260809_181614_8cf794b9-92ee-494a-90e0-6b9193a23a59.png",
+    "status": "completed"
+  }
+]
