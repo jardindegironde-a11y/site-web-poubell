@@ -37,7 +37,8 @@ VILLES = [
 SERVICES_FORM = [
     "Entretien de jardins", "Tonte de pelouse", "Taille de haies et arbustes",
     "Débroussaillage", "Désherbage", "Création d'espaces verts",
-    "Plantation de végétaux", "Engazonnement", "Nettoyage haute pression", "Autre",
+    "Plantation de végétaux", "Engazonnement", "Nettoyage haute pression",
+    "Nettoyage de toiture et gouttières", "Autre",
 ]
 
 # =====================================================================
@@ -67,25 +68,38 @@ def icon(name, cls="", size=None):
 # =====================================================================
 #  Logo — reproduction vectorielle de l'écusson Jardin de Gironde
 # =====================================================================
+# Si vous déposez votre fichier de logo dans assets/img/ (logo.png, logo.webp
+# ou logo.svg), il est utilisé automatiquement à la place de la reproduction
+# vectorielle ci-dessous. Relancez simplement `python3 build.py`.
+LOGO_FILE = next(
+    (f"assets/img/{n}" for n in ("logo.svg", "logo.png", "logo.webp")
+     if os.path.exists(os.path.join(HERE, "assets/img", n))),
+    None,
+)
+
+
 def logo_svg(height=46, cls="brand-logo"):
-    return f'''<svg class="{cls}" viewBox="0 0 560 470" height="{height}" role="img" aria-label="{SITE}">
-  <path d="M28 96c0-13 5-22 18-26C160 34 400 34 514 70c13 4 18 13 18 26v206c0 13-6 22-17 29L296 458c-10 6-22 6-32 0L45 331c-11-7-17-16-17-29z" fill="#17662C"/>
-  <path d="M52 108c0-10 4-17 14-20C171 57 389 57 494 88c10 3 14 10 14 20v190c0 10-4 17-13 23L292 431c-8 5-16 5-24 0L65 321c-9-6-13-13-13-23z" fill="none" stroke="#ffffff" stroke-width="9"/>
-  <text class="logo-word" x="280" y="196" text-anchor="middle" fill="#ffffff"
-        textLength="372" lengthAdjust="spacingAndGlyphs">JARDIN</text>
-  <path d="M104 240h116M340 240h116" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
-  <text class="logo-script" x="280" y="252" text-anchor="middle" fill="#ffffff"
-        textLength="60" lengthAdjust="spacingAndGlyphs">de</text>
-  <text class="logo-word" x="280" y="318" text-anchor="middle" fill="#ffffff"
-        textLength="336" lengthAdjust="spacingAndGlyphs">GIRONDE</text>
+    if LOGO_FILE:
+        return (f'<img class="{cls}" src="{LOGO_FILE}" alt="{SITE}" '
+                f'height="{height}" decoding="async">')
+    return f'''<svg class="{cls}" viewBox="0 0 560 480" height="{height}" role="img" aria-label="{SITE}">
+  <path d="M26 104c0-14 6-23 19-27C160 42 400 42 515 77c13 4 19 13 19 27v238c0 12-5 20-15 27L297 462c-10 7-24 7-34 0L41 369c-10-7-15-15-15-27z" fill="#17662C"/>
+  <path d="M50 116c0-10 5-17 15-20C173 64 387 64 495 96c10 3 15 10 15 20v226c0 9-4 15-12 21L292 434c-8 5-16 5-24 0L62 363c-8-6-12-12-12-21z" fill="none" stroke="#ffffff" stroke-width="10"/>
+  <text class="logo-word" x="280" y="222" text-anchor="middle" fill="#ffffff"
+        textLength="424" lengthAdjust="spacingAndGlyphs">JARDIN</text>
+  <path d="M78 262h128M354 262h128" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+  <text class="logo-script" x="280" y="276" text-anchor="middle" fill="#ffffff"
+        textLength="78" lengthAdjust="spacingAndGlyphs">de</text>
+  <text class="logo-word" x="280" y="360" text-anchor="middle" fill="#ffffff"
+        textLength="430" lengthAdjust="spacingAndGlyphs">GIRONDE</text>
 </svg>'''
 
 
 LOGO_CSS = """
 .brand-logo .logo-word { font-family: 'Oswald', 'Arial Narrow', Impact, sans-serif;
-  font-weight: 700; font-size: 100px; }
+  font-weight: 700; font-size: 116px; }
 .brand-logo .logo-script { font-family: 'Kaushan Script', 'Segoe Script', cursive;
-  font-size: 56px; }
+  font-size: 68px; }
 .brand-logo { height: 46px; width: auto; }
 .site-footer .brand-logo, .thanks .brand-logo { height: 66px; }
 @media (min-width: 700px) { .brand-logo { height: 56px; } }
@@ -247,6 +261,7 @@ def footer(home=False):
         ("Débroussaillage", "debroussaillage.html"),
         ("Création d'espaces verts", "creation-espaces-verts.html"),
         ("Nettoyage haute pression", "nettoyage-haute-pression.html"),
+        ("Toitures et gouttières", "nettoyage-toiture-gouttiere.html"),
     ]
     svc = "".join(f'<li><a href="{h}">{l}</a></li>' for l, h in services)
     return f'''<footer class="site-footer">
@@ -572,6 +587,30 @@ SERVICES = [
         ],
         "credit": False,
         "partenariat": True,
+    },
+    {
+        "slug": "nettoyage-toiture-gouttiere",
+        "titre": "Nettoyage de toitures et gouttières",
+        "court": "Toitures démoussées et gouttières dégagées, avant que l'eau ne fasse des dégâts.",
+        "img": None,
+        "img_w": None,
+        "alt": "",
+        "meta": "Nettoyage de toiture et de gouttières en Gironde : démoussage, "
+                "curage des chéneaux et descentes, à Bordeaux et partout en Gironde.",
+        "long": "Une gouttière bouchée déborde, et c'est la façade, les fondations ou la "
+                "charpente qui prennent l'eau. Nous curons les chéneaux et les descentes, "
+                "retirons feuilles, mousses et dépôts, et vérifions l'écoulement avant de "
+                "partir. Sur la toiture, nous procédons au démoussage et au nettoyage des "
+                "tuiles. Deux passages par an, à l'automne et au printemps, suffisent "
+                "généralement à éviter les mauvaises surprises.",
+        "benefices": [
+            "Curage complet des gouttières, chéneaux et descentes",
+            "Démoussage de toiture et nettoyage des tuiles",
+            "Contrôle de l'écoulement après intervention",
+            "Évacuation des déchets retirés",
+            "Intervention sécurisée, matériel adapté à la hauteur",
+        ],
+        "credit": False,
     },
     {
         "slug": "nettoyage-haute-pression",
@@ -915,6 +954,7 @@ def page_lp_entretien():
             "Débroussaillage des terrains envahis et mise aux normes",
             "Désherbage des allées, bordures et massifs",
             "Ramassage des feuilles et nettoyage automnal",
+            "Nettoyage des toitures et curage des gouttières",
             "Évacuation des déchets verts incluse",
             "Compte-rendu après chaque intervention",
         ],
@@ -1015,7 +1055,8 @@ def page_service(s):
     return (
         head(f"{s['titre']} en Gironde — {SITE}", s["meta"],
              f"{BASE_URL}/{s['slug']}.html",
-             preload_img=(s["img"], s["img_w"], "(min-width: 900px) 70vw, 92vw"))
+             preload_img=((s["img"], s["img_w"], "(min-width: 900px) 70vw, 92vw")
+                          if s["img"] else None))
         + local_business_jsonld() + '''
 </head>
 <body>
@@ -1035,7 +1076,10 @@ def page_service(s):
         <a class="btn btn-ghost" href="''' + PHONE_HREF + '''" data-loc="page-service">''' + icon('phone', 'ico', 16) + ''' ''' + PHONE_DISPLAY + '''</a>
       </div>
       <div class="page-media reveal in">'''
-        + picture(s["img"], s["img_w"], s["alt"], sizes="(min-width: 900px) 70vw, 92vw", eager=True) + '''</div>
+        + (picture(s["img"], s["img_w"], s["alt"], sizes="(min-width: 900px) 70vw, 92vw", eager=True)
+           if s["img"] else
+           f'''<div class="page-illus"><img src="assets/img/illus/{s["slug"]}.svg" alt=""
+                width="200" height="200" loading="eager"></div>''') + '''</div>
     </div>
   </section>
 

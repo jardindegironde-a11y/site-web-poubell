@@ -35,6 +35,7 @@ p { text-wrap: pretty; }
   --green: #17662C;
   --green-700: #1E7A34;
   --green-100: #E8F2EA;
+  --illus-bg: #F7F5EE;   /* doit rester identique au fond interne des SVG (illus.py) */
   --radius: 16px;
   --radius-lg: 24px;
   --container: 1180px;
@@ -392,25 +393,31 @@ body { padding-bottom: 0; }
 
 /* ---------- Tuiles illustrées (dessins au trait) ---------- */
 .service-media.illus {
-  display: grid; place-items: center; background: var(--green-100);
+  display: grid; place-items: center; background: var(--illus-bg);
   aspect-ratio: 16 / 10;
 }
 .service-media.illus img {
-  width: 44%; max-width: 128px; height: auto;
+  width: 58%; max-width: 176px; height: auto;
   transition: transform .5s var(--ease);
 }
 .service-card:hover .service-media.illus img { transform: scale(1.07) rotate(-1.5deg); }
 
 .illus-badge {
   display: grid; place-items: center; width: 84px; height: 84px;
-  border-radius: 20px; background: var(--green-100); flex: none;
+  border-radius: 20px; background: var(--illus-bg); flex: none;
 }
-.illus-badge img { width: 56px; height: 56px; }
+.illus-badge img { width: 66px; height: 66px; }
+
+.page-illus {
+  display: grid; place-items: center; background: var(--illus-bg);
+  aspect-ratio: 16 / 7;
+}
+.page-illus img { width: 200px; max-width: 42%; height: auto; }
 
 .usp-grid { display: grid; gap: clamp(20px, 3vw, 30px); margin-top: clamp(32px, 4vw, 48px); }
 .usp { display: flex; gap: 18px; align-items: flex-start; }
 .usp .illus-badge { width: 66px; height: 66px; border-radius: 16px; }
-.usp .illus-badge img { width: 44px; height: 44px; }
+.usp .illus-badge img { width: 54px; height: 54px; }
 .usp h3 { font-size: 17px; }
 .usp p { margin-top: 7px; font-size: 15px; color: var(--ink-3); }
 @media (min-width: 700px) { .usp-grid { grid-template-columns: repeat(2, 1fr); } }

@@ -10,7 +10,7 @@ Il remplace la version React générée par Hostinger Horizons.
 | 10 vidéos MP4 en lecture automatique, dont une plein écran en accueil | **1 seule vidéo** : le partenariat Villaverde, chargée uniquement quand on arrive dessus |
 | Sections à défilement bloqué (`min-h-[280vh]`), texte qui apparaît mot à mot | Défilement normal, apparitions douces, désactivées si l'utilisateur préfère moins d'animations |
 | Bundle React de 410 Ko + Framer Motion | ~25 Ko de CSS + 6 Ko de JS |
-| Vidéos de services au rendu « IA » | 6 illustrations au trait dessinées en SVG (2 Ko pièce) + photos réelles de chantiers |
+| Vidéos de services au rendu « IA » | 7 illustrations façon sérigraphie, avec la mascotte du site, dessinées en SVG (~3 Ko pièce) + photos réelles de chantiers |
 | Note « 4,9/5 sur 48 avis » dans les données structurées, invérifiable | Retirée — voir « Points d'attention » |
 | Aucune page dédiée aux campagnes publicitaires | 2 landing pages Google Ads |
 | Pas de mentions légales ni de politique de confidentialité | Les deux pages présentes |
@@ -28,9 +28,12 @@ debroussaillage.html
 entretien-jardins.html
 creation-espaces-verts.html
 nettoyage-haute-pression.html
+nettoyage-toiture-gouttiere.html
 mentions-legales.html
 politique-confidentialite.html
-send.php                       Réception du formulaire (hébergement PHP)
+send.php                       Réception du formulaire (SMTP, repli mail())
+demandes.php                   Consultation des demandes reçues (mot de passe)
+illus.py                       Générateur des illustrations SVG
 storage/                       Demandes enregistrées (non servi publiquement)
 sitemap.xml  robots.txt
 build.py                       Générateur : produit tous les fichiers .html ci-dessus
@@ -85,6 +88,39 @@ Vérifier après mise en ligne :
 - une demande de test arrive bien sur `jardindegironde@gmail.com` ;
 - le certificat HTTPS est actif sur `www.jardindegironde.fr` **et** `jardindegironde.fr`.
 
+## Notifications par e-mail — à finir de configurer
+
+Le formulaire enregistre **toujours** la demande dans `storage/devis.json`, et
+la page `demandes.php` permet de les consulter (mot de passe défini en haut du
+fichier, à changer). Aucune demande ne peut donc être perdue.
+
+En revanche, la **notification par e-mail** demande une dernière étape.
+La fonction `mail()` de l'hébergement envoie sans authentification : le
+message part bien (vérifié, `mail()` renvoie `true`), mais Gmail le classe en
+indésirable ou le refuse, car rien ne prouve que l'expéditeur est légitime.
+
+La solution fiable est l'envoi **SMTP authentifié**. Il suffit de renseigner
+quatre valeurs en haut de `send.php` :
+
+```php
+const SMTP_HOST = 'smtp.hostinger.com';   // ou smtp.gmail.com
+const SMTP_PORT = 465;
+const SMTP_USER = 'contact@jardindegironde.fr';
+const SMTP_PASS = '••••••••';
+```
+
+Deux façons d'obtenir ces identifiants :
+
+- **Boîte Hostinger** sur `jardindegironde.fr` — le domaine est déjà préparé
+  (enregistrements MX, SPF et DKIM en place), il ne manque qu'un abonnement
+  e-mail et la création d'une adresse ;
+- **Gmail** — dans le compte Google, activer la validation en deux étapes puis
+  générer un « mot de passe d'application » ; hôte `smtp.gmail.com`, port 465,
+  utilisateur `jardindegironde@gmail.com`.
+
+Tant que ces valeurs restent vides, `send.php` retombe sur `mail()` et
+journalise chaque tentative dans `storage/mail.log`.
+
 ## Configuration Google Ads
 
 L'identifiant `AW-18308555635` est déjà présent dans le `<head>` de chaque page.
@@ -127,7 +163,7 @@ conversions: {
 
 | Campagne | Page de destination | Exemples de mots-clés |
 |---|---|---|
-| Jardinage & entretien | `entretien-jardin.html` | jardinier gironde, entretien jardin bordeaux, tonte pelouse, taille de haies, débroussaillage |
+| Jardinage & entretien | `entretien-jardin.html` | jardinier gironde, entretien jardin bordeaux, tonte pelouse, taille de haies, débroussaillage, nettoyage gouttière |
 | Paysagisme & création | `creation-paysagisme.html` | paysagiste gironde, création jardin bordeaux, aménagement paysager, engazonnement, pose de clôture |
 
 Utilisez un suffixe d'URL de campagne du type
@@ -148,9 +184,11 @@ Utilisez un suffixe d'URL de campagne du type
   numéro de déclaration « services à la personne » sont à compléter dans
   `build.py` (constante `MENTIONS`) avant la mise en ligne. Google Ads peut
   demander ces informations lors de la vérification de l'annonceur.
-- **Logo** : reproduit en SVG vectoriel à partir de votre écusson (net à toutes les
-  tailles, ~1 Ko). Si vous préférez utiliser le fichier d'origine, déposez-le dans
-  `assets/img/logo.png` et remplacez l'appel à `logo_svg()` dans `build.py`.
+- **Logo** : le site affiche pour l'instant une **reproduction vectorielle** de
+  votre écusson, pas votre fichier d'origine. Pour utiliser le vrai fichier,
+  déposez-le dans `assets/img/` sous le nom `logo.png`, `logo.webp` ou
+  `logo.svg` et relancez `python3 build.py` : il est détecté et utilisé
+  automatiquement, sans autre modification.
 - **Photos** : uniquement des prises de vue réelles de vos chantiers, ré-encodées
   en WebP (de 3 Mo à 100–450 Ko). L'image « poignée de main en jardinerie » de
   l'ancien site, visiblement générée par IA, a été retirée.
