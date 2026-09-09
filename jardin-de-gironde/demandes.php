@@ -10,8 +10,17 @@ declare(strict_types=1);
 // Changez MOT_DE_PASSE avant la mise en ligne.
 // ---------------------------------------------------------------------
 
-const MOT_DE_PASSE = 'jardin2026';
+// Mot de passe lu depuis smtp-config.php (non versionné), pour qu'il ne se
+// retrouve jamais sur GitHub. Sans ce fichier, la valeur de repli ci-dessous
+// s'applique et la page affiche un avertissement.
+const MOT_DE_PASSE_DEFAUT = 'changez-moi';
 const STORAGE_FILE = __DIR__ . '/storage/devis.json';
+
+$config = is_file(__DIR__ . '/smtp-config.php') ? require __DIR__ . '/smtp-config.php' : [];
+$motDePasse = (is_array($config) && !empty($config['admin_pass']))
+    ? (string) $config['admin_pass']
+    : MOT_DE_PASSE_DEFAUT;
+$parDefaut = $motDePasse === MOT_DE_PASSE_DEFAUT;
 
 session_start();
 
@@ -22,7 +31,7 @@ if (isset($_GET['sortie'])) {
 }
 
 if (isset($_POST['mdp'])) {
-    if (hash_equals(MOT_DE_PASSE, (string) $_POST['mdp'])) {
+    if (hash_equals($motDePasse, (string) $_POST['mdp'])) {
         $_SESSION['jdg_admin'] = true;
     } else {
         $erreur = 'Mot de passe incorrect.';
@@ -66,6 +75,10 @@ if (!$autorise) {
          '<button type="submit">Entrer</button></form>';
     if (isset($erreur)) {
         echo '<p class="err">', htmlspecialchars($erreur), '</p>';
+    }
+    if ($parDefaut) {
+        echo '<p class="err">Mot de passe par défaut : ajoutez une clé ',
+             '<code>admin_pass</code> dans smtp-config.php.</p>';
     }
     echo '</div></body></html>';
     exit;

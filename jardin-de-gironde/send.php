@@ -140,6 +140,12 @@ function horizons_forward(array $payload): bool {
     if (HORIZONS_ENDPOINT === '') {
         return false;
     }
+    // Si le relais pointe sur ce site lui-même, le site Horizons n'existe
+    // plus : on n'appelle pas, cela ne ferait qu'ajouter un délai.
+    $cible = parse_url(HORIZONS_ENDPOINT, PHP_URL_HOST);
+    if ($cible !== null && strcasecmp((string) $cible, sender_domain()) === 0) {
+        return false;
+    }
     $json = json_encode($payload, JSON_UNESCAPED_UNICODE);
 
     if (function_exists('curl_init')) {
@@ -149,7 +155,7 @@ function horizons_forward(array $payload): bool {
             CURLOPT_POSTFIELDS     => $json,
             CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
             CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 12,
+            CURLOPT_TIMEOUT        => 6,
         ]);
         curl_exec($ch);
         $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
@@ -161,7 +167,7 @@ function horizons_forward(array $payload): bool {
         'method'        => 'POST',
         'header'        => "Content-Type: application/json\r\n",
         'content'       => $json,
-        'timeout'       => 12,
+        'timeout'       => 6,
         'ignore_errors' => true,
     ]]);
     $res = @file_get_contents(HORIZONS_ENDPOINT, false, $ctx);

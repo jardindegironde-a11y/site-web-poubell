@@ -17,6 +17,9 @@
 // ---------------------------------------------------------------------
 
 return [
+    // Mot de passe de la page /demandes.php
+    'admin_pass' => 'choisissez-un-mot-de-passe',
+
     'host' => 'smtp.gmail.com',
     'port' => 465,
     'user' => 'jardindegironde@gmail.com',
