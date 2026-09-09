@@ -60,6 +60,15 @@ php -S localhost:8000        # avec le formulaire fonctionnel
 # ou : python3 -m http.server 8000   (le formulaire affichera le repli téléphone/e-mail)
 ```
 
+## Aperçu en ligne
+
+**https://mediumpurple-boar-934886.hostingersite.com**
+
+Adresse de test Hostinger créée pour valider la refonte. `jardindegironde.fr`,
+`vedurastudio.com` et les sites BACNIFIQUE n'ont pas été touchés. Les balises
+`canonical` pointent vers `www.jardindegironde.fr`, cette adresse ne sera donc
+pas indexée par Google.
+
 ## Mise en ligne
 
 Le site est entièrement statique : il suffit de déposer le contenu du dossier
