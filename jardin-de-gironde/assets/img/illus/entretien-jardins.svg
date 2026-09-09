@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none" stroke="#17662C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Arrosoir arrosant une jeune pousse">
+<path d="M10 104 H110"/>
+<path d="M30 58 L27 90 a7 7 0 0 0 7 7 h20 a7 7 0 0 0 7 -7 L58 58 z"/>
+<path d="M27 58 h34"/>
+<path d="M34 58 c1 -13 19 -13 20 0"/>
+<path d="M60 66 L81 50 L90 61 L63 79 Z"/>
+<path d="M84 65 c3 6 4 10 4 14"/>
+<path d="M91 65 c2 5 3 9 3 12"/>
+<path d="M97 101 V86"/>
+<path d="M97 94 c-9 0 -12 -4 -11 -9 c7 -2 12 3 11 9 z"/>
+<path d="M97 89 c9 0 12 -4 11 -9 c-7 -2 -12 3 -11 9 z"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none" stroke="#17662C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Taille-haie au-dessus d'une haie taillée">
+<path d="M10 104 H110"/>
+<path d="M24 100 v-24 c0 -10 8 -16 17 -15 c3 -6 12 -7 16 -2 c5 -4 13 -2 15 4 c8 0 12 6 12 14 v23 z"/>
+<path d="M40 96 v-19"/><path d="M56 98 v-23"/><path d="M72 96 v-17"/>
+<g transform="rotate(-13 60 44)">
+  <path d="M22 40 h48 a4 4 0 0 1 0 8 h-48 a4 4 0 0 1 0 -8 z"/>
+  <path d="M28 48 v4 M36 48 v4 M44 48 v4 M52 48 v4 M60 48 v4"/>
+  <path d="M70 35 h18 a5 5 0 0 1 5 5 v8 a5 5 0 0 1 -5 5 h-18 z"/>
+  <path d="M79 35 v-7 a4 4 0 0 1 4 -4 h7"/>
+  <path d="M76 44 h9"/>
+</g>
+<path d="M95 72 c5 -1 8 2 7 6 c-4 2 -8 -1 -7 -6 z"/>
+<path d="M101 60 c5 -1 8 2 7 6 c-4 2 -8 -1 -7 -6 z"/>
+<path d="M88 86 c5 -1 8 2 7 6 c-4 2 -8 -1 -7 -6 z"/>
+</svg>

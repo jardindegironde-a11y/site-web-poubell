@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120" fill="none" stroke="#17662C" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Débroussailleuse coupant des broussailles">
+<path d="M10 104 H110"/>
+<path d="M32 86 L84 38"/>
+<g transform="rotate(-43 94 30)">
+  <path d="M82 21 h24 a5 5 0 0 1 5 5 v9 a5 5 0 0 1 -5 5 h-24 z"/>
+  <path d="M88 21 v-5 h8 v5"/>
+</g>
+<path d="M60 59 l-16 -4"/>
+<path d="M65 54 l11 -11"/>
+<path d="M13 80 a17 17 0 0 1 31 3"/>
+<circle cx="28" cy="90" r="9"/>
+<path d="M28 90 l6 -4 M28 90 l-1 7 M28 90 l-6 -4"/>
+<path d="M58 104 c1 -11 7 -15 13 -16"/>
+<path d="M70 104 c-1 -9 3 -14 10 -15"/>
+<path d="M84 104 c0 -10 5 -13 11 -13"/>
+<path d="M96 104 c-1 -7 2 -11 7 -12"/>
+<path d="M50 84 l7 -3 M46 76 l6 -5"/>
+</svg>
