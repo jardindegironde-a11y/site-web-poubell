@@ -72,7 +72,7 @@ def icon(name, cls="", size=None):
 # ou logo.svg), il est utilisé automatiquement à la place de la reproduction
 # vectorielle ci-dessous. Relancez simplement `python3 build.py`.
 LOGO_FILE = next(
-    (f"assets/img/{n}" for n in ("logo.svg", "logo.png", "logo.webp")
+    (f"assets/img/{n}" for n in ("logo.svg", "logo.png", "logo.webp", "logo-jdg.svg")
      if os.path.exists(os.path.join(HERE, "assets/img", n))),
     None,
 )
@@ -96,13 +96,9 @@ def logo_svg(height=46, cls="brand-logo"):
 
 
 LOGO_CSS = """
-.brand-logo .logo-word { font-family: 'Oswald', 'Arial Narrow', Impact, sans-serif;
-  font-weight: 700; font-size: 116px; }
-.brand-logo .logo-script { font-family: 'Kaushan Script', 'Segoe Script', cursive;
-  font-size: 68px; }
-.brand-logo { height: 46px; width: auto; }
-.site-footer .brand-logo, .thanks .brand-logo { height: 66px; }
-@media (min-width: 700px) { .brand-logo { height: 56px; } }
+.brand-logo { height: 50px; width: auto; }
+.site-footer .brand-logo, .thanks .brand-logo { height: 76px; }
+@media (min-width: 700px) { .brand-logo { height: 62px; } }
 """
 
 
@@ -142,8 +138,6 @@ def head(title, description, canonical, preload_img=None, extra_css="", noindex=
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&text=JARDINGOE&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&text=de&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=" js";</script>
 <link rel="stylesheet" href="assets/css/style.css">{preload}
 <style>{LOGO_CSS}{extra_css}</style>

@@ -34,6 +34,7 @@ politique-confidentialite.html
 send.php                       Réception du formulaire (SMTP, repli mail())
 demandes.php                   Consultation des demandes reçues (mot de passe)
 illus.py                       Générateur des illustrations SVG
+logo.py                        Générateur du logo vectorisé
 storage/                       Demandes enregistrées (non servi publiquement)
 sitemap.xml  robots.txt
 build.py                       Générateur : produit tous les fichiers .html ci-dessus
@@ -184,11 +185,13 @@ Utilisez un suffixe d'URL de campagne du type
   numéro de déclaration « services à la personne » sont à compléter dans
   `build.py` (constante `MENTIONS`) avant la mise en ligne. Google Ads peut
   demander ces informations lors de la vérification de l'annonceur.
-- **Logo** : le site affiche pour l'instant une **reproduction vectorielle** de
-  votre écusson, pas votre fichier d'origine. Pour utiliser le vrai fichier,
-  déposez-le dans `assets/img/` sous le nom `logo.png`, `logo.webp` ou
-  `logo.svg` et relancez `python3 build.py` : il est détecté et utilisé
-  automatiquement, sans autre modification.
+- **Logo** : `assets/img/logo-jdg.svg` est une **reproduction vectorielle** de
+  votre écusson, tracée d'après l'image que vous avez fournie — texte converti
+  en courbes, aucune dépendance à une police, ~6 Ko, net à toutes les tailles.
+  Le script `logo.py` permet de la régénérer et d'en ajuster la géométrie.
+  Ce n'est pas votre fichier d'origine : pour l'utiliser, déposez-le dans
+  `assets/img/` sous le nom `logo.png`, `logo.webp` ou `logo.svg` et relancez
+  `python3 build.py`. Il est détecté et prend automatiquement le dessus.
 - **Photos** : uniquement des prises de vue réelles de vos chantiers, ré-encodées
   en WebP (de 3 Mo à 100–450 Ko). L'image « poignée de main en jardinerie » de
   l'ancien site, visiblement générée par IA, a été retirée.
