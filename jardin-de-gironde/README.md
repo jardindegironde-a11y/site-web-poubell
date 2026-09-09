@@ -89,13 +89,29 @@ Vérifier après mise en ligne :
 - une demande de test arrive bien sur `jardindegironde@gmail.com` ;
 - le certificat HTTPS est actif sur `www.jardindegironde.fr` **et** `jardindegironde.fr`.
 
-## Notifications par e-mail — à finir de configurer
+## Notifications par e-mail
 
-Le formulaire enregistre **toujours** la demande dans `storage/devis.json`, et
-la page `demandes.php` permet de les consulter (mot de passe défini en haut du
-fichier, à changer). Aucune demande ne peut donc être perdue.
+Chaque demande part par **trois canaux**, pour qu'aucune ne se perde :
 
-En revanche, la **notification par e-mail** demande une dernière étape.
+1. **Enregistrement local** dans `storage/devis.json`, consultable sur
+   `demandes.php` (mot de passe en haut du fichier, à changer).
+2. **Relais vers l'ancien formulaire Horizons** — c'est le canal qui envoyait
+   les notifications jusqu'ici. `send.php` dépose une copie de la demande dans
+   la collection `devis_requests` du site Horizons de `jardindegironde.fr`, et
+   Hostinger prévient le propriétaire du compte comme avant.
+   **Ce relais s'éteindra le jour où `jardindegironde.fr` basculera sur cette
+   version statique** : le site Horizons ne sera plus en ligne. C'est pourquoi
+   le point 3 reste nécessaire.
+3. **Envoi direct** par SMTP si configuré, sinon par `mail()`.
+
+Le résultat de chaque tentative est journalisé dans `storage/mail.log`
+(`canal`, `envoye`, `relais_horizons`).
+
+### Rendre l'envoi direct fiable
+
+`mail()` part sans authentification : le message quitte bien le serveur
+(vérifié, `mail()` renvoie `true`), mais Gmail le classe en indésirable ou le
+refuse, car rien ne prouve que l'expéditeur est légitime.
 La fonction `mail()` de l'hébergement envoie sans authentification : le
 message part bien (vérifié, `mail()` renvoie `true`), mais Gmail le classe en
 indésirable ou le refuse, car rien ne prouve que l'expéditeur est légitime.

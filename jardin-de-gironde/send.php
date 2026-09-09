@@ -30,6 +30,21 @@ const SMTP_HOST = '';
 const SMTP_PORT = 465;
 const SMTP_USER = '';
 const SMTP_PASS = '';
+// ---------------------------------------------------------------------
+// Relais vers l'ancien formulaire Hostinger Horizons.
+//
+// C'est ce canal qui envoyait les notifications jusqu'ici : le site
+// Horizons de jardindegironde.fr enregistre la demande dans sa collection
+// « devis_requests » et Hostinger prévient le propriétaire du compte.
+// On continue donc à y déposer une copie de chaque demande.
+//
+// ATTENTION : ce relais ne fonctionne que tant que le site Horizons reste
+// en ligne sur jardindegironde.fr. Le jour où le domaine bascule sur cette
+// version statique, il s'éteint — d'où l'envoi SMTP ci-dessus, qui est la
+// solution durable. Laisser vide pour désactiver le relais.
+// ---------------------------------------------------------------------
+const HORIZONS_ENDPOINT = 'https://jardindegironde.fr/hcgi/platform/api/collections/devis_requests/records';
+
 const STORAGE_FILE = __DIR__ . '/storage/devis.json';
 const MAIL_LOG = __DIR__ . '/storage/mail.log';
 
@@ -104,6 +119,50 @@ function smtp_send(string $to, string $subject, string $body, string $replyTo): 
     $cmd('QUIT', '221');
     fclose($socket);
     return $ok;
+}
+
+/**
+ * Dépose une copie de la demande dans la collection Horizons, qui déclenche
+ * la notification déjà en place. Ne renvoie que l'état, sans jamais bloquer.
+ */
+function horizons_forward(array $payload): bool {
+    if (HORIZONS_ENDPOINT === '') {
+        return false;
+    }
+    $json = json_encode($payload, JSON_UNESCAPED_UNICODE);
+
+    if (function_exists('curl_init')) {
+        $ch = curl_init(HORIZONS_ENDPOINT);
+        curl_setopt_array($ch, [
+            CURLOPT_POST           => true,
+            CURLOPT_POSTFIELDS     => $json,
+            CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT        => 12,
+        ]);
+        curl_exec($ch);
+        $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        return $code >= 200 && $code < 300;
+    }
+
+    $ctx = stream_context_create(['http' => [
+        'method'        => 'POST',
+        'header'        => "Content-Type: application/json\r\n",
+        'content'       => $json,
+        'timeout'       => 12,
+        'ignore_errors' => true,
+    ]]);
+    $res = @file_get_contents(HORIZONS_ENDPOINT, false, $ctx);
+    if ($res === false) {
+        return false;
+    }
+    foreach ($http_response_header ?? [] as $line) {
+        if (preg_match('#^HTTP/\S+\s+(\d{3})#', $line, $m)) {
+            return (int) $m[1] >= 200 && (int) $m[1] < 300;
+        }
+    }
+    return false;
 }
 
 function respond(bool $success, string $message = ''): void {
@@ -224,14 +283,25 @@ if (!$sent) {
     $sent = @mail(NOTIFICATION_EMAIL, $subject, $body, $headers, '-f' . $from);
 }
 
+// Copie vers l'ancien formulaire Horizons — canal de notification historique.
+$relais = horizons_forward([
+    'nom'       => $nom,
+    'email'     => $email,
+    'telephone' => $telephone,
+    'ville'     => $ville,
+    'service'   => $service,
+    'message'   => $message,
+]);
+
 // Journal : permet de distinguer « mail() indisponible » de « mail parti
 // mais non distribué ». Consultable dans storage/mail.log.
 @file_put_contents(
     MAIL_LOG,
-    sprintf("%s | canal=%s | envoye=%s | from=%s | to=%s\n",
+    sprintf("%s | canal=%s | envoye=%s | relais_horizons=%s | from=%s | to=%s\n",
         date('Y-m-d H:i:s'),
         $canal,
         $sent ? 'true' : 'false',
+        $relais ? 'true' : 'false',
         $canal === 'smtp' ? SMTP_USER : $from,
         NOTIFICATION_EMAIL),
     FILE_APPEND | LOCK_EX
