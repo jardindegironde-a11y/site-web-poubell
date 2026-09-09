@@ -25,6 +25,11 @@
       'send.php',
       '/hcgi/platform/api/collections/devis_requests/records'
     ],
+    // Copie déposée dans l'ancien formulaire Horizons, déplacé sur
+    // jardindegironde.com : c'est lui qui déclenche l'e-mail de notification.
+    // Envoyée depuis le navigateur, car l'hébergement ne peut pas sortir vers
+    // ce domaine. Mettre à '' pour la désactiver.
+    notify: 'https://jardindegironde.com/hcgi/platform/api/collections/devis_requests/records',
     // Adresse de repli si l'endpoint n'est pas joignable.
     fallbackEmail: 'jardindegironde@gmail.com',
     thanksUrl: 'merci.html'
@@ -202,6 +207,21 @@
           if (index + 1 < CONFIG.endpoints.length) return send(index + 1);
           throw err;
         });
+      }
+
+      // Copie vers l'ancien formulaire : déclenche la notification par e-mail.
+      // keepalive permet à la requête d'aboutir malgré la redirection qui suit.
+      if (CONFIG.notify) {
+        fetch(CONFIG.notify, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            nom: data.nom, email: data.email, telephone: data.telephone,
+            ville: data.ville, service: data.service, message: data.message
+          }),
+          keepalive: true,
+          mode: 'cors'
+        }).catch(function () {});
       }
 
       send(0)

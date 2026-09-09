@@ -61,7 +61,13 @@ ErrorDocument 404 /index.html
   </FilesMatch>
 </IfModule>
 
-# --- Les journaux et les demandes ne sont jamais servis ---
+# --- Journaux, demandes et identifiants ne sont jamais servis ---
 <FilesMatch "\.(log|json)$">
   Require all denied
 </FilesMatch>
+<Files "smtp-config.php">
+  Require all denied
+</Files>
+<Files "smtp-config.exemple.php">
+  Require all denied
+</Files>

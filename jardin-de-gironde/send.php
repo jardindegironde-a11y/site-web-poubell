@@ -45,16 +45,19 @@ define('SMTP_PASS', (string) $smtp['pass']);
 // Relais vers l'ancien formulaire Hostinger Horizons.
 //
 // C'est ce canal qui envoyait les notifications jusqu'ici : le site
-// Horizons de jardindegironde.fr enregistre la demande dans sa collection
+// Horizons, déplacé sur jardindegironde.com, enregistre la demande dans sa collection
 // « devis_requests » et Hostinger prévient le propriétaire du compte.
 // On continue donc à y déposer une copie de chaque demande.
 //
-// ATTENTION : ce relais ne fonctionne que tant que le site Horizons reste
-// en ligne sur jardindegironde.fr. Le jour où le domaine bascule sur cette
-// version statique, il s'éteint — d'où l'envoi SMTP ci-dessus, qui est la
-// solution durable. Laisser vide pour désactiver le relais.
+// Le site Horizons a été déplacé sur jardindegironde.com pour libérer le
+// .fr : le canal de notification continue donc de fonctionner. Il s'arrêtera
+// le jour où ce projet Horizons sera supprimé — d'où l'envoi SMTP ci-dessus,
+// qui reste la solution durable. Laisser vide pour désactiver le relais.
 // ---------------------------------------------------------------------
-const HORIZONS_ENDPOINT = 'https://jardindegironde.fr/hcgi/platform/api/collections/devis_requests/records';
+// Vide : depuis l'hébergement, jardindegironde.com se résout sur le serveur
+// lui-même et la requête n'aboutit pas. Le relais est fait par le
+// navigateur du visiteur (voir assets/js/main.js), où il fonctionne.
+const HORIZONS_ENDPOINT = '';
 
 const STORAGE_FILE = __DIR__ . '/storage/devis.json';
 const MAIL_LOG = __DIR__ . '/storage/mail.log';
