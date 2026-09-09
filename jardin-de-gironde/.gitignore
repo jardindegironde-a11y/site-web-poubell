@@ -1,1 +1,4 @@
 storage/devis.json
+storage/mail.log
+jardin-de-gironde/smtp-config.php
+smtp-config.php

@@ -25,11 +25,22 @@ const NOTIFICATION_EMAIL = 'jardindegironde@gmail.com';
 //
 //   Hostinger  : smtp.hostinger.com, port 465, votre adresse complète
 //   Gmail      : smtp.gmail.com, port 465, mot de passe d'application
+//
+// Les identifiants vivent dans smtp-config.php, à côté de ce fichier.
+// Ce fichier n'est pas versionné : le mot de passe ne part donc jamais
+// sur GitHub. Modèle fourni dans smtp-config.exemple.php.
 // ---------------------------------------------------------------------
-const SMTP_HOST = '';
-const SMTP_PORT = 465;
-const SMTP_USER = '';
-const SMTP_PASS = '';
+$smtp = ['host' => '', 'port' => 465, 'user' => '', 'pass' => ''];
+if (is_file(__DIR__ . '/smtp-config.php')) {
+    $charge = require __DIR__ . '/smtp-config.php';
+    if (is_array($charge)) {
+        $smtp = array_merge($smtp, $charge);
+    }
+}
+define('SMTP_HOST', (string) $smtp['host']);
+define('SMTP_PORT', (int) $smtp['port']);
+define('SMTP_USER', (string) $smtp['user']);
+define('SMTP_PASS', (string) $smtp['pass']);
 // ---------------------------------------------------------------------
 // Relais vers l'ancien formulaire Hostinger Horizons.
 //

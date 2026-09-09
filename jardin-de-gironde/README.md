@@ -32,6 +32,7 @@ nettoyage-toiture-gouttiere.html
 mentions-legales.html
 politique-confidentialite.html
 send.php                       Réception du formulaire (SMTP, repli mail())
+smtp-config.exemple.php        Modèle des identifiants d'envoi (à copier)
 demandes.php                   Consultation des demandes reçues (mot de passe)
 illus.py                       Générateur des illustrations SVG
 logo.py                        Générateur du logo vectorisé
@@ -116,15 +117,20 @@ La fonction `mail()` de l'hébergement envoie sans authentification : le
 message part bien (vérifié, `mail()` renvoie `true`), mais Gmail le classe en
 indésirable ou le refuse, car rien ne prouve que l'expéditeur est légitime.
 
-La solution fiable est l'envoi **SMTP authentifié**. Il suffit de renseigner
-quatre valeurs en haut de `send.php` :
+La solution fiable est l'envoi **SMTP authentifié**. Copiez
+`smtp-config.exemple.php` sous le nom `smtp-config.php` et complétez-le :
 
 ```php
-const SMTP_HOST = 'smtp.hostinger.com';   // ou smtp.gmail.com
-const SMTP_PORT = 465;
-const SMTP_USER = 'contact@jardindegironde.fr';
-const SMTP_PASS = '••••••••';
+return [
+    'host' => 'smtp.gmail.com',
+    'port' => 465,
+    'user' => 'jardindegironde@gmail.com',
+    'pass' => 'mot de passe d\'application',
+];
 ```
+
+`smtp-config.php` n'est **pas versionné** : le mot de passe reste sur le
+serveur et ne part jamais sur GitHub.
 
 Deux façons d'obtenir ces identifiants :
 
