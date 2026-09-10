@@ -476,9 +476,10 @@ SERVICES = [
         "slug": "entretien-jardins",
         "titre": "Entretien de jardins",
         "court": "Un suivi régulier pour un jardin toujours impeccable, saison après saison.",
-        "img": "debroussaillage",
-        "img_w": [1200, 800, 500],
-        "alt": "L'équipe de Jardin de Gironde en intervention d'entretien",
+        # Pas de photo pour l'instant : l'illustration au trait tient la page.
+        "img": None,
+        "img_w": None,
+        "alt": "",
         "meta": "Entretien de jardins en Gironde : suivi régulier, taille, désherbage et soin de votre jardin à Bordeaux et partout en Gironde. Devis sous 24 h.",
         "long": "L'entretien d'un jardin demande du temps, du savoir-faire et une présence "
                 "régulière. Jardin de Gironde prend en charge l'ensemble des travaux "
@@ -541,9 +542,11 @@ SERVICES = [
         "slug": "debroussaillage",
         "titre": "Débroussaillage",
         "court": "Nettoyage des terrains envahis, mise aux normes et sécurité incendie.",
-        "img": "debroussaillage",
-        "img_w": [1200, 800, 500],
-        "alt": "Équipe de débroussaillage de Jardin de Gironde sur un terrain",
+        # Pas de photo : l'illustration au trait tient la page en attendant une
+        # vraie photo de chantier de débroussaillage.
+        "img": None,
+        "img_w": None,
+        "alt": "",
         "meta": "Débroussaillage professionnel en Gironde : nettoyage de terrains envahis, mise aux normes et sécurité incendie à Bordeaux et en Gironde.",
         "long": "En Gironde, le débroussaillage est souvent une obligation légale, notamment "
                 "pour les propriétés situées en zone à risque incendie. Notre équipe prend "
