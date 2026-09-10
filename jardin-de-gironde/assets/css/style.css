@@ -338,6 +338,13 @@ body { padding-bottom: 0; }
 .page-media { margin-top: clamp(28px, 4vw, 44px); border-radius: var(--radius-lg); overflow: hidden;
   background: var(--surface-2); box-shadow: var(--shadow); }
 .page-media img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* Photo verticale ou avant/après empilé : on garde ses proportions
+   plutôt que de la recadrer en 16/9. */
+.page-media.natural { display: grid; place-items: center; background: var(--surface-2);
+  padding: clamp(12px, 2vw, 22px); }
+.page-media.natural img { width: auto; max-width: min(100%, 540px); height: auto;
+  aspect-ratio: auto; border-radius: 12px; }
 .prose p + p { margin-top: 18px; }
 .prose p { color: var(--ink-2); }
 

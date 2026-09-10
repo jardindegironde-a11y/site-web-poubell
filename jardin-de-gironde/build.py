@@ -1072,8 +1072,10 @@ def page_service(s):
         <a class="btn btn-primary" href="#devis">Demander un devis gratuit ''' + icon('arrow', 'ico', 16) + '''</a>
         <a class="btn btn-ghost" href="''' + PHONE_HREF + '''" data-loc="page-service">''' + icon('phone', 'ico', 16) + ''' ''' + PHONE_DISPLAY + '''</a>
       </div>
-      <div class="page-media reveal in">'''
-        + (picture(s["img"], s["img_w"], s["alt"], sizes="(min-width: 900px) 70vw, 92vw", eager=True)
+      <div class="page-media''' + (" natural" if s.get("img_natural") else "") + ''' reveal in">'''
+        + (picture(s["img"], s["img_w"], s["alt"],
+                   sizes="(min-width: 900px) 540px, 92vw" if s.get("img_natural")
+                         else "(min-width: 900px) 70vw, 92vw", eager=True)
            if s["img"] else
            f'''<div class="page-illus"><img src="assets/img/illus/{s["slug"]}.svg" alt=""
                 width="200" height="200" loading="eager"></div>''') + '''</div>
