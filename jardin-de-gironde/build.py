@@ -78,9 +78,28 @@ LOGO_FILE = next(
 )
 
 
+def _png_ratio(path):
+    """Largeur / hauteur d'un PNG, lue directement dans l'en-tête IHDR."""
+    try:
+        with open(path, "rb") as f:
+            head_bytes = f.read(24)
+        if head_bytes[:8] != b"\x89PNG\r\n\x1a\n":
+            return None
+        w = int.from_bytes(head_bytes[16:20], "big")
+        h = int.from_bytes(head_bytes[20:24], "big")
+        return w / h if h else None
+    except OSError:
+        return None
+
+
+LOGO_RATIO = _png_ratio(os.path.join(HERE, LOGO_FILE)) if LOGO_FILE else None
+
+
 def logo_svg(height=46, cls="brand-logo"):
     if LOGO_FILE:
-        return (f'<img class="{cls}" src="{LOGO_FILE}" alt="{SITE}" '
+        # width explicite : évite tout décalage de mise en page au chargement.
+        w = f' width="{round(height * LOGO_RATIO)}"' if LOGO_RATIO else ""
+        return (f'<img class="{cls}" src="{LOGO_FILE}" alt="{SITE}"{w} '
                 f'height="{height}" decoding="async">')
     return f'''<svg class="{cls}" viewBox="0 0 560 480" height="{height}" role="img" aria-label="{SITE}">
   <path d="M26 104c0-14 6-23 19-27C160 42 400 42 515 77c13 4 19 13 19 27v238c0 12-5 20-15 27L297 462c-10 7-24 7-34 0L41 369c-10-7-15-15-15-27z" fill="#17662C"/>
@@ -134,7 +153,9 @@ def head(title, description, canonical, preload_img=None, extra_css="", noindex=
 <meta property="og:image" content="{BASE_URL}/assets/img/creation-jardin-1000.webp">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon-192.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -494,6 +515,14 @@ SERVICES = [
             "Rapport d'intervention et conseils personnalisés",
         ],
         "credit": True,
+        "galerie_titre": "Avant / après",
+        "galerie": [
+            ("chantier-bambous-terrasse", [1080, 720, 540],
+             "Avant / après : bambous et graminées maîtrisés le long d'une terrasse, "
+             "jardin entretenu en Gironde",
+             "Reprise d'un jardin laissé en friche : bambous rabattus, "
+             "massif remis en forme et terrain dégagé."),
+        ],
     },
     {
         "slug": "tonte-pelouse",
@@ -537,6 +566,16 @@ SERVICES = [
             "Intervention ponctuelle ou planifiée",
         ],
         "credit": True,
+        "galerie": [
+            ("chantier-haie-bambous", [1080, 720, 540],
+             "Avant / après : haie de bambous ramenée à hauteur et remise au carré, Gironde",
+             "Une haie de bambous devenue envahissante, rabattue et remise "
+             "au carré sur toute sa longueur."),
+            ("chantier-taille-haie", [1080, 720, 540],
+             "Taille d'une haie haute au taille-haie sur perche depuis un échafaudage roulant",
+             "Taille en hauteur au taille-haie sur perche, en sécurité "
+             "depuis une échelle-plateforme."),
+        ],
     },
     {
         "slug": "debroussaillage",
@@ -584,6 +623,16 @@ SERVICES = [
         ],
         "credit": False,
         "partenariat": True,
+        "galerie": [
+            ("chantier-massif-gravier", [1080, 720, 540],
+             "Avant / après : massif en friche transformé en parterre de gravier "
+             "décoratif, Gironde",
+             "Un massif à l'abandon remplacé par un parterre de gravier "
+             "décoratif, propre et sans entretien."),
+            ("chantier-cloture", [1080, 720, 540],
+             "Pose d'une clôture rigide sur longrines béton, chantier en Gironde",
+             "Terrassement et pose d'une clôture rigide sur longrines béton."),
+        ],
     },
     {
         "slug": "nettoyage-toiture-gouttiere",
@@ -633,6 +682,30 @@ SERVICES = [
 ]
 
 
+def galerie_section(items, titre="Sur le terrain"):
+    """Photos de chantier d'une prestation, sous la description.
+
+    Chaque item : (nom, largeurs, alt) ou (nom, largeurs, alt, legende).
+    """
+    figs = []
+    for i, item in enumerate(items):
+        nom, widths, alt = item[0], item[1], item[2]
+        legende = item[3] if len(item) > 3 else ""
+        cap = f'<figcaption>{legende}</figcaption>' if legende else ""
+        figs.append(
+            f'<figure class="chantier reveal" style="--d:{i}">'
+            + picture(nom, widths, alt,
+                      sizes="(min-width: 1000px) 430px, (min-width: 620px) 46vw, 92vw")
+            + cap + '</figure>'
+        )
+    return f'''<section class="section-sm">
+    <div class="container">
+      <p class="eyebrow reveal">{titre}</p>
+      <div class="chantier-grid">{"".join(figs)}</div>
+    </div>
+  </section>'''
+
+
 def services_grid():
     cards = []
     for i, s in enumerate(SERVICES):
@@ -646,6 +719,32 @@ def services_grid():
       </div>
     </a>''')
     return '<div class="service-grid">' + "".join(cards) + '</div>'
+
+
+def partenariat_banner(anchor=True):
+    """Bandeau partenariat VillaVerde, juste sous le hero : c'est l'argument
+    que les visiteurs doivent voir dès leur arrivée."""
+    visuel = picture("partenariat-villaverde", [1000, 700, 500],
+                     "Partenariat commercial entre Jardin de Gironde et la jardinerie "
+                     "VillaVerde Cestas : tarifs préférentiels pour nos clients",
+                     sizes="(min-width: 900px) 340px, 78vw")
+    return f'''<section class="partner-band" aria-labelledby="partner-title">
+    <div class="container partner-strip">
+      {'<a class="partner-visual reveal in" href="#partenariat">' if anchor else '<div class="partner-visual reveal in">'}{visuel}{'</a>' if anchor else '</div>'}
+      <div class="partner-copy reveal in" style="--d:1">
+        <p class="eyebrow">Partenariat commercial &middot; VillaVerde Cestas</p>
+        <h2 class="h2" id="partner-title">Vos plantes moins chères</h2>
+        <p class="lead">En passant par Jardin de Gironde, vous profitez de
+          <strong>tarifs préférentiels</strong> sur les végétaux de la jardinerie
+          VillaVerde à Cestas. Un avantage réservé à nos clients, sur tous vos
+          projets de jardin.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#devis">Demander un devis gratuit {icon('arrow', 'ico', 16)}</a>
+          {'<a class="btn btn-ghost" href="#partenariat">En savoir plus</a>' if anchor else ''}
+        </div>
+      </div>
+    </div>
+  </section>'''
 
 
 def partenariat_section(video_first=False):
@@ -815,6 +914,8 @@ def page_index():
     </div>
   </section>
 
+''' + partenariat_banner() + '''
+
   <section class="section-sm">
     <div class="container">
       ''' + facts_block([
@@ -882,6 +983,8 @@ def landing(slug, title, description, origine, eyebrow, h1, lead, usps, checklis
       <div class="reveal in" style="--d:1">''' + form_card(origine, titre=form_titre, service_default=service_default) + '''</div>
     </div>
   </section>
+
+''' + partenariat_banner(anchor=with_partenariat) + '''
 
   <section class="section bg-soft">
     <div class="container">
@@ -1095,7 +1198,9 @@ def page_service(s):
     </div>
   </section>
 
-''' + (credit_section("credit-impot") if s["credit"] else "")
+''' + (galerie_section(s["galerie"], s.get("galerie_titre", "Sur le terrain"))
+           if s.get("galerie") else "")
+        + (credit_section("credit-impot") if s["credit"] else "")
         + (partenariat_section() if s.get("partenariat") else "") + '''
 
   <section class="section bg-soft">

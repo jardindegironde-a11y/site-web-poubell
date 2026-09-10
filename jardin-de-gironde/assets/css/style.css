@@ -428,3 +428,67 @@ body { padding-bottom: 0; }
 .usp h3 { font-size: 17px; }
 .usp p { margin-top: 7px; font-size: 15px; color: var(--ink-3); }
 @media (min-width: 700px) { .usp-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ---------- Photos de chantier sur une page de prestation ---------- */
+.chantier-grid {
+  display: grid;
+  gap: clamp(16px, 2.4vw, 26px);
+  margin-top: 20px;
+  align-items: start;
+}
+.chantier { margin: 0; }
+/* Les avant / après gardent leur cadrage d'origine : pas de recadrage forcé. */
+.chantier img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+.chantier figcaption {
+  margin-top: 10px;
+  font-size: .92rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+@media (min-width: 620px) { .chantier-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .chantier-grid { max-width: 880px; } }
+
+/* ---------- Bandeau partenariat VillaVerde (visible dès l'arrivée) ---------- */
+.partner-band {
+  background: var(--green-100);
+  border-block: 1px solid rgba(23, 102, 44, .14);
+  padding-block: clamp(36px, 5vw, 60px);
+}
+.partner-strip {
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+.partner-visual {
+  display: block;
+  width: min(340px, 78vw);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--shadow);
+  transition: transform .5s var(--ease);
+}
+a.partner-visual:hover { transform: translateY(-4px); }
+.partner-visual img { width: 100%; display: block; }
+.partner-copy .eyebrow { color: var(--green); }
+.partner-copy .h2 { margin-top: 12px; }
+.partner-copy .lead { margin-top: 16px; max-width: 46ch; }
+.partner-copy .hero-actions { margin-top: 26px; justify-content: center; }
+
+@media (min-width: 900px) {
+  .partner-strip {
+    grid-template-columns: 340px 1fr;
+    justify-items: stretch;
+    text-align: left;
+  }
+  .partner-copy .lead { margin-inline: 0; }
+  .partner-copy .hero-actions { justify-content: flex-start; }
+}
