@@ -106,4 +106,19 @@ svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 480" role="im
 </svg>
 '''
 open('assets/img/logo-jdg.svg', 'w', encoding='utf-8').write(svg)
-print("écrit :", len(svg), "octets")
+print("écrit : logo-jdg.svg", len(svg), "octets")
+
+# --- Favicon : même écusson, réduit à ses initiales pour rester lisible
+# à 16 px, et carré comme Google l'attend pour la vignette de résultat.
+fav_outer = shield_outer.replace("M 26 124", "M 26 143")
+fav = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" width="560" height="560" role="img" aria-label="Jardin de Gironde">
+  <title>Jardin de Gironde</title>
+  <g transform="translate(0 19)">
+    <path d="{shield_outer}" fill="{GREEN}"/>
+    <path d="{shield_inner}" fill="none" stroke="#ffffff" stroke-width="14"/>
+  </g>
+  {straight(OSW, "JG", 250, 280, 366, 250)}
+</svg>
+'''
+open('assets/img/favicon.svg', 'w', encoding='utf-8').write(fav)
+print("écrit : favicon.svg", len(fav), "octets")

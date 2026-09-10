@@ -1,4 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <path d="M4 13.5C4 11.9 4.6 10.8 6 10.3 19.6 6 44.4 6 58 10.3c1.4.5 2 1.6 2 3.2v23.9c0 1.5-.8 2.6-2 3.4L34.4 56.6c-1.5.9-3.3.9-4.8 0L6 40.8c-1.2-.8-2-1.9-2-3.4z" fill="#17662C"/>
-  <text x="32" y="36" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="23" font-weight="900" fill="#ffffff" letter-spacing="-1">JG</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 560" width="560" height="560" role="img" aria-label="Jardin de Gironde">
+  <title>Jardin de Gironde</title>
+  <g transform="translate(0 19)">
+    <path d="M 26 124 C 26 109 33 100 47 96 C 173 60 387 60 513 96 C 527 100 534 109 534 124 L 534 368 L 296 457 C 286 462 274 462 264 457 L 26 368 Z" fill="#1E7A34"/>
+    <path d="M 47 133 C 47 122 52 116 63 113 C 179 81 381 81 497 113 C 508 116 513 122 513 133 L 513 357 L 291 440 C 284 443 276 443 269 440 L 47 357 Z" fill="none" stroke="#ffffff" stroke-width="14"/>
+  </g>
+  <path d="M13 -21V104Q40 104 59.0 107.0Q78 110 89.0 118.5Q100 127 105.0 143.5Q110 160 110 186V810H289V178Q289 112 272.5 67.5Q256 23 215.0 1.0Q174 -21 100 -21Z" transform="translate(155.0 366.0) scale(0.25000 -0.25000)" fill="#ffffff"/>
+  <path d="M271 -12Q187 -12 138.5 23.0Q90 58 69.5 121.5Q49 185 49 268V540Q49 626 71.0 689.0Q93 752 146.5 786.5Q200 821 292 821Q382 821 433.5 791.0Q485 761 507.0 708.0Q529 655 529 584V532H354V598Q354 624 350.5 646.0Q347 668 334.5 681.5Q322 695 294 695Q265 695 252.0 679.5Q239 664 235.5 641.0Q232 618 232 593V218Q232 191 237.5 167.5Q243 144 257.5 129.5Q272 115 299 115Q327 115 342.0 130.0Q357 145 363.0 169.0Q369 193 369 220V315H296V420H530V0H412L402 67Q386 33 355.0 10.5Q324 -12 271 -12Z" transform="translate(259.5 366.0) scale(0.25000 -0.25000)" fill="#ffffff"/>
 </svg>
