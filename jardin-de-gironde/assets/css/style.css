@@ -429,31 +429,6 @@ body { padding-bottom: 0; }
 .usp p { margin-top: 7px; font-size: 15px; color: var(--ink-3); }
 @media (min-width: 700px) { .usp-grid { grid-template-columns: repeat(2, 1fr); } }
 
-/* ---------- Photos de chantier sur une page de prestation ---------- */
-.chantier-grid {
-  display: grid;
-  gap: clamp(16px, 2.4vw, 26px);
-  margin-top: 20px;
-  align-items: start;
-}
-.chantier { margin: 0; }
-/* Les avant / après gardent leur cadrage d'origine : pas de recadrage forcé. */
-.chantier img {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: var(--radius);
-  background: var(--surface-2);
-}
-.chantier figcaption {
-  margin-top: 10px;
-  font-size: .92rem;
-  line-height: 1.5;
-  color: var(--muted);
-}
-@media (min-width: 620px) { .chantier-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 1000px) { .chantier-grid { max-width: 880px; } }
-
 /* ---------- Bandeau partenariat VillaVerde (visible dès l'arrivée) ---------- */
 .partner-band {
   background: var(--green-100);
@@ -493,20 +468,68 @@ a.partner-visual:hover { transform: translateY(-4px); }
   .partner-copy .hero-actions { justify-content: flex-start; }
 }
 
-/* ---------- Vidéos de chantier (format portrait) ---------- */
-.clip-grid {
+
+/* ---------- Galerie de chantiers ---------- */
+/* Toutes les tuiles ont le meme format : c'est ce qui fait tenir la grille.
+   Le nombre de colonnes vient de --cols, pose par le generateur selon le
+   nombre de photos, pour qu'une page a deux photos n'ait pas trois colonnes. */
+.gallery-grid {
   display: grid;
-  gap: clamp(16px, 2.4vw, 26px);
-  margin-top: 20px;
-  align-items: start;
-  max-width: 720px;
+  grid-template-columns: repeat(var(--cols-m, 2), minmax(0, 1fr));
+  gap: clamp(12px, 1.6vw, 20px);
+  margin-top: 26px;
 }
-.clip { margin: 0; }
-.video-frame.video-portrait { aspect-ratio: 9 / 16; }
-.clip figcaption {
-  margin-top: 10px;
-  font-size: .92rem;
-  line-height: 1.5;
-  color: var(--muted);
+.tile { margin: 0; min-width: 0; }
+.tile-media {
+  display: block;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
 }
-@media (min-width: 620px) { .clip-grid { grid-template-columns: repeat(2, 1fr); } }
+.tile-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s var(--ease);
+}
+.tile:hover .tile-media img { transform: scale(1.035); }
+.tile figcaption {
+  margin-top: 11px;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+@media (min-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+    max-width: calc(var(--cols, 3) * 340px + (var(--cols, 3) - 1) * 20px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tile-media img, .tile:hover .tile-media img { transition: none; transform: none; }
+}
+
+/* ---------- Vidéo de chantier, format portrait ---------- */
+.split-clip {
+  display: grid;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+.clip-frame {
+  width: min(320px, 74vw);
+  aspect-ratio: 9 / 16;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #0D1711;
+  box-shadow: var(--shadow);
+}
+.clip-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (min-width: 900px) {
+  .split-clip { grid-template-columns: 1fr 320px; text-align: left; justify-items: stretch; }
+  .split-clip .lead { max-width: 46ch; }
+}

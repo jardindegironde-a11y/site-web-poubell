@@ -11,6 +11,7 @@ contenu défini ci-dessous. Pour modifier un texte, un service ou une FAQ :
 """
 
 import os
+import hashlib
 import html
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -99,7 +100,7 @@ def logo_svg(height=46, cls="brand-logo"):
     if LOGO_FILE:
         # width explicite : évite tout décalage de mise en page au chargement.
         w = f' width="{round(height * LOGO_RATIO)}"' if LOGO_RATIO else ""
-        return (f'<img class="{cls}" src="{LOGO_FILE}" alt="{SITE}"{w} '
+        return (f'<img class="{cls}" src="{asset(LOGO_FILE)}" alt="{SITE}"{w} '
                 f'height="{height}" decoding="async">')
     return f'''<svg class="{cls}" viewBox="0 0 560 480" height="{height}" role="img" aria-label="{SITE}">
   <path d="M26 104c0-14 6-23 19-27C160 42 400 42 515 77c13 4 19 13 19 27v238c0 12-5 20-15 27L297 462c-10 7-24 7-34 0L41 369c-10-7-15-15-15-27z" fill="#17662C"/>
@@ -124,14 +125,34 @@ LOGO_CSS = """
 # =====================================================================
 #  Blocs communs
 # =====================================================================
+_ASSET_HASH = {}
+
+
+def asset(path):
+    """URL d'un fichier statique, suffixee par une empreinte de son contenu.
+
+    Les images, la CSS et les videos sont servies avec un cache d'un an. Sans
+    cette empreinte, un visiteur deja venu garderait l'ancienne version apres
+    une mise a jour : l'URL ne change pas, son navigateur ne redemande rien.
+    """
+    if path not in _ASSET_HASH:
+        try:
+            with open(os.path.join(HERE, path), "rb") as f:
+                _ASSET_HASH[path] = hashlib.md5(f.read()).hexdigest()[:8]
+        except OSError:
+            _ASSET_HASH[path] = ""
+    v = _ASSET_HASH[path]
+    return f"{path}?v={v}" if v else path
+
+
 def head(title, description, canonical, preload_img=None, extra_css="", noindex=False):
     robots = "noindex, nofollow" if noindex else "index, follow"
     preload = ""
     if preload_img:
         name, widths, psizes = preload_img
-        srcset = ", ".join(f"assets/img/{name}-{w}.webp {w}w" for w in widths)
+        srcset = ", ".join(f"{asset(f'assets/img/{name}-{w}.webp')} {w}w" for w in widths)
         preload = ('\n<link rel="preload" as="image" fetchpriority="high" '
-                   f'href="assets/img/{name}-{widths[0]}.webp" '
+                   f'href="{asset(f"assets/img/{name}-{widths[0]}.webp")}" '
                    f'imagesrcset="{srcset}" imagesizes="{psizes}">')
     return f'''<!doctype html>
 <html lang="fr">
@@ -150,17 +171,17 @@ def head(title, description, canonical, preload_img=None, extra_css="", noindex=
 <meta property="og:title" content="{html.escape(title)}">
 <meta property="og:description" content="{html.escape(description)}">
 <meta property="og:url" content="{canonical}">
-<meta property="og:image" content="{BASE_URL}/assets/img/creation-jardin-1000.webp">
+<meta property="og:image" content="{BASE_URL}/{asset("assets/img/creation-jardin-1000.webp")}">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="assets/img/icon-192.png">
-<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="{asset("assets/img/favicon-32.png")}">
+<link rel="icon" type="image/png" sizes="192x192" href="{asset("assets/img/icon-192.png")}">
+<link rel="apple-touch-icon" href="{asset("assets/img/apple-touch-icon.png")}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=" js";</script>
-<link rel="stylesheet" href="assets/css/style.css">{preload}
+<link rel="stylesheet" href="{asset("assets/css/style.css")}">{preload}
 <style>{LOGO_CSS}{extra_css}</style>
 
 <!-- Google tag (gtag.js) -->
@@ -182,7 +203,7 @@ def local_business_jsonld():
   "@id": "%(base)s/#organisation",
   "name": "%(site)s",
   "url": "%(base)s/",
-  "image": "%(base)s/assets/img/creation-jardin-1000.webp",
+  "image": "%(base)s/%(ogimg)s",
   "telephone": "+33630644709",
   "email": "%(email)s",
   "description": "Entreprise d'entretien et de création de jardins en Gironde : tonte de pelouse, taille de haies, débroussaillage, désherbage, engazonnement et aménagement paysager.",
@@ -195,7 +216,8 @@ def local_business_jsonld():
     "opens": "08:00", "closes": "19:00"
   }]
 }
-</script>''' % {"base": BASE_URL, "site": SITE, "email": EMAIL}
+</script>''' % {"base": BASE_URL, "site": SITE, "email": EMAIL,
+                 "ogimg": asset("assets/img/creation-jardin-1000.webp")}
 
 
 def faq_jsonld(items):
@@ -319,7 +341,7 @@ def footer(home=False):
 
 
 def scripts():
-    return '<script src="assets/js/main.js" defer></script>'
+    return f'<script src="{asset("assets/js/main.js")}" defer></script>'
 
 
 def form_card(origine, titre="Recevoir mon devis gratuit", service_default="Entretien de jardins"):
@@ -379,11 +401,11 @@ def _slug(text):
 def picture(name, widths, alt, ratio=None, sizes="(min-width: 900px) 50vw, 100vw",
             eager=False, cls=""):
     """<img> responsive en WebP."""
-    srcset = ", ".join(f"assets/img/{name}-{w}.webp {w}w" for w in widths)
+    srcset = ", ".join(f"{asset(f'assets/img/{name}-{w}.webp')} {w}w" for w in widths)
     big = widths[0]
     loading = 'loading="eager" fetchpriority="high"' if eager else 'loading="lazy"'
     style = f' style="aspect-ratio:{ratio}"' if ratio else ""
-    return (f'<img class="{cls}" src="assets/img/{name}-{big}.webp" srcset="{srcset}" '
+    return (f'<img class="{cls}" src="{asset(f"assets/img/{name}-{big}.webp")}" srcset="{srcset}" '
             f'sizes="{sizes}" alt="{html.escape(alt)}" {loading} decoding="async"{style}>')
 
 
@@ -515,13 +537,11 @@ SERVICES = [
             "Rapport d'intervention et conseils personnalisés",
         ],
         "credit": True,
-        "galerie_titre": "Avant / après",
         "galerie": [
             ("chantier-bambous-terrasse", [1080, 720, 540],
              "Avant / après : bambous et graminées maîtrisés le long d'une terrasse, "
              "jardin entretenu en Gironde",
-             "Reprise d'un jardin laissé en friche : bambous rabattus, "
-             "massif remis en forme et terrain dégagé."),
+             "Avant / après — jardin repris en main"),
         ],
     },
     {
@@ -566,30 +586,22 @@ SERVICES = [
             "Intervention ponctuelle ou planifiée",
         ],
         "credit": True,
-        "videos_titre": "Nos équipes en intervention",
-        "videos": [
-            ("taille-haies-perche",
-             "Taille au taille-haie sur perche, depuis le sol, pour atteindre "
-             "le sommet d'une haie de cyprès.",
-             "Taille d'une haie de cyprès au taille-haie sur perche en Gironde"),
-            ("taille-haies-hauteur",
-             "Échelle-plateforme et perche télescopique : la hauteur se travaille "
-             "en sécurité, sans abîmer la haie.",
-             "Taille d'une haie haute depuis une échelle-plateforme en Gironde"),
-        ],
+        "video": ("taille-haies-hauteur",
+                  "La hauteur se travaille en sécurité",
+                  "Échelle-plateforme stabilisée et perche télescopique : nous "
+                  "atteignons le sommet d'une haie sans l'abîmer et sans prendre "
+                  "de risque, même sur les sujets les plus hauts.",
+                  "Taille d'une haie haute depuis une échelle-plateforme en Gironde"),
         "galerie": [
             ("chantier-haie-cypres", [1080, 720, 540],
              "Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l'appui",
-             "Taille d'une haie de cyprès à la perche télescopique, "
-             "avec bâche de ramassage et évacuation des déchets verts."),
+             "Haie de cyprès taillée à la perche"),
             ("chantier-haie-bambous", [1080, 720, 540],
              "Avant / après : haie de bambous ramenée à hauteur et remise au carré, Gironde",
-             "Une haie de bambous devenue envahissante, rabattue et remise "
-             "au carré sur toute sa longueur."),
+             "Haie de bambous remise au carré"),
             ("chantier-taille-haie", [1080, 720, 540],
              "Taille d'une haie haute au taille-haie sur perche depuis un échafaudage roulant",
-             "Taille en hauteur au taille-haie sur perche, en sécurité "
-             "depuis une échelle-plateforme."),
+             "Taille en hauteur, en sécurité"),
         ],
     },
     {
@@ -642,30 +654,25 @@ SERVICES = [
             ("chantier-massif-gravier", [1080, 720, 540],
              "Avant / après : massif en friche transformé en parterre de gravier "
              "décoratif, Gironde",
-             "Un massif à l'abandon remplacé par un parterre de gravier "
-             "décoratif, propre et sans entretien."),
+             "Avant / après — massif en gravier"),
             ("chantier-massif-fleuri", [1080, 720, 540],
              "Massif planté de tomates sur tuteurs et d'œillets d'Inde, bordé "
              "d'une allée en pierre et gravier, en Gironde",
-             "Massif potager et fleuri, bordure en pierre et allée gravillonnée : "
-             "le végétal et le minéral pensés ensemble."),
+             "Massif potager et bordure en pierre"),
             ("chantier-bananiers", [1080, 720, 540],
              "Bananiers rouges Ensete ventricosum en conteneurs, avant plantation, "
              "par Jardin de Gironde",
-             "Des bananiers rouges prêts à être plantés : nous sélectionnons "
-             "les sujets un par un avant chaque chantier."),
+             "Bananiers rouges avant plantation"),
             ("chantier-feuillage-exotique", [1080, 720, 540],
              "Feuillage d'un bananier rouge en contre-jour dans un jardin girondin",
-             "Le climat girondin permet des ambiances exotiques qui tiennent "
-             "dans la durée."),
+             "Ambiance exotique en Gironde"),
             ("chantier-terrassement", [1080, 720, 540],
              "Terrassement à la pelle mécanique et pose de longrines béton pour "
              "une clôture rigide, chantier en Gironde",
-             "Terrassement à la pelle mécanique et pose des longrines : "
-             "nous prenons en charge le gros œuvre du jardin."),
+             "Terrassement à la pelle mécanique"),
             ("chantier-cloture", [1080, 720, 540],
              "Pose d'une clôture rigide sur longrines béton, chantier en Gironde",
-             "Le même chantier une fois la clôture rigide posée et alignée."),
+             "Clôture rigide sur longrines"),
         ],
     },
     {
@@ -716,48 +723,53 @@ SERVICES = [
 ]
 
 
-def videos_section(items, titre="En vidéo"):
-    """Courtes vidéos de chantier, format portrait, chargées seulement
-    quand elles arrivent à l'écran."""
-    blocs = []
-    for i, (nom, legende, alt) in enumerate(items):
-        blocs.append(f'''<figure class="clip reveal" style="--d:{i}">
-          <div class="video-frame video-portrait">
-            <video data-lazy data-src="assets/video/{nom}.mp4"
-                   poster="assets/img/{nom}-poster.webp"
-                   muted loop playsinline preload="none"
-                   title="{html.escape(alt)}"></video>
-          </div>
-          <figcaption>{legende}</figcaption>
-        </figure>''')
-    return f'''<section class="section-sm">
-    <div class="container">
-      <p class="eyebrow reveal">{titre}</p>
-      <div class="clip-grid">{"".join(blocs)}</div>
+def video_section(nom, titre, texte, alt):
+    """Une seule video de chantier, posee a cote de son texte comme le bloc
+    partenariat : format portrait, largeur contenue, chargee a l'arrivee."""
+    return f'''<section class="section bg-soft">
+    <div class="container split-clip">
+      <div class="reveal">
+        <p class="eyebrow">En intervention</p>
+        <h2 class="h2" style="margin-top:14px">{titre}</h2>
+        <p class="lead" style="margin-top:20px">{texte}</p>
+      </div>
+      <div class="clip-frame reveal" style="--d:1">
+        <video data-lazy data-src="{asset(f'assets/video/{nom}.mp4')}"
+               poster="{asset(f'assets/img/{nom}-poster.webp')}"
+               muted loop playsinline preload="none"
+               title="{html.escape(alt)}"></video>
+      </div>
     </div>
   </section>'''
 
 
-def galerie_section(items, titre="Sur le terrain"):
-    """Photos de chantier d'une prestation, sous la description.
+def galerie_section(items, titre="Nos réalisations", sous_titre=""):
+    """Grille de photos de chantier.
 
-    Chaque item : (nom, largeurs, alt) ou (nom, largeurs, alt, legende).
+    Toutes les tuiles ont le meme format : c'est ce qui fait tenir la page.
+    Le texte long reste dans l'attribut alt, la legende visible est courte.
     """
-    figs = []
+    tuiles = []
     for i, item in enumerate(items):
         nom, widths, alt = item[0], item[1], item[2]
         legende = item[3] if len(item) > 3 else ""
+        img = picture(nom, widths, alt,
+                      sizes="(min-width: 900px) 320px, (min-width: 560px) 44vw, 46vw")
         cap = f'<figcaption>{legende}</figcaption>' if legende else ""
-        figs.append(
-            f'<figure class="chantier reveal" style="--d:{i}">'
-            + picture(nom, widths, alt,
-                      sizes="(min-width: 1000px) 430px, (min-width: 620px) 46vw, 92vw")
-            + cap + '</figure>'
-        )
+        tuiles.append(f'<figure class="tile reveal" style="--d:{i % 3}">'
+                      f'<span class="tile-media">{img}</span>{cap}</figure>')
+
+    cols = min(len(items), 3)
+    intro = f'<p class="lead reveal">{sous_titre}</p>' if sous_titre else ""
     return f'''<section class="section-sm">
     <div class="container">
-      <p class="eyebrow reveal">{titre}</p>
-      <div class="chantier-grid">{"".join(figs)}</div>
+      <div class="section-head reveal">
+        <p class="eyebrow">{titre}</p>
+        {intro}
+      </div>
+      <div class="gallery-grid" style="--cols:{cols}; --cols-m:{min(cols, 2)}">
+        {"".join(tuiles)}
+      </div>
     </div>
   </section>'''
 
@@ -766,7 +778,7 @@ def services_grid():
     cards = []
     for i, s in enumerate(SERVICES):
         cards.append(f'''<a class="service-card reveal" style="--d:{i % 3}" href="{s['slug']}.html">
-      <div class="service-media illus"><img src="assets/img/illus/{s['slug']}.svg" alt=""
+      <div class="service-media illus"><img src="{asset(f"assets/img/illus/{s['slug']}.svg")}" alt=""
            width="120" height="120" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>{s['titre']}</h3>
@@ -817,8 +829,8 @@ def partenariat_section(video_first=False):
     </div>
     <div class="video-frame reveal" style="--d:1">
       <span class="video-tag">Villaverde Cestas</span>
-      <video data-lazy data-src="assets/video/villaverde-cestas.mp4"
-             poster="assets/img/villaverde-poster.webp"
+      <video data-lazy data-src="{asset("assets/video/villaverde-cestas.mp4")}"
+             poster="{asset("assets/img/villaverde-poster.webp")}"
              muted loop playsinline preload="none"
              title="Partenariat entre Jardin de Gironde et Villaverde Cestas"></video>
     </div>
@@ -872,8 +884,50 @@ def steps_section(title, eyebrow, steps):
 </section>'''
 
 
+_SANS_ESPACE_FINE = ("script", "style")
+
+
+def typographie(page):
+    """Espaces insecables avant la ponctuation haute, comme le veut le francais.
+
+    Sans cela une ligne peut se terminer par un mot et commencer par « : »,
+    ce qui saute aux yeux. On ne touche qu'au texte visible : jamais l'interieur
+    d'une balise (ou vivent href="tel:..." et les URL), ni les scripts.
+    """
+    sortie = []
+    i = 0
+    saut = None            # nom de la balise dont on ignore le contenu
+    while i < len(page):
+        j = page.find("<", i)
+        if j == -1:
+            j = len(page)
+        texte = page[i:j]
+        if saut is None:
+            for signe in (":", ";", "!", "?", "»"):
+                texte = texte.replace(" " + signe, "&nbsp;" + signe)
+            texte = texte.replace("« ", "«&nbsp;")
+        sortie.append(texte)
+        if j == len(page):
+            break
+        k = page.find(">", j)
+        if k == -1:
+            sortie.append(page[j:])
+            break
+        balise = page[j:k + 1]
+        sortie.append(balise)
+        nom = balise[1:].split(None, 1)[0].strip("/>").lower() if len(balise) > 2 else ""
+        if saut is None and nom in _SANS_ESPACE_FINE and not balise.startswith("</"):
+            saut = nom
+        elif saut is not None and balise.startswith("</") and nom == saut:
+            saut = None
+        i = k + 1
+    return "".join(sortie)
+
+
 def write(filename, content):
     path = os.path.join(HERE, filename)
+    if filename.endswith(".html"):
+        content = typographie(content)
     with open(path, "w", encoding="utf-8") as fh:
         fh.write(content)
     print("  ✓ %-34s %6d octets" % (filename, len(content.encode("utf-8"))))
@@ -1011,7 +1065,7 @@ def landing(slug, title, description, origine, eyebrow, h1, lead, usps, checklis
             checklist_title, steps, faq, service_default, photo, photo_w, photo_alt,
             with_credit, with_partenariat, form_titre):
     usp_html = "".join(f'''<div class="usp reveal" style="--d:{i}">
-        <span class="illus-badge"><img src="assets/img/illus/{ic}.svg" alt="" width="120" height="120" loading="lazy"></span>
+        <span class="illus-badge"><img src="{asset(f"assets/img/illus/{ic}.svg")}" alt="" width="120" height="120" loading="lazy"></span>
         <div><h3>{t}</h3><p>{d}</p></div>
       </div>''' for i, (ic, t, d) in enumerate(usps))
 
@@ -1203,7 +1257,7 @@ def page_lp_creation():
 def page_service(s):
     autres = [x for x in SERVICES if x["slug"] != s["slug"]][:3]
     cards = "".join(f'''<a class="service-card reveal" style="--d:{i}" href="{o['slug']}.html">
-      <div class="service-media illus"><img src="assets/img/illus/{o['slug']}.svg" alt="" width="120" height="120" loading="lazy"></div>
+      <div class="service-media illus"><img src="{asset(f"assets/img/illus/{o['slug']}.svg")}" alt="" width="120" height="120" loading="lazy"></div>
       <div class="service-body"><h3>{o['titre']}</h3><p>{o['court']}</p>
         <span class="link-arrow">En savoir plus {icon('arrow', size=15)}</span></div>
     </a>''' for i, o in enumerate(autres))
@@ -1223,7 +1277,7 @@ def page_service(s):
     <div class="container">
       <p class="breadcrumb"><a href="index.html">Accueil</a> &nbsp;/&nbsp; ''' + s["titre"] + '''</p>
       <div style="display:flex; gap:22px; align-items:center; margin-top:22px; flex-wrap:wrap">
-        <span class="illus-badge"><img src="assets/img/illus/''' + s["slug"] + '''.svg" alt="" width="120" height="120"></span>
+        <span class="illus-badge"><img src="''' + asset("assets/img/illus/" + s["slug"] + ".svg") + '''" alt="" width="120" height="120"></span>
         <h1 class="h1" style="margin:0; flex:1; min-width:260px">''' + s["titre"] + ''' en Gironde</h1>
       </div>
       <p class="lead" style="max-width:52ch">''' + s["court"] + '''</p>
@@ -1236,7 +1290,7 @@ def page_service(s):
                    sizes="(min-width: 900px) 540px, 92vw" if s.get("img_natural")
                          else "(min-width: 900px) 70vw, 92vw", eager=True)
            if s["img"] else
-           f'''<div class="page-illus"><img src="assets/img/illus/{s["slug"]}.svg" alt=""
+           f'''<div class="page-illus"><img src="{asset(f'assets/img/illus/{s["slug"]}.svg')}" alt=""
                 width="200" height="200" loading="eager"></div>''') + '''</div>
     </div>
   </section>
@@ -1254,9 +1308,9 @@ def page_service(s):
     </div>
   </section>
 
-''' + (videos_section(s["videos"], s.get("videos_titre", "En vidéo"))
-           if s.get("videos") else "")
-        + (galerie_section(s["galerie"], s.get("galerie_titre", "Sur le terrain"))
+''' + (video_section(*s["video"]) if s.get("video") else "")
+        + (galerie_section(s["galerie"], s.get("galerie_titre", "Nos réalisations"),
+                           s.get("galerie_intro", ""))
            if s.get("galerie") else "")
         + (credit_section("credit-impot") if s["credit"] else "")
         + (partenariat_section() if s.get("partenariat") else "") + '''
