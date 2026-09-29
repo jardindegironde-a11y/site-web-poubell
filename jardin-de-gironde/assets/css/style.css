@@ -492,3 +492,21 @@ a.partner-visual:hover { transform: translateY(-4px); }
   .partner-copy .lead { margin-inline: 0; }
   .partner-copy .hero-actions { justify-content: flex-start; }
 }
+
+/* ---------- Vidéos de chantier (format portrait) ---------- */
+.clip-grid {
+  display: grid;
+  gap: clamp(16px, 2.4vw, 26px);
+  margin-top: 20px;
+  align-items: start;
+  max-width: 720px;
+}
+.clip { margin: 0; }
+.video-frame.video-portrait { aspect-ratio: 9 / 16; }
+.clip figcaption {
+  margin-top: 10px;
+  font-size: .92rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+@media (min-width: 620px) { .clip-grid { grid-template-columns: repeat(2, 1fr); } }

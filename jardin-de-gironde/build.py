@@ -566,7 +566,22 @@ SERVICES = [
             "Intervention ponctuelle ou planifiée",
         ],
         "credit": True,
+        "videos_titre": "Nos équipes en intervention",
+        "videos": [
+            ("taille-haies-perche",
+             "Taille au taille-haie sur perche, depuis le sol, pour atteindre "
+             "le sommet d'une haie de cyprès.",
+             "Taille d'une haie de cyprès au taille-haie sur perche en Gironde"),
+            ("taille-haies-hauteur",
+             "Échelle-plateforme et perche télescopique : la hauteur se travaille "
+             "en sécurité, sans abîmer la haie.",
+             "Taille d'une haie haute depuis une échelle-plateforme en Gironde"),
+        ],
         "galerie": [
+            ("chantier-haie-cypres", [1080, 720, 540],
+             "Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l'appui",
+             "Taille d'une haie de cyprès à la perche télescopique, "
+             "avec bâche de ramassage et évacuation des déchets verts."),
             ("chantier-haie-bambous", [1080, 720, 540],
              "Avant / après : haie de bambous ramenée à hauteur et remise au carré, Gironde",
              "Une haie de bambous devenue envahissante, rabattue et remise "
@@ -629,9 +644,28 @@ SERVICES = [
              "décoratif, Gironde",
              "Un massif à l'abandon remplacé par un parterre de gravier "
              "décoratif, propre et sans entretien."),
+            ("chantier-massif-fleuri", [1080, 720, 540],
+             "Massif planté de tomates sur tuteurs et d'œillets d'Inde, bordé "
+             "d'une allée en pierre et gravier, en Gironde",
+             "Massif potager et fleuri, bordure en pierre et allée gravillonnée : "
+             "le végétal et le minéral pensés ensemble."),
+            ("chantier-bananiers", [1080, 720, 540],
+             "Bananiers rouges Ensete ventricosum en conteneurs, avant plantation, "
+             "par Jardin de Gironde",
+             "Des bananiers rouges prêts à être plantés : nous sélectionnons "
+             "les sujets un par un avant chaque chantier."),
+            ("chantier-feuillage-exotique", [1080, 720, 540],
+             "Feuillage d'un bananier rouge en contre-jour dans un jardin girondin",
+             "Le climat girondin permet des ambiances exotiques qui tiennent "
+             "dans la durée."),
+            ("chantier-terrassement", [1080, 720, 540],
+             "Terrassement à la pelle mécanique et pose de longrines béton pour "
+             "une clôture rigide, chantier en Gironde",
+             "Terrassement à la pelle mécanique et pose des longrines : "
+             "nous prenons en charge le gros œuvre du jardin."),
             ("chantier-cloture", [1080, 720, 540],
              "Pose d'une clôture rigide sur longrines béton, chantier en Gironde",
-             "Terrassement et pose d'une clôture rigide sur longrines béton."),
+             "Le même chantier une fois la clôture rigide posée et alignée."),
         ],
     },
     {
@@ -680,6 +714,28 @@ SERVICES = [
         "credit": False,
     },
 ]
+
+
+def videos_section(items, titre="En vidéo"):
+    """Courtes vidéos de chantier, format portrait, chargées seulement
+    quand elles arrivent à l'écran."""
+    blocs = []
+    for i, (nom, legende, alt) in enumerate(items):
+        blocs.append(f'''<figure class="clip reveal" style="--d:{i}">
+          <div class="video-frame video-portrait">
+            <video data-lazy data-src="assets/video/{nom}.mp4"
+                   poster="assets/img/{nom}-poster.webp"
+                   muted loop playsinline preload="none"
+                   title="{html.escape(alt)}"></video>
+          </div>
+          <figcaption>{legende}</figcaption>
+        </figure>''')
+    return f'''<section class="section-sm">
+    <div class="container">
+      <p class="eyebrow reveal">{titre}</p>
+      <div class="clip-grid">{"".join(blocs)}</div>
+    </div>
+  </section>'''
 
 
 def galerie_section(items, titre="Sur le terrain"):
@@ -879,8 +935,8 @@ FAQ_HOME = FAQ_ENTRETIEN[:3] + FAQ_CREATION[1:3]
 #  Page d'accueil
 # =====================================================================
 def page_index():
-    hero_img = picture("creation-jardin", [1448, 1000, 640],
-                       "Jardin créé par Jardin de Gironde : pelouse neuve, clôture bois et massifs",
+    hero_img = picture("taille-haies-chantier", [1080, 800, 640],
+                       "Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l'appui",
                        sizes="(min-width: 900px) 46vw, 92vw", eager=True)
     return (
         head(
@@ -889,7 +945,7 @@ def page_index():
             "d'espaces verts partout en Gironde. Devis gratuit sous 24 h, crédit d'impôt "
             "de 50 % sur l'entretien.",
             BASE_URL + "/",
-            preload_img=("creation-jardin", [1448, 1000, 640], "(min-width: 900px) 46vw, 92vw"),
+            preload_img=("taille-haies-chantier", [1080, 800, 640], "(min-width: 900px) 46vw, 92vw"),
         )
         + local_business_jsonld() + faq_jsonld(FAQ_HOME) + '''
 </head>
@@ -1198,7 +1254,9 @@ def page_service(s):
     </div>
   </section>
 
-''' + (galerie_section(s["galerie"], s.get("galerie_titre", "Sur le terrain"))
+''' + (videos_section(s["videos"], s.get("videos_titre", "En vidéo"))
+           if s.get("videos") else "")
+        + (galerie_section(s["galerie"], s.get("galerie_titre", "Sur le terrain"))
            if s.get("galerie") else "")
         + (credit_section("credit-impot") if s["credit"] else "")
         + (partenariat_section() if s.get("partenariat") else "") + '''
