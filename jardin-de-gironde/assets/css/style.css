@@ -533,3 +533,26 @@ a.partner-visual:hover { transform: translateY(-4px); }
   .split-clip { grid-template-columns: 1fr 320px; text-align: left; justify-items: stretch; }
   .split-clip .lead { max-width: 46ch; }
 }
+
+/* ---------- Paire avant / après ---------- */
+.duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(10px, 1.4vw, 18px);
+  margin: 22px 0 0;
+  max-width: 900px;
+}
+.duo-img {
+  display: block;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface-2);
+}
+.duo-img img { width: 100%; height: auto; display: block; }
+.duo figcaption {
+  grid-column: 1 / -1;
+  margin-top: 12px;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--ink-3);
+}

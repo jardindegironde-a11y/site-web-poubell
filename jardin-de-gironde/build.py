@@ -592,11 +592,15 @@ SERVICES = [
                   "atteignons le sommet d'une haie sans l'abîmer et sans prendre "
                   "de risque, même sur les sujets les plus hauts.",
                   "Taille d'une haie haute depuis une échelle-plateforme en Gironde"),
+        "avant_apres": ("chantier-haie-photinia-avant",
+                        "chantier-haie-photinia-apres", [900, 600, 420],
+                        "Avant : haie de photinias envahissante, pousses "
+                        "débordant au-dessus d'un mur en Gironde",
+                        "Après : la même haie de photinias rabattue et remise "
+                        "à niveau sur toute sa longueur",
+                        "Haie de photinias remise à niveau sur toute sa longueur, "
+                        "le long d'un mur de clôture."),
         "galerie": [
-            ("chantier-haie-photinia", [1080, 720, 540],
-             "Avant / après : haie de photinias rabattue et remise à niveau "
-             "le long d'un mur, en Gironde",
-             "Haie de photinias remise à niveau"),
             ("chantier-haie-cypres", [1080, 720, 540],
              "Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l'appui",
              "Haie de cyprès taillée à la perche"),
@@ -743,6 +747,26 @@ def video_section(nom, titre, texte, alt):
                muted loop playsinline preload="none"
                title="{html.escape(alt)}"></video>
       </div>
+    </div>
+  </section>'''
+
+
+def avant_apres_section(avant, apres, widths, alt_av, alt_ap, legende):
+    """Deux photos entieres cote a cote.
+
+    Rester cote a cote a toutes les largeurs est volontaire : une comparaison
+    dont les deux moities ne se voient pas d'un seul coup d'oeil ne compare
+    plus rien.
+    """
+    taille = "(min-width: 900px) 440px, 45vw"
+    return f'''<section class="section-sm">
+    <div class="container">
+      <p class="eyebrow reveal">Avant / après</p>
+      <figure class="duo reveal">
+        <span class="duo-img">{picture(avant, widths, alt_av, sizes=taille)}</span>
+        <span class="duo-img">{picture(apres, widths, alt_ap, sizes=taille)}</span>
+        <figcaption>{legende}</figcaption>
+      </figure>
     </div>
   </section>'''
 
@@ -1324,6 +1348,7 @@ def page_service(s):
   </section>
 
 ''' + (video_section(*s["video"]) if s.get("video") else "")
+        + (avant_apres_section(*s["avant_apres"]) if s.get("avant_apres") else "")
         + (galerie_section(s["galerie"], s.get("galerie_titre", "Nos réalisations"),
                            s.get("galerie_intro", ""))
            if s.get("galerie") else "")
