@@ -593,6 +593,10 @@ SERVICES = [
                   "de risque, même sur les sujets les plus hauts.",
                   "Taille d'une haie haute depuis une échelle-plateforme en Gironde"),
         "galerie": [
+            ("chantier-haie-photinia", [1080, 720, 540],
+             "Avant / après : haie de photinias rabattue et remise à niveau "
+             "le long d'un mur, en Gironde",
+             "Haie de photinias remise à niveau"),
             ("chantier-haie-cypres", [1080, 720, 540],
              "Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l'appui",
              "Haie de cyprès taillée à la perche"),
@@ -743,6 +747,17 @@ def video_section(nom, titre, texte, alt):
   </section>'''
 
 
+def _colonnes(n):
+    """Nombre de colonnes de la galerie.
+
+    Trois au plus, mais deux quand trois laisseraient une derniere ligne a
+    un seul element : quatre photos font un carre, pas 3 + 1 orpheline.
+    """
+    if n <= 3:
+        return n
+    return 2 if (n % 3 == 1 and n % 2 == 0) else 3
+
+
 def galerie_section(items, titre="Nos réalisations", sous_titre=""):
     """Grille de photos de chantier.
 
@@ -759,7 +774,7 @@ def galerie_section(items, titre="Nos réalisations", sous_titre=""):
         tuiles.append(f'<figure class="tile reveal" style="--d:{i % 3}">'
                       f'<span class="tile-media">{img}</span>{cap}</figure>')
 
-    cols = min(len(items), 3)
+    cols = _colonnes(len(items))
     intro = f'<p class="lead reveal">{sous_titre}</p>' if sous_titre else ""
     return f'''<section class="section-sm">
     <div class="container">
