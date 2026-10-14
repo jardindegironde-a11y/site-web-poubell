@@ -25,8 +25,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=" js";</script>
-<link rel="stylesheet" href="assets/css/style.css?v=246b15d9">
+<link rel="stylesheet" href="assets/css/style.css?v=56e971a2">
 <link rel="preload" as="image" fetchpriority="high" href="assets/img/taille-haies-chantier-1080.webp?v=a0f0b379" imagesrcset="assets/img/taille-haies-chantier-1080.webp?v=a0f0b379 1080w, assets/img/taille-haies-chantier-800.webp?v=99bb61d0 800w, assets/img/taille-haies-chantier-640.webp?v=3968de0b 640w" imagesizes="(min-width: 900px) 46vw, 92vw">
+<link rel="stylesheet" href="assets/css/refonte.css?v=af900209">
 <style>
 .brand-logo { height: 50px; width: auto; }
 .site-footer .brand-logo, .thanks .brand-logo { height: 76px; }
@@ -65,12 +66,13 @@
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Comment fonctionne le crédit d'impôt de 50 % ?","acceptedAnswer":{"@type":"Answer","text":"Nos prestations d'entretien courant du jardin relèvent des services à la personne. Vous réglez la facture normalement, nous vous remettons une attestation fiscale en début d'année suivante, et 50 % du montant vous est restitué par l'administration — que vous soyez imposable ou non. Le plafond est de 5 000 € de travaux par an et par foyer."}},{"@type":"Question","name":"Suis-je obligé de signer un contrat à l'année ?","acceptedAnswer":{"@type":"Answer","text":"Non. Vous pouvez faire appel à nous pour une intervention ponctuelle. Le contrat d'entretien régulier existe pour ceux qui préfèrent ne plus y penser, mais il n'a jamais rien d'obligatoire."}},{"@type":"Question","name":"Dois-je être présent pendant l'intervention ?","acceptedAnswer":{"@type":"Answer","text":"Ce n'est pas nécessaire dès lors que nous avons accès au terrain. Beaucoup de nos clients nous confient l'entretien pendant leurs absences ; nous vous envoyons un compte-rendu après le passage."}},{"@type":"Question","name":"Le crédit d'impôt de 50 % s'applique-t-il aux travaux de création ?","acceptedAnswer":{"@type":"Answer","text":"Non, et nous préférons le dire clairement. Le crédit d'impôt services à la personne concerne l'entretien courant du jardin (tonte, taille, débroussaillage, désherbage). Les travaux de création et d'aménagement paysager n'y ouvrent pas droit — en revanche, l'entretien qui suivra, oui."}},{"@type":"Question","name":"Fournissez-vous les végétaux ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Grâce à notre partenariat avec Villaverde Cestas, nos clients bénéficient de prix préférentiels sur les plantes du magasin. Nous sélectionnons des espèces adaptées au climat girondin, pour qu'elles tiennent dans le temps."}}]}
 </script>
 </head>
-<body>
+<body class="home">
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
     <a class="brand" href="#top" aria-label="Jardin de Gironde — accueil">
       <img class="brand-logo" src="assets/img/logo.png?v=c2c7428c" alt="Jardin de Gironde" width="55" height="46" decoding="async">
+      <span class="brand-name">Jardin de Gironde<span>Le soin de vos espaces verts</span></span>
     </a>
     <nav class="main-nav" aria-label="Navigation principale"><a href="#services">Services</a><a href="#realisations">Réalisations</a><a href="#credit-impot">Crédit d'impôt</a><a href="#devis">Contact</a></nav>
     <div class="header-actions">
@@ -92,40 +94,25 @@
 
   <section class="hero" id="top">
     <div class="container hero-grid">
-      <div class="reveal in">
-        <p class="eyebrow">Entretien &amp; création de jardins en Gironde</p>
-        <h1 class="h1">Des espaces verts qui respirent le soin.</h1>
-        <p class="lead">Une équipe locale, un travail régulier et des devis clairs.
-           Vous nous confiez votre jardin&nbsp;: vous n'avez plus à y penser.</p>
+      <div class="hero-copy reveal in">
+        <p class="eyebrow"><span class="location-dot" aria-hidden="true"></span> Jardiniers &amp; paysagistes en Gironde</p>
+        <h1 class="h1">Votre jardin.<br>Notre soin.<br><em>Votre plaisir.</em></h1>
+        <p class="lead">Un jardin à entretenir, un espace à imaginer&nbsp;? Nous prenons soin de vos extérieurs, pour que vous profitiez de chaque saison.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" href="#devis">Demander un devis gratuit <svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></a>
+          <a class="btn btn-primary btn-lg" href="#devis">Parlons de votre jardin <svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></a>
           <a class="btn btn-ghost btn-lg" href="tel:+33630644709" data-loc="hero"><svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> 06 30 64 47 09</a>
         </div>
-        <ul class="trust-row"><li><svg class="" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3.5v3m8-3v3"/></svg> Devis gratuit sous 24 h</li><li><svg class="" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.8A4.3 4.3 0 0 0 9 11.2m6.5 4A4.3 4.3 0 0 1 9 12.8M6.8 11h6m-6 2.6h6"/></svg> Crédit d'impôt de 50 %</li><li><svg class="" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7.5 3v5.5c0 4.7-3.2 8.2-7.5 9.5-4.3-1.3-7.5-4.8-7.5-9.5V6z"/><path d="M9 12l2.2 2.2L15.3 10"/></svg> Entreprise déclarée services à la personne</li><li><svg class="" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg> Toute la Gironde</li></ul>
+        <p class="hero-reassurance">Devis gratuit · Réponse sous 24 h ouvrées · Sans engagement</p>
       </div>
-      <div class="hero-media reveal in" style="--d:1"><img class="" src="assets/img/taille-haies-chantier-1080.webp?v=a0f0b379" srcset="assets/img/taille-haies-chantier-1080.webp?v=a0f0b379 1080w, assets/img/taille-haies-chantier-800.webp?v=99bb61d0 800w, assets/img/taille-haies-chantier-640.webp?v=3968de0b 640w" sizes="(min-width: 900px) 46vw, 92vw" alt="Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l&#x27;appui" loading="eager" fetchpriority="high" decoding="async"></div>
-    </div>
-  </section>
-
-<section class="partner-band" aria-labelledby="partner-title">
-    <div class="container partner-strip">
-      <a class="partner-visual reveal in" href="#partenariat"><img class="" src="assets/img/partenariat-villaverde-1000.webp?v=b0d5f550" srcset="assets/img/partenariat-villaverde-1000.webp?v=b0d5f550 1000w, assets/img/partenariat-villaverde-700.webp?v=a2ad3d6d 700w, assets/img/partenariat-villaverde-500.webp?v=327a2bac 500w" sizes="(min-width: 900px) 340px, 78vw" alt="Partenariat commercial entre Jardin de Gironde et la jardinerie VillaVerde Cestas : tarifs préférentiels pour nos clients" loading="lazy" decoding="async"></a>
-      <div class="partner-copy reveal in" style="--d:1">
-        <p class="eyebrow">Partenariat commercial &middot; VillaVerde Cestas</p>
-        <h2 class="h2" id="partner-title">Vos plantes moins chères</h2>
-        <p class="lead">En passant par Jardin de Gironde, vous profitez de
-          <strong>tarifs préférentiels</strong> sur les végétaux de la jardinerie
-          VillaVerde à Cestas. Un avantage réservé à nos clients, sur tous vos
-          projets de jardin.</p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#devis">Demander un devis gratuit <svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></a>
-          <a class="btn btn-ghost" href="#partenariat">En savoir plus</a>
-        </div>
+      <div class="hero-visual reveal in" style="--d:1">
+        <div class="hero-media"><img class="" src="assets/img/taille-haies-chantier-1080.webp?v=a0f0b379" srcset="assets/img/taille-haies-chantier-1080.webp?v=a0f0b379 1080w, assets/img/taille-haies-chantier-800.webp?v=99bb61d0 800w, assets/img/taille-haies-chantier-640.webp?v=3968de0b 640w" sizes="(min-width: 900px) 46vw, 92vw" alt="Jardinier de Jardin de Gironde taillant une haie de cyprès au taille-haie sur perche, échelle-plateforme à l&#x27;appui" loading="eager" fetchpriority="high" decoding="async"></div>
+        <div class="hero-caption"><span>Sur le terrain, en Gironde</span><b>Le soin du détail,<br>jusqu'à la dernière taille.</b></div>
+        <a class="hero-stamp" href="#realisations" aria-label="Voir nos réalisations en Gironde">Vos jardins<br><b>en bonnes<br>mains</b><span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
 
-  <section class="section-sm">
+  <section class="home-facts" aria-label="Nos engagements">
     <div class="container">
       <dl class="facts reveal"><div><dt>Réponse à votre demande</dt><dd>Sous 24 h</dd></div><div><dt>Crédit d'impôt sur l'entretien</dt><dd>50 %</dd></div><div><dt>Zone d'intervention</dt><dd>Toute la Gironde</dd></div><div><dt>Devis</dt><dd>Gratuit, sans engagement</dd></div></dl>
     </div>
@@ -135,61 +122,53 @@
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Nos prestations</p>
-        <h2 class="h2">Tout ce dont votre jardin a besoin</h2>
-        <p class="lead">De la tonte hebdomadaire à la création complète d'un espace vert,
-           avec le même soin du détail.</p>
+        <h2 class="h2">À chaque jardin,<br>le soin qu'il lui faut.</h2>
+        <p class="lead">Un entretien ponctuel, un suivi au fil des saisons ou un nouveau projet&nbsp;: choisissez la prestation qui vous ressemble.</p>
       </div>
       <div class="service-grid"><a class="service-card reveal" style="--d:0" href="entretien-jardins.html">
-      <div class="service-media illus"><img src="assets/img/illus/entretien-jardins.svg?v=251c2b04" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media illus"><img src="assets/img/illus/entretien-jardins.svg?v=251c2b04" alt="" width="120" height="120" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Entretien de jardins</h3>
         <p>Un suivi régulier pour un jardin toujours impeccable, saison après saison.</p>
         <span class="link-arrow">En savoir plus <svg class="" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
       </div>
     </a><a class="service-card reveal" style="--d:1" href="tonte-pelouse.html">
-      <div class="service-media illus"><img src="assets/img/illus/tonte-pelouse.svg?v=4ff694cb" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media"><img class="" src="assets/img/tonte-pelouse-1086.webp?v=303e4390" srcset="assets/img/tonte-pelouse-1086.webp?v=303e4390 1086w, assets/img/tonte-pelouse-800.webp?v=26cf84a6 800w, assets/img/tonte-pelouse-500.webp?v=fca4dcf0 500w" sizes="(min-width: 900px) 360px, (min-width: 600px) 45vw, 92vw" alt="Pelouse fraîchement tondue au bord d&#x27;une terrasse en bois" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Tonte de pelouse</h3>
         <p>Une pelouse dense, nette et parfaitement rasée à la fréquence idéale.</p>
         <span class="link-arrow">En savoir plus <svg class="" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
       </div>
     </a><a class="service-card reveal" style="--d:2" href="taille-haies.html">
-      <div class="service-media illus"><img src="assets/img/illus/taille-haies.svg?v=0ef40e17" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media"><img class="" src="assets/img/taille-haies-941.webp?v=00f437d2" srcset="assets/img/taille-haies-941.webp?v=00f437d2 941w, assets/img/taille-haies-800.webp?v=d70c21c9 800w, assets/img/taille-haies-500.webp?v=49622076 500w" sizes="(min-width: 900px) 360px, (min-width: 600px) 45vw, 92vw" alt="Taille d&#x27;une haie au taille-haie thermique en Gironde" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Taille de haies et arbustes</h3>
         <p>Des haies structurées et des arbustes en pleine santé, taillés avec précision.</p>
         <span class="link-arrow">En savoir plus <svg class="" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
       </div>
     </a><a class="service-card reveal" style="--d:0" href="debroussaillage.html">
-      <div class="service-media illus"><img src="assets/img/illus/debroussaillage.svg?v=d1bdf832" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media illus"><img src="assets/img/illus/debroussaillage.svg?v=d1bdf832" alt="" width="120" height="120" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Débroussaillage</h3>
         <p>Nettoyage des terrains envahis, mise aux normes et sécurité incendie.</p>
         <span class="link-arrow">En savoir plus <svg class="" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
       </div>
     </a><a class="service-card reveal" style="--d:1" href="creation-espaces-verts.html">
-      <div class="service-media illus"><img src="assets/img/illus/creation-espaces-verts.svg?v=f291a0ae" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media"><img class="" src="assets/img/creation-jardin-1448.webp?v=6fa2d7af" srcset="assets/img/creation-jardin-1448.webp?v=6fa2d7af 1448w, assets/img/creation-jardin-1000.webp?v=0cdc8310 1000w, assets/img/creation-jardin-640.webp?v=133558b0 640w" sizes="(min-width: 900px) 360px, (min-width: 600px) 45vw, 92vw" alt="Jardin créé par Jardin de Gironde : gazon neuf, clôture et massifs" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Création d'espaces verts</h3>
         <p>Conception sur mesure de jardins qui vous ressemblent, de A à Z.</p>
         <span class="link-arrow">En savoir plus <svg class="" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
       </div>
     </a><a class="service-card reveal" style="--d:2" href="nettoyage-toiture-gouttiere.html">
-      <div class="service-media illus"><img src="assets/img/illus/nettoyage-toiture-gouttiere.svg?v=05f55237" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media illus"><img src="assets/img/illus/nettoyage-toiture-gouttiere.svg?v=05f55237" alt="" width="120" height="120" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Nettoyage de toitures et gouttières</h3>
         <p>Toitures démoussées et gouttières dégagées, avant que l'eau ne fasse des dégâts.</p>
         <span class="link-arrow">En savoir plus <svg class="" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></span>
       </div>
     </a><a class="service-card reveal" style="--d:0" href="nettoyage-haute-pression.html">
-      <div class="service-media illus"><img src="assets/img/illus/nettoyage-haute-pression.svg?v=c310a91f" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media"><img class="" src="assets/img/nettoyage-haute-pression-1600.webp?v=fbcf7f46" srcset="assets/img/nettoyage-haute-pression-1600.webp?v=fbcf7f46 1600w, assets/img/nettoyage-haute-pression-1000.webp?v=5ca6489c 1000w, assets/img/nettoyage-haute-pression-640.webp?v=dad56b03 640w" sizes="(min-width: 900px) 360px, (min-width: 600px) 45vw, 92vw" alt="Avant / après : bassin nettoyé au karcher par Jardin de Gironde" loading="lazy" decoding="async"></div>
       <div class="service-body">
         <h3>Nettoyage haute pression</h3>
         <p>Terrasses, allées et murets retrouvent leur éclat d'origine.</p>
@@ -199,7 +178,53 @@
     </div>
   </section>
 
-<section id="credit-impot" class="section bg-surface">
+<section class="section" id="realisations">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Réalisations</p>
+      <h2 class="h2">De vrais jardins.<br>De belles transformations.</h2>
+      <p class="lead">Des chantiers réels, photographiés sur le terrain, en Gironde.
+         Découvrez notre travail, de l'entretien à l'aménagement.</p>
+    </div>
+    <div class="works"><figure class="work reveal" style="--d:0">
+      <img class="" src="assets/img/taille-haies-941.webp?v=00f437d2" srcset="assets/img/taille-haies-941.webp?v=00f437d2 941w, assets/img/taille-haies-800.webp?v=d70c21c9 800w, assets/img/taille-haies-500.webp?v=49622076 500w" sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" alt="Taille de haie réalisée par Jardin de Gironde" loading="lazy" decoding="async">
+      <figcaption><span>Précision & finition</span><b>Taille de haies</b></figcaption>
+    </figure><figure class="work work-wide reveal" style="--d:1">
+      <img class="" src="assets/img/creation-jardin-1448.webp?v=6fa2d7af" srcset="assets/img/creation-jardin-1448.webp?v=6fa2d7af 1448w, assets/img/creation-jardin-1000.webp?v=0cdc8310 1000w, assets/img/creation-jardin-640.webp?v=133558b0 640w" sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" alt="Création d&#x27;un jardin avec gazon neuf et clôture bois" loading="lazy" decoding="async">
+      <figcaption><span>Sur mesure, de A à Z</span><b>Création d'un jardin</b></figcaption>
+    </figure><figure class="work work-wide reveal" style="--d:2">
+      <img class="" src="assets/img/nettoyage-haute-pression-1600.webp?v=fbcf7f46" srcset="assets/img/nettoyage-haute-pression-1600.webp?v=fbcf7f46 1600w, assets/img/nettoyage-haute-pression-1000.webp?v=5ca6489c 1000w, assets/img/nettoyage-haute-pression-640.webp?v=dad56b03 640w" sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" alt="Avant après d&#x27;un nettoyage haute pression" loading="lazy" decoding="async">
+      <figcaption><span>Avant / après</span><b>Nettoyage haute pression</b></figcaption>
+    </figure></div>
+  </div>
+</section>
+  <section class="section home-team">
+    <div class="container split">
+      <div class="team-photo reveal"><img class="" src="assets/img/equipe-portrait-1200.webp?v=5045a5ae" srcset="assets/img/equipe-portrait-1200.webp?v=5045a5ae 1200w, assets/img/equipe-portrait-800.webp?v=bb637a30 800w, assets/img/equipe-portrait-500.webp?v=eb2996dc 500w" sizes="(min-width: 900px) 420px, 92vw" alt="Un membre de l&#x27;équipe Jardin de Gironde devant une haie entretenue" loading="lazy" decoding="async"></div>
+      <div class="reveal">
+        <p class="eyebrow">Une équipe locale, un engagement concret</p>
+        <h2 class="h2">Des mains qui travaillent.<br>Un jardin qui respire.</h2>
+        <p class="lead">Derrière Jardin de Gironde, il y a une équipe sur le terrain. De la tonte aux plantations, nous abordons chaque jardin avec le même soin et un devis clair.</p>
+        <p>Pour les particuliers comme pour les professionnels, en intervention ponctuelle ou en entretien régulier, nous adaptons notre travail à votre jardin et à vos envies.</p>
+        <a class="link-arrow" href="#devis">Faisons connaissance <svg class="" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></a>
+      </div>
+    </div>
+  </section>
+<section class="section bg-surface" id="deroulement">
+  <div class="container">
+    <div class="section-head reveal">
+      <p class="eyebrow">Simple, du premier contact au chantier</p>
+      <h2 class="h2">Un beau jardin commence par un échange.</h2>
+    </div>
+    <div class="steps"><div class="step reveal" style="--d:0">
+      <b>Étape 1</b><h3>Vous nous parlez de votre jardin</h3><p>Votre ville, vos envies et la prestation recherchée&nbsp;: par téléphone ou via le formulaire, nous faisons le point ensemble.</p>
+    </div><div class="step reveal" style="--d:1">
+      <b>Étape 2</b><h3>Nous préparons votre devis</h3><p>Une proposition claire, adaptée à votre terrain et à votre projet. Le devis est gratuit et sans engagement.</p>
+    </div><div class="step reveal" style="--d:2">
+      <b>Étape 3</b><h3>Nous prenons soin de vos extérieurs</h3><p>Après votre accord, nous organisons l'intervention, ponctuelle ou régulière, à la fréquence qui vous convient.</p>
+    </div></div>
+  </div>
+</section><section id="credit-impot" class="section bg-surface">
   <div class="container split">
     <div class="reveal">
       <p class="eyebrow">Avantage fiscal</p>
@@ -224,45 +249,23 @@
       <a class="btn btn-primary btn-block" style="margin-top:26px" href="#devis">Estimer mon coût réel</a>
     </div>
   </div>
-</section><section class="section" id="realisations">
-  <div class="container">
-    <div class="section-head reveal">
-      <p class="eyebrow">Réalisations</p>
-      <h2 class="h2">Le travail parle de lui-même</h2>
-      <p class="lead">Des chantiers réels, photographiés sur le terrain, en Gironde.
-         Pas d'images de synthèse&nbsp;: ce que vous voyez est ce que nous faisons.</p>
+</section><section class="partner-band" aria-labelledby="partner-title">
+    <div class="container partner-strip">
+      <div class="partner-visual reveal in"><img class="" src="assets/img/partenariat-villaverde-1000.webp?v=b0d5f550" srcset="assets/img/partenariat-villaverde-1000.webp?v=b0d5f550 1000w, assets/img/partenariat-villaverde-700.webp?v=a2ad3d6d 700w, assets/img/partenariat-villaverde-500.webp?v=327a2bac 500w" sizes="(min-width: 900px) 340px, 78vw" alt="Partenariat commercial entre Jardin de Gironde et la jardinerie VillaVerde Cestas : tarifs préférentiels pour nos clients" loading="lazy" decoding="async"></div>
+      <div class="partner-copy reveal in" style="--d:1">
+        <p class="eyebrow">Partenariat commercial &middot; VillaVerde Cestas</p>
+        <h2 class="h2" id="partner-title">Vos plantes moins chères</h2>
+        <p class="lead">En passant par Jardin de Gironde, vous profitez de
+          <strong>tarifs préférentiels</strong> sur les végétaux de la jardinerie
+          VillaVerde à Cestas. Un avantage réservé à nos clients, sur tous vos
+          projets de jardin.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#devis">Demander un devis gratuit <svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></a>
+
+        </div>
+      </div>
     </div>
-    <div class="works"><figure class="work reveal" style="--d:0">
-      <img class="" src="assets/img/taille-haies-941.webp?v=00f437d2" srcset="assets/img/taille-haies-941.webp?v=00f437d2 941w, assets/img/taille-haies-800.webp?v=d70c21c9 800w, assets/img/taille-haies-500.webp?v=49622076 500w" sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" alt="Taille de haie réalisée par Jardin de Gironde" loading="lazy" decoding="async">
-      <figcaption><span>Précision & finition</span><b>Taille de haies</b></figcaption>
-    </figure><figure class="work work-wide reveal" style="--d:1">
-      <img class="" src="assets/img/creation-jardin-1448.webp?v=6fa2d7af" srcset="assets/img/creation-jardin-1448.webp?v=6fa2d7af 1448w, assets/img/creation-jardin-1000.webp?v=0cdc8310 1000w, assets/img/creation-jardin-640.webp?v=133558b0 640w" sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" alt="Création d&#x27;un jardin avec gazon neuf et clôture bois" loading="lazy" decoding="async">
-      <figcaption><span>Sur mesure, de A à Z</span><b>Création d'un jardin</b></figcaption>
-    </figure><figure class="work work-wide reveal" style="--d:2">
-      <img class="" src="assets/img/nettoyage-haute-pression-1600.webp?v=fbcf7f46" srcset="assets/img/nettoyage-haute-pression-1600.webp?v=fbcf7f46 1600w, assets/img/nettoyage-haute-pression-1000.webp?v=5ca6489c 1000w, assets/img/nettoyage-haute-pression-640.webp?v=dad56b03 640w" sizes="(min-width: 900px) 33vw, (min-width: 600px) 50vw, 100vw" alt="Avant après d&#x27;un nettoyage haute pression" loading="lazy" decoding="async">
-      <figcaption><span>Avant / après</span><b>Nettoyage haute pression</b></figcaption>
-    </figure></div>
-  </div>
-</section><section class="section bg-surface" id="partenariat">
-  <div class="container split">
-    <div class="reveal">
-      <p class="eyebrow">Partenariat commercial</p>
-      <h2 class="h2" style="margin-top:14px">Un partenariat de confiance avec Villaverde Cestas</h2>
-      <p class="lead" style="margin-top:20px">
-        Grâce à ce partenariat, les clients qui passent par Jardin de Gironde
-        bénéficient de prix préférentiels sur les plantes du magasin.
-      </p>
-      <a class="btn btn-ghost" style="margin-top:28px" href="#devis">Demander un devis <svg class="ico" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 5.5 19 12l-6.5 6.5"/></svg></a>
-    </div>
-    <div class="video-frame reveal" style="--d:1">
-      <span class="video-tag">Villaverde Cestas</span>
-      <video data-lazy data-src="assets/video/villaverde-cestas.mp4?v=39c8f623"
-             poster="assets/img/villaverde-poster.webp?v=5c075196"
-             muted loop playsinline preload="none"
-             title="Partenariat entre Jardin de Gironde et Villaverde Cestas"></video>
-    </div>
-  </div>
-</section><section class="section-sm bg-soft" id="zone">
+  </section><section class="section-sm bg-soft" id="zone">
   <div class="container reveal">
     <p class="eyebrow">Zone d'intervention</p>
     <h2 class="h3" style="margin-top:12px">Nous intervenons partout en Gironde</h2>
@@ -371,6 +374,6 @@
 </footer><div class="action-bar">
   <a class="btn btn-ghost" href="tel:+33630644709" data-loc="barre-mobile"><svg class="" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg> Appeler</a>
   <a class="btn btn-primary" href="#devis">Devis gratuit</a>
-</div><script src="assets/js/main.js?v=3a034808" defer></script>
+</div><script src="assets/js/main.js?v=be3c7e1a" defer></script>
 </body>
 </html>
