@@ -25,20 +25,21 @@ p { text-wrap: pretty; }
 
 /* ---------- Tokens ---------- */
 :root {
-  --ink: #111A14;
-  --ink-2: #3B463F;
-  --ink-3: #6B7670;
-  --paper: #FBFAF7;
+  --ink: #243D31;
+  --ink-2: #4C5C50;
+  --ink-3: #667067;
+  --paper: #F8F6F0;
   --surface: #FFFFFF;
-  --surface-2: #F3F2EC;
-  --line: #E4E2DA;
-  --green: #17662C;
-  --green-700: #1E7A34;
-  --green-100: #E8F2EA;
+  --surface-2: #EFEEE5;
+  --line: #DCDDD1;
+  --green: #244F3B;
+  --green-700: #32684E;
+  --green-100: #E8EDDF;
+  --clay: #A65335;
   --illus-bg: #F7F5EE;   /* doit rester identique au fond interne des SVG (illus.py) */
-  --radius: 16px;
-  --radius-lg: 24px;
-  --container: 1180px;
+  --radius: 10px;
+  --radius-lg: 14px;
+  --container: 1320px;
   --pad: clamp(20px, 5vw, 40px);
   --shadow: 0 1px 2px rgba(17, 26, 20, .04), 0 12px 32px -16px rgba(17, 26, 20, .18);
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -74,7 +75,7 @@ section { scroll-margin-top: 96px; }
 /* ---------- Buttons ---------- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  padding: 14px 26px; border-radius: 999px; border: 1px solid transparent;
+  padding: 14px 26px; border-radius: 7px; border: 1px solid transparent;
   font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer;
   transition: background-color .25s var(--ease), color .25s var(--ease),
               border-color .25s var(--ease), transform .18s var(--ease);
@@ -149,10 +150,11 @@ section { scroll-margin-top: 96px; }
 
 .mobile-nav {
   display: grid; gap: 2px; overflow: hidden; max-height: 0;
+  visibility: hidden;
   transition: max-height .38s var(--ease);
   border-top: 1px solid transparent;
 }
-.mobile-nav.open { max-height: 400px; border-top-color: var(--line); }
+.mobile-nav.open { max-height: 400px; border-top-color: var(--line); visibility: visible; }
 .mobile-nav-inner { padding: 14px 0 22px; display: grid; gap: 4px; }
 .mobile-nav a { padding: 12px 4px; text-decoration: none; font-weight: 500; border-radius: 10px; }
 .mobile-nav .btn { margin-top: 10px; }
@@ -391,7 +393,7 @@ body { padding-bottom: 0; }
   .work-wide img { aspect-ratio: 4 / 5; }
   .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
 }
-@media (min-width: 1000px) {
+@media (min-width: 1200px) {
   .main-nav { display: flex; }
   .header-cta { display: inline-flex; }
   .nav-toggle { display: none; }

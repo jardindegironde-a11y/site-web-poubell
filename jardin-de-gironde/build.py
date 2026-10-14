@@ -182,6 +182,7 @@ def head(title, description, canonical, preload_img=None, extra_css="", noindex=
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script>document.documentElement.className+=" js";</script>
 <link rel="stylesheet" href="{asset("assets/css/style.css")}">{preload}
+<link rel="stylesheet" href="{asset("assets/css/refonte.css")}">
 <style>{LOGO_CSS}{extra_css}</style>
 
 <!-- Google tag (gtag.js) -->
@@ -271,6 +272,7 @@ def header(minimal=False, home=False):
   <div class="container header-inner">
     <a class="brand" href="{'#top' if home else 'index.html'}" aria-label="{SITE} — accueil">
       {logo_svg()}
+      <span class="brand-name">Jardin de Gironde<span>Le soin de vos espaces verts</span></span>
     </a>
     {nav}
     <div class="header-actions">
@@ -816,9 +818,13 @@ def galerie_section(items, titre="Nos réalisations", sous_titre=""):
 def services_grid():
     cards = []
     for i, s in enumerate(SERVICES):
+        media = (picture(s["img"], s["img_w"], s["alt"],
+                         sizes="(min-width: 900px) 360px, (min-width: 600px) 45vw, 92vw")
+                 if s["img"] else
+                 '<img src="' + asset('assets/img/illus/' + s['slug'] + '.svg')
+                 + '" alt="" width="120" height="120" loading="lazy" decoding="async">')
         cards.append(f'''<a class="service-card reveal" style="--d:{i % 3}" href="{s['slug']}.html">
-      <div class="service-media illus"><img src="{asset(f"assets/img/illus/{s['slug']}.svg")}" alt=""
-           width="120" height="120" loading="lazy" decoding="async"></div>
+      <div class="service-media{' illus' if not s['img'] else ''}">{media}</div>
       <div class="service-body">
         <h3>{s['titre']}</h3>
         <p>{s['court']}</p>
@@ -847,7 +853,7 @@ def partenariat_banner(anchor=True):
           projets de jardin.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#devis">Demander un devis gratuit {icon('arrow', 'ico', 16)}</a>
-          {'<a class="btn btn-ghost" href="#partenariat">En savoir plus</a>' if anchor else ''}
+{'          <a class="btn btn-ghost" href="#partenariat">En savoir plus</a>' if anchor else ''}
         </div>
       </div>
     </div>
@@ -897,9 +903,9 @@ def realisations_section():
   <div class="container">
     <div class="section-head reveal">
       <p class="eyebrow">Réalisations</p>
-      <h2 class="h2">Le travail parle de lui-même</h2>
+      <h2 class="h2">De vrais jardins.<br>De belles transformations.</h2>
       <p class="lead">Des chantiers réels, photographiés sur le terrain, en Gironde.
-         Pas d'images de synthèse : ce que vous voyez est ce que nous faisons.</p>
+         Découvrez notre travail, de l'entretien à l'aménagement.</p>
     </div>
     <div class="works">{"".join(figs)}</div>
   </div>
@@ -1042,30 +1048,31 @@ def page_index():
         )
         + local_business_jsonld() + faq_jsonld(FAQ_HOME) + '''
 </head>
-<body>
+<body class="home">
 ''' + header(home=True) + '''
 <main id="contenu">
 
   <section class="hero" id="top">
     <div class="container hero-grid">
-      <div class="reveal in">
-        <p class="eyebrow">Entretien &amp; création de jardins en Gironde</p>
-        <h1 class="h1">Des espaces verts qui respirent le soin.</h1>
-        <p class="lead">Une équipe locale, un travail régulier et des devis clairs.
-           Vous nous confiez votre jardin : vous n'avez plus à y penser.</p>
+      <div class="hero-copy reveal in">
+        <p class="eyebrow"><span class="location-dot" aria-hidden="true"></span> Jardiniers &amp; paysagistes en Gironde</p>
+        <h1 class="h1">Votre jardin.<br>Notre soin.<br><em>Votre plaisir.</em></h1>
+        <p class="lead">Un jardin à entretenir, un espace à imaginer ? Nous prenons soin de vos extérieurs, pour que vous profitiez de chaque saison.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary btn-lg" href="#devis">Demander un devis gratuit ''' + icon('arrow', 'ico', 16) + '''</a>
+          <a class="btn btn-primary btn-lg" href="#devis">Parlons de votre jardin ''' + icon('arrow', 'ico', 16) + '''</a>
           <a class="btn btn-ghost btn-lg" href="''' + PHONE_HREF + '''" data-loc="hero">''' + icon('phone', 'ico', 16) + ''' ''' + PHONE_DISPLAY + '''</a>
         </div>
-        ''' + trust_row() + '''
+        <p class="hero-reassurance">Devis gratuit · Réponse sous 24 h ouvrées · Sans engagement</p>
       </div>
-      <div class="hero-media reveal in" style="--d:1">''' + hero_img + '''</div>
+      <div class="hero-visual reveal in" style="--d:1">
+        <div class="hero-media">''' + hero_img + '''</div>
+        <div class="hero-caption"><span>Sur le terrain, en Gironde</span><b>Le soin du détail,<br>jusqu'à la dernière taille.</b></div>
+        <a class="hero-stamp" href="#realisations" aria-label="Voir nos réalisations en Gironde">Vos jardins<br><b>en bonnes<br>mains</b><span aria-hidden="true">↗</span></a>
+      </div>
     </div>
   </section>
 
-''' + partenariat_banner() + '''
-
-  <section class="section-sm">
+  <section class="home-facts" aria-label="Nos engagements">
     <div class="container">
       ''' + facts_block([
           ("Réponse à votre demande", "Sous 24 h"),
@@ -1080,15 +1087,33 @@ def page_index():
     <div class="container">
       <div class="section-head reveal">
         <p class="eyebrow">Nos prestations</p>
-        <h2 class="h2">Tout ce dont votre jardin a besoin</h2>
-        <p class="lead">De la tonte hebdomadaire à la création complète d'un espace vert,
-           avec le même soin du détail.</p>
+        <h2 class="h2">À chaque jardin,<br>le soin qu'il lui faut.</h2>
+        <p class="lead">Un entretien ponctuel, un suivi au fil des saisons ou un nouveau projet : choisissez la prestation qui vous ressemble.</p>
       </div>
       ''' + services_grid() + '''
     </div>
   </section>
 
-''' + credit_section() + realisations_section() + partenariat_section()
+''' + realisations_section() + '''
+  <section class="section home-team">
+    <div class="container split">
+      <div class="team-photo reveal">''' + picture("equipe-portrait", [1200, 800, 500],
+          "Un membre de l'équipe Jardin de Gironde devant une haie entretenue",
+          sizes="(min-width: 900px) 420px, 92vw") + '''</div>
+      <div class="reveal">
+        <p class="eyebrow">Une équipe locale, un engagement concret</p>
+        <h2 class="h2">Des mains qui travaillent.<br>Un jardin qui respire.</h2>
+        <p class="lead">Derrière Jardin de Gironde, il y a une équipe sur le terrain. De la tonte aux plantations, nous abordons chaque jardin avec le même soin et un devis clair.</p>
+        <p>Pour les particuliers comme pour les professionnels, en intervention ponctuelle ou en entretien régulier, nous adaptons notre travail à votre jardin et à vos envies.</p>
+        <a class="link-arrow" href="#devis">Faisons connaissance ''' + icon('arrow', size=16) + '''</a>
+      </div>
+    </div>
+  </section>
+''' + steps_section("Un beau jardin commence par un échange.", "Simple, du premier contact au chantier", [
+          ("Vous nous parlez de votre jardin", "Votre ville, vos envies et la prestation recherchée : par téléphone ou via le formulaire, nous faisons le point ensemble."),
+          ("Nous préparons votre devis", "Une proposition claire, adaptée à votre terrain et à votre projet. Le devis est gratuit et sans engagement."),
+          ("Nous prenons soin de vos extérieurs", "Après votre accord, nous organisons l'intervention, ponctuelle ou régulière, à la fréquence qui vous convient."),
+        ]) + credit_section() + partenariat_banner(anchor=False)
         + zone_section() + faq_section(FAQ_HOME) + devis_section("Accueil") + '''
 </main>
 ''' + footer(home=True) + action_bar() + scripts() + '''

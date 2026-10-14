@@ -55,17 +55,34 @@
   /* ---------- Menu mobile ---------- */
   var toggle = d.getElementById('navToggle');
   var mobileNav = d.getElementById('mobileNav');
+  function setMenu(open) {
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    }
+    if (mobileNav) {
+      mobileNav.classList.toggle('open', open);
+      mobileNav.inert = !open;
+    }
+  }
+  setMenu(false);
   on(toggle, 'click', function () {
     var open = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!open));
-    if (mobileNav) mobileNav.classList.toggle('open', !open);
+    setMenu(!open);
   });
   all('#mobileNav a').forEach(function (a) {
     on(a, 'click', function () {
-      if (toggle) toggle.setAttribute('aria-expanded', 'false');
-      if (mobileNav) mobileNav.classList.remove('open');
+      setMenu(false);
     });
   });
+  on(d, 'keydown', function (e) {
+    if (e.key === 'Escape' && toggle && toggle.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      toggle.focus();
+    }
+  });
+  var desktopMenu = window.matchMedia('(min-width: 1200px)');
+  on(desktopMenu, 'change', function (e) { if (e.matches) setMenu(false); });
 
   /* ---------- Apparitions au défilement ---------- */
   var revealables = all('.reveal');
