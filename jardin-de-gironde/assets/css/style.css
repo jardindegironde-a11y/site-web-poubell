@@ -526,6 +526,17 @@ a.partner-visual:hover { transform: translateY(-4px); }
   .video-bandeau { aspect-ratio: 2 / 1; }
 }
 
+/* ---------- Chantier rendu propre ---------- */
+.propre-frame {
+  justify-self: center;
+  width: min(100%, 460px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+}
+.propre-img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+
 /* ---------- Paire avant / après ---------- */
 .duo {
   display: grid;

@@ -517,6 +517,7 @@ def devis_section(origine, titre="Demandez votre devis gratuit",
 SERVICES = [
     {
         "slug": "entretien-jardins",
+        "propre": True,
         "titre": "Entretien de jardins",
         "court": "Un suivi régulier pour un jardin toujours impeccable, saison après saison.",
         # Pas de photo pour l'instant : l'illustration au trait tient la page.
@@ -574,6 +575,7 @@ SERVICES = [
     },
     {
         "slug": "taille-haies",
+        "propre": True,
         "titre": "Taille de haies et arbustes",
         "court": "Des haies structurées et des arbustes en pleine santé, taillés avec précision.",
         "img": "taille-haies",
@@ -761,6 +763,34 @@ def video_bandeau(nom, titre, texte, alt, eyebrow="En intervention", fond=""):
                width="1920" height="1080"
                title="{html.escape(alt)}"></video>
       </div>
+    </div>
+  </section>'''
+
+
+def chantier_propre_section(fond=""):
+    """Le chantier rendu propre : photo d'une rangee de haies taillees et
+    d'un sol entierement ratisse, avec l'engagement qui va avec."""
+    photo = picture("chantier-propre-haies", [960, 720, 480],
+                    "Rangée de haies taillées en boule dans une propriété en "
+                    "Gironde, sol ratissé et pelouse dégagée après notre passage",
+                    sizes="(min-width: 900px) 460px, 92vw", cls="propre-img")
+    return f'''<section class="section {fond}">
+    <div class="container split">
+      <div class="reveal">
+        <p class="eyebrow">Après notre passage</p>
+        <h2 class="h2" style="margin-top:14px">Un jardin plus propre qu'à notre arrivée</h2>
+        <p class="lead" style="margin-top:20px">Sur tous nos chantiers, le
+          nettoyage fait partie du travail. Branches, feuilles et déchets de
+          coupe sont ramassés et évacués, les allées et les pelouses
+          soufflées, les massifs ratissés. Quand nous repartons, il ne reste
+          que le résultat.</p>
+        <div style="margin-top:24px">''' + check_list([
+            "Ramassage complet des déchets de coupe",
+            "Évacuation des déchets verts incluse",
+            "Allées, terrasses et pelouses nettoyées",
+        ]) + f'''</div>
+      </div>
+      <div class="propre-frame reveal" style="--d:1">{photo}</div>
     </div>
   </section>'''
 
@@ -1376,6 +1406,7 @@ def page_service(s):
 
 ''' + (video_bandeau(*s["video"], fond="bg-soft") if s.get("video") else "")
         + (avant_apres_section(*s["avant_apres"]) if s.get("avant_apres") else "")
+        + (chantier_propre_section() if s.get("propre") else "")
         + (galerie_section(s["galerie"], s.get("galerie_titre", "Nos réalisations"),
                            s.get("galerie_intro", ""))
            if s.get("galerie") else "")
