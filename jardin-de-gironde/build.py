@@ -741,26 +741,6 @@ SERVICES = [
 ]
 
 
-def video_section(nom, titre, texte, alt, eyebrow="En intervention", fond="bg-soft"):
-    """Une seule video de chantier, posee a cote de son texte comme le bloc
-    partenariat : format portrait, largeur contenue, chargee a l'arrivee."""
-    return f'''<section class="section {fond}">
-    <div class="container split-clip">
-      <div class="reveal">
-        <p class="eyebrow">{eyebrow}</p>
-        <h2 class="h2" style="margin-top:14px">{titre}</h2>
-        <p class="lead" style="margin-top:20px">{texte}</p>
-      </div>
-      <div class="clip-frame reveal" style="--d:1">
-        <video data-lazy data-src="{asset(f'assets/video/{nom}.mp4')}"
-               poster="{asset(f'assets/img/{nom}-poster.webp')}"
-               muted loop playsinline preload="none"
-               title="{html.escape(alt)}"></video>
-      </div>
-    </div>
-  </section>'''
-
-
 def video_bandeau(nom, titre, texte, alt, eyebrow="En intervention", fond=""):
     """Video de chantier en bandeau paysage, sur toute la largeur du contenu.
 
@@ -1394,7 +1374,7 @@ def page_service(s):
     </div>
   </section>
 
-''' + (video_section(*s["video"]) if s.get("video") else "")
+''' + (video_bandeau(*s["video"], fond="bg-soft") if s.get("video") else "")
         + (avant_apres_section(*s["avant_apres"]) if s.get("avant_apres") else "")
         + (galerie_section(s["galerie"], s.get("galerie_titre", "Nos réalisations"),
                            s.get("galerie_intro", ""))

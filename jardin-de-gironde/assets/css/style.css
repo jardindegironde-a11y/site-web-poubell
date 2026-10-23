@@ -512,28 +512,6 @@ a.partner-visual:hover { transform: translateY(-4px); }
   .tile-media img, .tile:hover .tile-media img { transition: none; transform: none; }
 }
 
-/* ---------- Vidéo de chantier, format portrait ---------- */
-.split-clip {
-  display: grid;
-  gap: clamp(28px, 4vw, 56px);
-  align-items: center;
-  justify-items: center;
-  text-align: center;
-}
-.clip-frame {
-  width: min(320px, 74vw);
-  aspect-ratio: 9 / 16;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  background: #0D1711;
-  box-shadow: var(--shadow);
-}
-.clip-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
-@media (min-width: 900px) {
-  .split-clip { grid-template-columns: 1fr 320px; text-align: left; justify-items: stretch; }
-  .split-clip .lead { max-width: 46ch; }
-}
-
 /* ---------- Vidéo de chantier, en bandeau paysage ---------- */
 .video-bandeau {
   margin-top: clamp(28px, 4vw, 44px);
