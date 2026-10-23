@@ -548,10 +548,10 @@ SERVICES = [
         "slug": "tonte-pelouse",
         "titre": "Tonte de pelouse",
         "court": "Une pelouse dense, nette et parfaitement rasée à la fréquence idéale.",
-        "img": "pelouse-golf",
-        "img_w": [1456, 1086, 760],
-        "alt": "Parcours de golf en Gironde au petit matin : fairway tondu, "
-               "brume sur le green et bunker",
+        "img": "pelouse-brume",
+        "img_w": [1536, 1086, 760],
+        "alt": "Pelouse rase au petit matin en Gironde, brume et soleil levant "
+               "derrière une rangée d'arbres",
         "galerie_titre": "Nos réalisations",
         "galerie": [
             ("tonte-pelouse", [1086, 800, 500],
@@ -778,7 +778,7 @@ def video_bandeau(nom, titre, texte, alt, eyebrow="En intervention", fond=""):
         <video data-lazy data-src="{asset(f'assets/video/{nom}-bandeau.mp4')}"
                poster="{asset(f'assets/img/{nom}-bandeau-poster.webp')}"
                muted loop playsinline preload="none"
-               width="1280" height="720"
+               width="1920" height="1080"
                title="{html.escape(alt)}"></video>
       </div>
     </div>
