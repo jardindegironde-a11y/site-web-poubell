@@ -586,12 +586,15 @@ SERVICES = [
             "Intervention ponctuelle ou planifiée",
         ],
         "credit": True,
-        "video": ("taille-haies-hauteur",
-                  "La hauteur se travaille en sécurité",
-                  "Échelle-plateforme stabilisée et perche télescopique : nous "
-                  "atteignons le sommet d'une haie sans l'abîmer et sans prendre "
-                  "de risque, même sur les sujets les plus hauts.",
-                  "Taille d'une haie haute depuis une échelle-plateforme en Gironde"),
+        "video": ("equipe-taille-haie",
+                  "Des haies dignes des lieux qu'elles entourent",
+                  "On nous confie la taille des haies de résidences prestigieuses "
+                  "et de propriétés de standing en Gironde. Une ligne nette, une "
+                  "finition régulière et un ramassage complet des déchets de "
+                  "coupe : c'est ce qui sépare une haie taillée d'une haie "
+                  "soignée.",
+                  "Jardinier de Jardin de Gironde taillant une haie de photinias "
+                  "au taille-haie thermique, en Gironde"),
         "avant_apres": ("chantier-haie-photinia-avant",
                         "chantier-haie-photinia-apres", [900, 600, 420],
                         "Avant : haie de photinias envahissante, pousses "
@@ -1078,11 +1081,13 @@ def page_index():
 
 ''' + video_section(
         "equipe-taille-haie",
-        "Une équipe sur le terrain, pas un catalogue",
-        "Taille d'une haie de photinias un matin d'automne en Gironde. "
-        "C'est nous, c'est notre matériel, et c'est le travail que vous obtenez.",
-        "Jardinier de Jardin de Gironde taillant une haie de photinias au "
-        "taille-haie thermique, en Gironde",
+        "L'entretien de propriétés de prestige",
+        "On nous confie l'entretien de jardins de résidences prestigieuses et "
+        "de belles propriétés girondines : haies au cordeau, pelouses "
+        "impeccables, abords soignés en toute saison. Et le même soin, quelle "
+        "que soit la taille du jardin.",
+        "Jardinier de Jardin de Gironde taillant une haie de photinias dans "
+        "une propriété de standing en Gironde",
         eyebrow="Jardin de Gironde en vrai",
         fond="",
     ) + '''
