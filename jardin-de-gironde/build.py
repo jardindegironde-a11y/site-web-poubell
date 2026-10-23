@@ -731,13 +731,13 @@ SERVICES = [
 ]
 
 
-def video_section(nom, titre, texte, alt):
+def video_section(nom, titre, texte, alt, eyebrow="En intervention", fond="bg-soft"):
     """Une seule video de chantier, posee a cote de son texte comme le bloc
     partenariat : format portrait, largeur contenue, chargee a l'arrivee."""
-    return f'''<section class="section bg-soft">
+    return f'''<section class="section {fond}">
     <div class="container split-clip">
       <div class="reveal">
-        <p class="eyebrow">En intervention</p>
+        <p class="eyebrow">{eyebrow}</p>
         <h2 class="h2" style="margin-top:14px">{titre}</h2>
         <p class="lead" style="margin-top:20px">{texte}</p>
       </div>
@@ -1075,6 +1075,17 @@ def page_index():
       ]) + '''
     </div>
   </section>
+
+''' + video_section(
+        "equipe-taille-haie",
+        "Une équipe sur le terrain, pas un catalogue",
+        "Taille d'une haie de photinias un matin d'automne en Gironde. "
+        "C'est nous, c'est notre matériel, et c'est le travail que vous obtenez.",
+        "Jardinier de Jardin de Gironde taillant une haie de photinias au "
+        "taille-haie thermique, en Gironde",
+        eyebrow="Jardin de Gironde en vrai",
+        fond="",
+    ) + '''
 
   <section class="section bg-soft" id="services">
     <div class="container">
