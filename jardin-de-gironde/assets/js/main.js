@@ -85,26 +85,39 @@
 
   /* ---------- Vidéo : lecture seulement quand elle est visible ---------- */
   all('video[data-lazy]').forEach(function (video) {
-    if (!('IntersectionObserver' in window)) { video.play().catch(function () {}); return; }
+    var visible = false, prete = false;
+    function charger() {
+      if (video.getAttribute('src') || !video.dataset.src) return;
+      video.muted = true;
+      video.preload = 'auto';
+      video.setAttribute('src', video.dataset.src);
+      video.load();
+      // Lancer la lecture sur 'canplay' la fait caler dès les premières
+      // secondes : on attend que le navigateur estime pouvoir lire sans pause.
+      function lancer() {
+        prete = true;
+        if (visible && !reduced) video.play().catch(function () {});
+      }
+      video.addEventListener('canplaythrough', lancer, { once: true });
+      // Filet de sécurité : certains navigateurs mobiles n'émettent jamais
+      // 'canplaythrough' sur une vidéo en lecture automatique.
+      setTimeout(function () { if (!prete && video.readyState >= 3) lancer(); }, 4000);
+    }
+    if (!('IntersectionObserver' in window)) { charger(); visible = true; return; }
+    // Le téléchargement commence bien avant que la vidéo n'arrive à l'écran...
+    var pre = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) { charger(); pre.disconnect(); }
+    }, { rootMargin: '900px 0px' });
+    pre.observe(video);
+    // ... et la lecture ne tourne que pendant qu'elle est visible.
     var vio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          video.muted = true;
-          if (!video.getAttribute('src') && video.dataset.src) {
-            // La source n'est chargée qu'à l'approche de la section : le play()
-            // doit attendre que le navigateur ait de quoi lire.
-            video.setAttribute('src', video.dataset.src);
-            video.load();
-            video.addEventListener('canplay', function () {
-              if (!reduced) video.play().catch(function () {});
-            }, { once: true });
-          } else if (!reduced) {
-            video.play().catch(function () {});
-          }
-        } else if (!video.paused) {
-          video.pause();
-        }
-      });
+      visible = entries[0].isIntersecting;
+      if (visible) {
+        charger();
+        if (prete && !reduced) video.play().catch(function () {});
+      } else if (!video.paused) {
+        video.pause();
+      }
     }, { threshold: 0.25 });
     vio.observe(video);
   });

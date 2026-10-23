@@ -534,6 +534,20 @@ a.partner-visual:hover { transform: translateY(-4px); }
   .split-clip .lead { max-width: 46ch; }
 }
 
+/* ---------- Vidéo de chantier, en bandeau paysage ---------- */
+.video-bandeau {
+  margin-top: clamp(28px, 4vw, 44px);
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #0D1711;
+  box-shadow: var(--shadow);
+}
+.video-bandeau video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; display: block; }
+@media (min-width: 900px) {
+  .video-bandeau { aspect-ratio: 2 / 1; }
+}
+
 /* ---------- Paire avant / après ---------- */
 .duo {
   display: grid;

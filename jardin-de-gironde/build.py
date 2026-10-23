@@ -761,6 +761,30 @@ def video_section(nom, titre, texte, alt, eyebrow="En intervention", fond="bg-so
   </section>'''
 
 
+def video_bandeau(nom, titre, texte, alt, eyebrow="En intervention", fond=""):
+    """Video de chantier en bandeau paysage, sur toute la largeur du contenu.
+
+    La source est recadree en 16:9 (fichier `{nom}-bandeau.mp4`) : en
+    paysage, elle se lit comme un plan de film et non comme une story.
+    """
+    return f'''<section class="section {fond}">
+    <div class="container">
+      <div class="section-head reveal">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 class="h2">{titre}</h2>
+        <p class="lead">{texte}</p>
+      </div>
+      <div class="video-bandeau reveal" style="--d:1">
+        <video data-lazy data-src="{asset(f'assets/video/{nom}-bandeau.mp4')}"
+               poster="{asset(f'assets/img/{nom}-bandeau-poster.webp')}"
+               muted loop playsinline preload="none"
+               width="1280" height="720"
+               title="{html.escape(alt)}"></video>
+      </div>
+    </div>
+  </section>'''
+
+
 def avant_apres_section(avant, apres, widths, alt_av, alt_ap, legende):
     """Deux photos entieres cote a cote.
 
@@ -1086,7 +1110,7 @@ def page_index():
     </div>
   </section>
 
-''' + video_section(
+''' + video_bandeau(
         "equipe-taille-haie",
         "L'entretien de propriétés de prestige",
         "On nous confie l'entretien de jardins de résidences prestigieuses et "
