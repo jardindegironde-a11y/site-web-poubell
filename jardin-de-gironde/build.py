@@ -548,9 +548,16 @@ SERVICES = [
         "slug": "tonte-pelouse",
         "titre": "Tonte de pelouse",
         "court": "Une pelouse dense, nette et parfaitement rasée à la fréquence idéale.",
-        "img": "tonte-pelouse",
-        "img_w": [1086, 800, 500],
-        "alt": "Pelouse fraîchement tondue au bord d'une terrasse en bois",
+        "img": "pelouse-golf",
+        "img_w": [1456, 1086, 760],
+        "alt": "Parcours de golf en Gironde au petit matin : fairway tondu, "
+               "brume sur le green et bunker",
+        "galerie_titre": "Nos réalisations",
+        "galerie": [
+            ("tonte-pelouse", [1086, 800, 500],
+             "Pelouse fraîchement tondue au bord d'une terrasse en bois, en Gironde",
+             "Pelouse tondue au bord d'une terrasse"),
+        ],
         "meta": "Tonte de pelouse en Gironde : pelouse nette et dense, tonte régulière, résultat impeccable à Bordeaux et partout en Gironde.",
         "long": "Notre équipe intervient sur tous types de terrains en Gironde pour assurer "
                 "une tonte régulière et soignée de votre pelouse. Nous adaptons la hauteur "
